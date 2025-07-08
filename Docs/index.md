@@ -1,131 +1,86 @@
-# Book Publishing Template ドキュメント
+---
+layout: book
+title: AI主導開発時代のソフトウェアテスト戦略
+---
 
-このテンプレートを使用して効率的に書籍を作成・公開するための包括的なガイド集です。
+# AI主導開発時代のソフトウェアテスト戦略
 
-## 📚 ドキュメント一覧
+## 品質保証の新パラダイム
 
-### 🚀 開始ガイド
-- **[セットアップガイド](../setup-guide.md)** - 初期設定と環境構築
-- **[クイックスタート](quick-start.md)** - 5分で始める書籍作成
-- **[基本概念](concepts.md)** - テンプレートの構造と仕組み
+<div class="book-cover">
+  <h2>AI生成コードに対応した実践的テスト手法</h2>
+  <p class="author">ITDO Inc.</p>
+</div>
 
-### 📝 執筆ガイド
-- **[コンテンツ作成](writing-guide.md)** - Markdownでの執筆方法
-- **[構造化ガイド](content-structure.md)** - 章立てとファイル構成
-- **[スタイルガイド](style-guide.md)** - 一貫した書式と表現
+## 本書について
 
-### 🔧 設定とカスタマイズ
-- **[設定リファレンス](configuration.md)** - book-config.jsonの詳細設定
-- **[テーマカスタマイズ](theming.md)** - 見た目とレイアウトの変更
-- **[プラグイン開発](plugins.md)** - 機能拡張の方法
+GitHub Copilot、ChatGPT、Claudeなど、AI支援ツールの急速な普及により、ソフトウェア開発の現場は大きく変わりました。開発者の生産性は飛躍的に向上しましたが、同時に新たな品質保証の課題も生まれています。
 
-### 📤 出力と公開
-- **[複数フォーマット対応](output-formats.md)** - Web, PDF, EPUB出力
-- **[GitHub Pages デプロイ](deployment.md)** - 自動公開の設定
-- **[CI/CD設定](ci-cd.md)** - 継続的な統合とデプロイ
+本書は、AI主導開発時代における品質保証の新しいパラダイムを提示し、実践的な解決策を提供します。
 
-### 🛠️ 開発とメンテナンス
-- **[ベストプラクティス](best-practices.md)** - 効率的な開発手法
-- **[トラブルシューティング](../TROUBLESHOOTING.md)** - 問題解決ガイド
-- **[FAQ](faq.md)** - よくある質問と回答
+### こんな方におすすめ
 
-### 🎯 高度な活用
-- **[自動化](automation.md)** - ワークフローの自動化
-- **[チーム開発](collaboration.md)** - 複数人での執筆管理
-- **[パフォーマンス最適化](performance.md)** - ビルド時間とファイルサイズの最適化
+- **QAエンジニア・テストエンジニア** - AI生成コードの品質保証に課題を感じている方
+- **開発チームリーダー・アーキテクト** - チーム全体の品質戦略を見直したい方
+- **CTO・VP of Engineering** - 組織レベルでの品質保証体制を構築したい方
+- **DevOpsエンジニア** - CI/CDパイプラインにAI品質検証を組み込みたい方
 
-## 📋 チュートリアル
+## 目次
 
-### 初心者向け
-1. **[はじめての書籍作成](tutorials/first-book.md)**
-2. **[GitHub Pagesでの公開](tutorials/github-pages.md)**
-3. **[基本的なカスタマイズ](tutorials/basic-customization.md)**
+### [はじめに](introduction/preface.html)
 
-### 中級者向け
-1. **[複数フォーマット出力](tutorials/multi-format.md)**
-2. **[自動化ワークフロー](tutorials/automation.md)**
-3. **[SEO最適化](tutorials/seo-optimization.md)**
+### 第1部：基礎編
 
-### 上級者向け
-1. **[カスタムテーマ開発](tutorials/custom-theme.md)**
-2. **[プラグイン作成](tutorials/plugin-development.md)**
-3. **[大規模プロジェクト管理](tutorials/large-projects.md)**
+- [第1章 AI主導開発の現状と課題](chapters/chapter-01-ai-driven-development.html)
+- [第2章 ソフトウェアテストの基礎知識](chapters/chapter-02-software-testing-fundamentals.html)
+- [第3章 AIコードの特性理解](chapters/chapter-03-ai-code-characteristics.html)
 
-## 🔗 外部リソース
+### 第2部：戦略編
 
-### 公式リンク
-- **[GitHub Repository](https://github.com/itdojp/book-publishing-template)**
-- **[Issues & Bug Reports](https://github.com/itdojp/book-publishing-template/issues)**
-- **[Discussions](https://github.com/itdojp/book-publishing-template/discussions)**
+- [第4章 AI時代のテスト戦略](chapters/chapter-04-ai-testing-strategy.html)
+- [第5章 AIコード検証の実践技法](chapters/chapter-05-ai-code-verification.html)
+- [第6章 テスト自動化とAIの協調](chapters/chapter-06-test-automation-ai-cooperation.html)
 
-### 関連技術
-- **[Markdown記法](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)**
-- **[GitHub Pages Documentation](https://docs.github.com/pages)**
-- **[Pandoc User's Guide](https://pandoc.org/MANUAL.html)**
-- **[Jekyll Documentation](https://jekyllrb.com/docs/)**
+### 第3部：実践編
 
-### コミュニティ
-- **[ユーザーコミュニティ](#)** - 情報交換と質問
-- **[事例集](#)** - 実際の使用例
-- **[貢献ガイド](../CONTRIBUTING.md)** - プロジェクトへの貢献方法
+- [第7章 品質メトリクスと評価](chapters/chapter-07-quality-metrics-evaluation.html)
+- [第8章 組織とプロセスの変革](chapters/chapter-08-organization-process-transformation.html)
+- [第9章 ケーススタディ](chapters/chapter-09-case-studies.html)
 
-## 📊 ステータス
+### 第4部：発展編
 
-| 機能 | 状態 | ドキュメント |
-|------|------|-------------|
-| 基本ビルド | ✅ 完成 | [セットアップガイド](../setup-guide.md) |
-| Web出力 | ✅ 完成 | [出力フォーマット](output-formats.md) |
-| PDF出力 | ✅ 完成 | [出力フォーマット](output-formats.md) |
-| EPUB出力 | ✅ 完成 | [出力フォーマット](output-formats.md) |
-| 自動デプロイ | ✅ 完成 | [デプロイ](deployment.md) |
-| 国際化 | 🚧 開発中 | [多言語対応](i18n.md) |
+- [第10章 高度なトピック](chapters/chapter-10-advanced-topics.html)
+- [第11章 将来展望](chapters/chapter-11-future-outlook.html)
 
-## 💡 使い方のヒント
+### 付録
 
-### 効率的な学習順序
-1. **[セットアップガイド](../setup-guide.md)** で環境を構築
-2. **[クイックスタート](quick-start.md)** でサンプル書籍を作成
-3. **[コンテンツ作成](writing-guide.md)** で執筆方法を学習
-4. **[設定リファレンス](configuration.md)** でカスタマイズ
-5. **[出力フォーマット](output-formats.md)** で公開形式を選択
+- [付録A テンプレート集](appendices/appendix-a-templates.html)
+- [付録B チェックリスト](appendices/appendix-b-checklists.html)
+- [付録C ツール比較表](appendices/appendix-c-tool-comparison.html)
+- [付録D 用語集](appendices/appendix-d-glossary.html)
 
-### よく使うコマンド
-```bash
-# 開発サーバー起動
-npm run preview
+### [あとがき](afterword/index.html)
 
-# 全フォーマットビルド
-npm run build:all
+## 本書の特徴
 
-# デプロイ
-npm run deploy
+### 🎯 実践的なアプローチ
+理論だけでなく、実際の現場で使える具体的な手法、テンプレート、チェックリストを豊富に収録
 
-# クリーンビルド
-npm run clean && npm run build
-```
+### 🔄 継続的な更新
+AI技術の進歩に対応して、内容を継続的に更新。最新情報は[GitHubリポジトリ](https://github.com/itdojp/ai-testing-strategy-book)で公開
 
-### トラブル時の対処
-1. **[トラブルシューティング](../TROUBLESHOOTING.md)** で一般的な問題を確認
-2. **[FAQ](faq.md)** でよくある質問をチェック
-3. **[Issues](https://github.com/itdojp/book-publishing-template/issues)** で既知の問題を検索
-4. 解決しない場合は新しいIssueを作成
+### 💡 ケーススタディ
+実際のプロジェクトでの成功事例と失敗事例から学ぶ実践的な知見
 
-## 🤝 サポート
+### 🛠️ すぐに使えるツール
+付録に収録されたテンプレートやチェックリストは、そのまま現場で活用可能
 
-### 質問・相談
-- **GitHub Discussions**: 一般的な質問や使用法の相談
-- **GitHub Issues**: バグ報告や機能要望
-- **Email**: knowledge@itdo.jp（緊急時のみ）
+## フィードバック・お問い合わせ
 
-### コントリビューション
-このプロジェクトはオープンソースです。改善提案やバグ修正など、あらゆる貢献を歓迎します。
-
-- **[貢献ガイド](../CONTRIBUTING.md)** - 貢献方法の詳細
-- **[開発環境構築](development.md)** - 開発者向けセットアップ
-- **[コーディング規約](coding-standards.md)** - コード品質の基準
+- **GitHub Issues**: [https://github.com/itdojp/ai-testing-strategy-book/issues](https://github.com/itdojp/ai-testing-strategy-book/issues)
+- **Email**: knowledge@itdo.jp
+- **公式サイト**: [https://itdojp.github.io/ai-testing-strategy-book/](https://itdojp.github.io/ai-testing-strategy-book/)
 
 ---
 
-**📅 最終更新:** 2024年6月16日  
-**📧 メンテナー:** ITDO Inc. <knowledge@itdo.jp>  
-**📄 ライセンス:** MIT License
+© 2025 ITDO Inc. All Rights Reserved.
