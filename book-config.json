@@ -1,12 +1,12 @@
 {
   "book": {
-    "title": "Book Publishing Template v3.0 サンプル",
-    "description": "モダンデザインシステムを使用した技術書籍テンプレートのサンプル",
+    "title": "AI主導開発時代のソフトウェアテスト戦略",
+    "description": "品質保証の新パラダイム - AI生成コードに対応した実践的テスト手法",
     "author": {
-      "name": "Book Publishing Template",
-      "email": "example@example.com"
+      "name": "ITDO Inc.",
+      "email": "knowledge@itdo.jp"
     },
-    "version": "3.0.0",
+    "version": "1.0.0",
     "language": "ja"
   },
   "contentSections": [
@@ -30,6 +30,13 @@
       "enabled": true,
       "order": 3,
       "title": "付録"
+    },
+    {
+      "name": "afterword",
+      "directory": "afterword",
+      "enabled": true,
+      "order": 4,
+      "title": "あとがき"
     }
   ],
   "excludePatterns": [
