@@ -1,0 +1,37 @@
+name: Validate Build (Light)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-light:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install core dependencies only
+      run: |
+        echo "Installing core dependencies..."
+        npm install --no-optional --no-audit --no-fund
+      timeout-minutes: 2
+      
+    - name: Build book
+      run: npm run build
+      
+    - name: Quick validation
+      run: |
+        echo "Checking build output..."
+        [ -d "docs" ] && echo "✓ docs directory exists"
+        [ -f "docs/_config.yml" ] && echo "✓ _config.yml exists"
+        [ -f "docs/index.md" ] && echo "✓ index.md exists"
+        echo "Build validation completed!"

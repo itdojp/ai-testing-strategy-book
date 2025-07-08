@@ -9,6 +9,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
     - uses: actions/checkout@v4
@@ -20,7 +21,10 @@ jobs:
         cache: 'npm'
         
     - name: Install dependencies
-      run: npm ci
+      run: |
+        echo "Installing dependencies without optional packages..."
+        npm ci --no-optional
+      timeout-minutes: 5
       
     - name: Check for Jekyll conflicts
       run: npm run check-conflicts
