@@ -8,8 +8,25 @@ author:
 baseurl: "/ai-testing-strategy-book"
 url: "https://itdojp.github.io"
 
+# Repository settings for links
+repository:
+  github: https://github.com/itdojp/ai-testing-strategy-book
+  zenn: books/ai-testing-strategy-book
+
+# テーマ
+theme: minima
+plugins:
+  - jekyll-feed
+
 # 言語設定
 lang: ja
+
+# Markdown設定
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 # ビルド設定
 exclude:

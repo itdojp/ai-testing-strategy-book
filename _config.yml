@@ -1,27 +1,34 @@
 # Jekyll設定 - 書籍作成時に以下の値を必ず変更してください
 # ⚠️ 警告: デフォルト値のままでは正しく動作しません
 
-title: "YOUR_BOOK_TITLE_HERE"  # ❌ この値を変更必須
-description: "YOUR_BOOK_DESCRIPTION_HERE"  # ❌ この値を変更必須
+title: "AI主導開発時代のソフトウェアテスト戦略"
+description: "品質保証の新パラダイム - AI生成コードに対応した実践的テスト手法"
 author: 
-  name: "YOUR_AUTHOR_NAME"  # ❌ この値を変更必須
-  github: "YOUR_GITHUB_USERNAME"  # ❌ この値を変更必須
-  email: "your.email@example.com"  # ❌ この値を変更必須
-baseurl: "/YOUR_REPOSITORY_NAME_HERE"  # ❌ この値を変更必須
-url: "https://YOUR_GITHUB_USERNAME.github.io"  # ❌ この値を変更必須
+  name: "ITDO Inc."
+  github: "itdojp"
+  email: "knowledge@itdo.jp"
+baseurl: "/ai-testing-strategy-book"
+url: "https://itdojp.github.io"
 
-# Repository settings for links - 書籍作成時に更新してください
+# Repository settings for links
 repository:
-  github: https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME_HERE  # ❌ この値を変更必須
-  zenn: books/YOUR_REPOSITORY_NAME_HERE  # ❌ この値を変更必須
+  github: https://github.com/itdojp/ai-testing-strategy-book
+  zenn: books/ai-testing-strategy-book
 
 # テーマ
-remote_theme: pages-themes/minimal@v0.2.0
+theme: minima
 plugins:
-  - jekyll-remote-theme
+  - jekyll-feed
 
 # 言語設定
 lang: ja
+
+# Markdown設定
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 # その他の設定
 show_downloads: false

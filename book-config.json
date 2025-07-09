@@ -46,9 +46,9 @@
     "Thumbs.db"
   ],
   "contentExcludePatterns": [
-    "<\!-- PRIVATE:",
-    "<\!-- TODO:",
-    "<\!-- DRAFT:"
+    "<!-- PRIVATE:",
+    "<!-- TODO:",
+    "<!-- DRAFT:"
   ],
   "build": {
     "outputDirectory": "docs",
