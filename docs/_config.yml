@@ -28,6 +28,14 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
+# Use custom book layout as default
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "book"
+
 # ビルド設定
 exclude:
   - README.md
