@@ -1,6 +1,4 @@
-# Jekyll設定 - 書籍作成時に以下の値を必ず変更してください
-# ⚠️ 警告: デフォルト値のままでは正しく動作しません
-
+# Jekyll設定
 title: "AI主導開発時代のソフトウェアテスト戦略"
 description: "品質保証の新パラダイム - AI生成コードに対応した実践的テスト手法"
 author: 
@@ -30,9 +28,13 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# その他の設定
-show_downloads: false
-google_analytics:
+# Use custom book layout as default
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "book"
 
 # ビルド設定
 exclude:
