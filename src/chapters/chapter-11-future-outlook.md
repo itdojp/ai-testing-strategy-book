@@ -12,7 +12,17 @@
 
 **生成AIの進化がもたらす新たな挑戦**
 
-現在のLLMベースの生成AIは始まりに過ぎない。今後登場する技術は、さらに複雑な品質課題をもたらす：
+現在のLLMベースの生成AIは始まりに過ぎない。2024年に急速に発展している技術と今後登場する技術は、さらに複雑な品質課題をもたらす：
+
+**2024年現在の最新トレンド**^[3](#ref-3)
+
+- **マルチモーダル大規模言語モデル**: GPT-4V、Claude 3、Gemini Ultra
+- **コード生成AI**: Cursor、GitHub Copilot X、Amazon CodeWhisperer
+- **AI Agents**: AutoGPT、LangChain、CrewAI
+- **Edge AI**: モバイル・IoTデバイス向け軽量モデル
+
+> **参考資料**  
+> [3] AI Index Report 2024, Stanford HAI. https://aiindex.stanford.edu/ (2024年4月参照)
 
 1. **マルチモーダルAI**
    - テキスト、画像、音声の統合処理

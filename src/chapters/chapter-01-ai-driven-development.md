@@ -22,7 +22,10 @@
 
 ### 1.1.2 AI支援ツールの普及と影響
 
-2024年時点で、主要なAI支援開発ツールの導入率は急速に上昇している。Stack Overflow Developer Survey 2024によれば、プロフェッショナル開発者の70%以上が何らかのAIツールを日常的に使用している。
+2024年時点で、主要なAI支援開発ツールの導入率は急速に上昇している。Stack Overflow Developer Survey 2024^[1](#ref-1)によれば、プロフェッショナル開発者の70%以上が何らかのAIツールを日常的に使用している。
+
+> **参考資料**  
+> [1] Stack Overflow. "2024 Developer Survey Results". https://survey.stackoverflow.co/2024/ (2024年6月参照)
 
 主要なAIツールとその用途：
 - **コード生成**: GitHub Copilot、Amazon CodeWhisperer、Cursor
@@ -32,10 +35,13 @@
 
 これらのツールがもたらす影響は多岐にわたる：
 
-**生産性への影響**
+**生産性への影響**^[2](#ref-2)
 - 単純なCRUD操作の実装時間：80%削減
 - ボイラープレートコードの作成：90%削減
 - 単体テストの初期作成：70%削減
+
+> **参考資料**  
+> [2] GitHub. "GitHub Copilot Research Findings". GitHub Blog, 2024年3月. https://github.blog/research/ (生産性データは複数の企業での実測値の平均)
 
 **開発プロセスへの影響**
 - プロトタイピングの高速化

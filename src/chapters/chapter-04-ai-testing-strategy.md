@@ -108,6 +108,79 @@ class RiskAssessment:
         }
         
         return strategies[category]
+
+# 実践的な使用例とテストケース
+
+def example_risk_assessment():
+    """リスク評価の実例デモンストレーション"""
+    
+    # 例1: ECサイトの決済処理（高リスク）
+    payment_component = RiskAssessment(
+        component_name="PaymentProcessor",
+        dimensions={
+            RiskDimension.BUSINESS_IMPACT: 5,      # 売上に直結
+            RiskDimension.TECHNICAL_COMPLEXITY: 4, # 外部API連携
+            RiskDimension.AI_UNDERSTANDING: 3,     # 標準的なパターン
+            RiskDimension.DATA_SENSITIVITY: 5,     # 個人情報・金融情報
+            RiskDimension.REGULATORY_COMPLIANCE: 5 # PCI DSS準拠
+        }
+    )
+    
+    # 例2: ログ出力機能（低リスク）
+    logging_component = RiskAssessment(
+        component_name="Logger",
+        dimensions={
+            RiskDimension.BUSINESS_IMPACT: 1,      # 直接的影響は小
+            RiskDimension.TECHNICAL_COMPLEXITY: 1, # シンプルな構造
+            RiskDimension.AI_UNDERSTANDING: 1,     # よく理解されたパターン
+            RiskDimension.DATA_SENSITIVITY: 2,     # ログ内容次第
+            RiskDimension.REGULATORY_COMPLIANCE: 1 # 一般的な要件
+        }
+    )
+    
+    # 結果出力と戦略決定
+    components = [payment_component, logging_component]
+    
+    for comp in components:
+        risk_score = comp.calculate_risk_score()
+        category = comp.get_risk_category()
+        strategy = comp.get_test_strategy()
+        
+        print(f"\n=== {comp.component_name} ===")
+        print(f"リスクスコア: {risk_score:.2f}")
+        print(f"リスクカテゴリ: {category}")
+        print(f"推奨テスト戦略:")
+        for key, value in strategy.items():
+            print(f"  {key}: {value}")
+
+if __name__ == "__main__":
+    example_risk_assessment()
+```
+
+**実行結果例：**
+
+```
+=== PaymentProcessor ===
+リスクスコア: 4.45
+リスクカテゴリ: CRITICAL
+推奨テスト戦略:
+  manual_review: 必須（シニアエンジニア）
+  automated_tests: 包括的（カバレッジ95%以上）
+  security_scan: 詳細スキャン
+  performance_test: 負荷テスト必須
+  exploratory_test: 8時間以上
+  monitoring: リアルタイム監視
+
+=== Logger ===
+リスクスコア: 1.20
+リスクカテゴリ: LOW
+推奨テスト戦略:
+  manual_review: オプション
+  automated_tests: 基本（カバレッジ50%以上）
+  security_scan: 自動チェックのみ
+  performance_test: 不要
+  exploratory_test: オプション
+  monitoring: エラーログのみ
 ```
 
 **AI理解度の評価基準**

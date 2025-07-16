@@ -48,6 +48,114 @@ AIコーディング支援ツールは急速に進化しており、それぞれ
 
 従来のテスト自動化ツールに加え、AI機能を組み込んだ新世代のツールが登場している。これらは、テストケース生成、自己修復、視覚的検証などの高度な機能を提供する。
 
+### テストフレームワーク選定基準マトリクス
+
+| ツール名 | AI機能 | テスト種別 | 学習曲線 | コスト | 保守性 | 総合評価 | 推奨用途 |
+|----------|--------|------------|----------|--------|--------|----------|----------|
+| **pytest** | 外部統合 | 単体・統合 | 低 | 無料 | 高 | ★★★★☆ | Python開発全般 |
+| **Jest** | 外部統合 | 単体・統合 | 低 | 無料 | 高 | ★★★★☆ | JavaScript/TypeScript |
+| **TestRigor** | 内蔵 | E2E・回帰 | 中 | 高 | 高 | ★★★★☆ | 非技術者も含むチーム |
+| **Playwright** | 部分的 | E2E・視覚 | 中 | 無料 | 中 | ★★★★☆ | モダンWeb開発 |
+| **Cypress** | 外部統合 | E2E | 中 | 無料/有料 | 中 | ★★★☆☆ | フロントエンド重視 |
+| **Selenium** | 外部統合 | E2E | 高 | 無料 | 低 | ★★☆☆☆ | レガシーサポート |
+
+### フレームワーク選定決定木
+
+```mermaid
+graph TD
+    A[テストフレームワーク選定開始] --> B{AI機能が必要?}
+    
+    B -->|Yes| C{予算制約は?}
+    B -->|No| D{テスト種別は?}
+    
+    C -->|高予算| E[TestRigor<br/>Mabl<br/>Applitools]
+    C -->|低予算| F[pytest + AI拡張<br/>Jest + AI プラグイン]
+    
+    D -->|単体テスト| G{言語は?}
+    D -->|E2E テスト| H{技術スキルは?}
+    
+    G -->|Python| I[pytest]
+    G -->|JavaScript| J[Jest]
+    G -->|Java| K[JUnit 5]
+    G -->|その他| L[言語固有フレームワーク]
+    
+    H -->|高| M[Playwright<br/>Cypress]
+    H -->|低| N[TestRigor<br/>低コード/ノーコード]
+    
+    style A fill:#e1f5fe
+    style E fill:#fff3e0
+    style F fill:#f3e5f5
+    style I fill:#e8f5e8
+```
+
+### 選定基準の重み付け評価
+
+```python
+class TestFrameworkSelector:
+    """テストフレームワーク選定支援ツール"""
+    
+    def __init__(self):
+        self.criteria_weights = {
+            'ai_support': 0.25,      # AI機能サポート
+            'learning_curve': 0.20,  # 学習コスト
+            'maintenance': 0.20,     # 保守性
+            'cost': 0.15,           # コスト効率
+            'ecosystem': 0.10,       # エコシステム
+            'performance': 0.10      # パフォーマンス
+        }
+    
+    def evaluate_framework(self, framework_scores: dict) -> float:
+        """フレームワークの総合評価スコア計算"""
+        total_score = sum(
+            framework_scores.get(criterion, 0) * weight
+            for criterion, weight in self.criteria_weights.items()
+        )
+        return round(total_score, 2)
+    
+    def recommend_framework(self, project_requirements: dict) -> str:
+        """プロジェクト要件に基づく推奨フレームワーク"""
+        
+        # プロジェクト特性の分析
+        language = project_requirements.get('language', '')
+        team_size = project_requirements.get('team_size', 1)
+        ai_requirement = project_requirements.get('ai_features', False)
+        budget = project_requirements.get('budget', 'low')
+        
+        # 推奨ロジック
+        if ai_requirement and budget == 'high':
+            return "TestRigor: AI機能豊富、高予算プロジェクト向け"
+        elif language == 'python':
+            return "pytest + AI拡張: Python開発者にとって最適"
+        elif language == 'javascript':
+            return "Jest + AI プラグイン: JS/TS開発に最適化"
+        elif team_size > 10:
+            return "Playwright: 大規模チーム、クロスブラウザ対応"
+        else:
+            return "プロジェクト要件を再評価してください"
+
+# 使用例
+selector = TestFrameworkSelector()
+
+project = {
+    'language': 'python',
+    'team_size': 5,
+    'ai_features': True,
+    'budget': 'medium'
+}
+
+recommendation = selector.recommend_framework(project)
+print(f"推奨フレームワーク: {recommendation}")
+```
+
+### 実行環境別推奨事項
+
+| 環境 | 推奨フレームワーク | 理由 | 注意点 |
+|------|-------------------|------|--------|
+| **ローカル開発** | pytest, Jest | 高速フィードバック | AI機能は外部サービス依存 |
+| **CI/CD** | Playwright, Cypress | 並列実行対応 | リソース消費に注意 |
+| **本番監視** | TestRigor, Mabl | 継続的監視機能 | コスト対効果を慎重に評価 |
+| **レガシー統合** | Selenium Grid | 既存インフラ活用 | 保守コストが高い |
+
 ### テスト自動化ツール比較表
 
 | ツール名 | カテゴリ | AI機能 | 対応範囲 | 価格帯 | 主な特徴 | 適用場面 | 注意点 |
