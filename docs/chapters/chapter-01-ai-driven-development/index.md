@@ -13,7 +13,80 @@ title: "第1章 AI主導開発の現状と課題"
 
 しかし、GitHub Copilot、ChatGPT、Claude等のAI支援ツールの登場により、この前提が大きく変わりつつある。コード生成、設計提案、バグ修正、ドキュメント作成といった開発タスクの多くが、AIとの協調作業によって実行されるようになった。
 
-この変化は単なるツールの進化ではない。開発の主体が「人間中心」から「人間とAIの協調」へとシフトする、パラダイムの転換である。具体的には以下の変化が起きている：
+この変化は単なるツールの進化ではない。開発の主体が「人間中心」から「人間とAIの協調」へとシフトする、パラダイムの転換である。
+
+```mermaid
+graph TD
+    subgraph "開発パラダイムの転換：従来 vs AI協調型"
+        subgraph "従来の開発プロセス"
+            TraditionalReq["要件定義<br/>・詳細要件書<br/>・仕様書作成<br/>・ステークホルダー合意"]
+            TraditionalDesign["設計<br/>・アーキテクチャ設計<br/>・詳細設計<br/>・UI/UXデザイン"]
+            TraditionalImpl["実装<br/>・コード記述<br/>・手動コーディング<br/>・デバッグ"]
+            TraditionalTest["テスト<br/>・手動テスト<br/>・テストケース作成<br/>・バグ修正"]
+            TraditionalDeploy["デプロイ<br/>・手動デプロイ<br/>・環境設定<br/>・運用監視"]
+            
+            TraditionalReq --> TraditionalDesign
+            TraditionalDesign --> TraditionalImpl
+            TraditionalImpl --> TraditionalTest
+            TraditionalTest --> TraditionalDeploy
+            
+            TraditionalChars["特徴:<br/>・線形プロセス<br/>・文書駆動<br/>・計画重視<br/>・人間中心"]
+        end
+        
+        subgraph "AI協調型開発プロセス"
+            AIReq["要件定義<br/>・プロンプト設計<br/>・AI対話による要件整理<br/>・動的要件調整"]
+            AIDesign["設計<br/>・AIアシスト設計<br/>・パターン提案<br/>・自動文書生成"]
+            AIImpl["実装<br/>・AI生成コード<br/>・リアルタイム補完<br/>・自動リファクタリング"]
+            AITest["テスト<br/>・AI生成テスト<br/>・自動テスト実行<br/>・インテリジェント検証"]
+            AIDeploy["デプロイ<br/>・自動化パイプライン<br/>・AI監視<br/>・予測的運用"]
+            
+            AIReq --> AIDesign
+            AIDesign --> AIImpl
+            AIImpl --> AITest
+            AITest --> AIDeploy
+            
+            AIChars["特徴:<br/>・反復的サイクル<br/>・プロンプト駆動<br/>・適応的開発<br/>・人間×AI協調"]
+            
+            AIReq -.-> AIImpl
+            AIDesign -.-> AITest
+            AITest -.-> AIDesign
+        end
+        
+        subgraph "役割の変化"
+            RoleChange["エンジニアの役割変化"]
+            
+            ProgrammerOld["従来のプログラマー<br/>・コード記述<br/>・手動デバッグ<br/>・詳細実装"]
+            ProgrammerNew["AI時代のプログラマー<br/>・AI出力検証<br/>・プロンプト設計<br/>・品質調整"]
+            
+            TesterOld["従来のテスター<br/>・手動テスト実行<br/>・テストケース作成<br/>・バグ発見"]
+            TesterNew["AI時代のテスター<br/>・テスト戦略立案<br/>・AI生成テスト評価<br/>・品質保証"]
+            
+            DesignerOld["従来の設計者<br/>・詳細設計書<br/>・手動モデリング<br/>・文書作成"]
+            DesignerNew["AI時代の設計者<br/>・アーキテクチャ定義<br/>・AIへの指示<br/>・設計レビュー"]
+            
+            ProgrammerOld -.-> ProgrammerNew
+            TesterOld -.-> TesterNew
+            DesignerOld -.-> DesignerNew
+        end
+        
+        subgraph "開発効率とチャレンジ"
+            Efficiency["効率化領域<br/>・コード生成: 80%削減<br/>・テスト作成: 70%削減<br/>・ドキュメント: 90%削減"]
+            
+            Challenges["新たな課題<br/>・AI出力品質管理<br/>・人間のスキル維持<br/>・責任の所在<br/>・プロンプト設計"]
+            
+            QualityControl["品質管理の変化<br/>・AI生成物の検証<br/>・プロンプトの品質<br/>・協調プロセスの最適化"]
+        end
+    end
+    
+    style TraditionalReq fill:#ffebee
+    style AIReq fill:#e8f5e8
+    style ProgrammerNew fill:#e3f2fd
+    style TesterNew fill:#fff3e0
+    style Efficiency fill:#c8e6c9
+    style Challenges fill:#ffccbc
+```
+
+具体的には以下の変化が起きている：
 
 **役割の変化**
 - プログラマー：コード記述者から、AI出力の検証者・調整者へ

@@ -11,6 +11,93 @@ title: "第4章 AI時代のテスト戦略"
 
 本章では、AI時代に適応したテスト戦略を構築する。単に既存の手法を拡張するのではなく、AIの特性を踏まえた新しいアプローチを探求する。重要なのは、AIの能力を最大限活用しながら、その限界を人間の洞察力で補完することである。
 
+```mermaid
+graph TD
+    subgraph "AI時代のテスト戦略全体像"
+        subgraph "従来のテスト戦略"
+            TraditionalStrategy["従来戦略の課題"]
+            TraditionalRisk["リスク評価<br/>・機能複雑さ<br/>・ビジネス影響<br/>・技術的負債"]
+            TraditionalApproach["テストアプローチ<br/>・手動テスト<br/>・静的解析<br/>・定型パターン"]
+            TraditionalLimits["限界<br/>・スケールしない<br/>・AI生成コード対応不可<br/>・品質保証の遅延"]
+        end
+        
+        subgraph "AI時代の新戦略"
+            AIStrategy["AI協調型戦略"]
+            
+            subgraph "多次元リスク評価"
+                BusinessImpact["ビジネス影響度<br/>・売上への影響<br/>・ユーザー体験<br/>・法的リスク"]
+                TechnicalComplexity["技術的複雑度<br/>・アルゴリズム複雑さ<br/>・依存関係<br/>・統合難易度"]
+                AIUnderstanding["AI理解度<br/>・生成精度<br/>・モデル信頼性<br/>・出力一貫性"]
+                DataSensitivity["データ機密性<br/>・個人情報<br/>・企業秘密<br/>・規制対象データ"]
+                ComplianceRisk["規制準拠<br/>・GDPR<br/>・SOX法<br/>・業界標準"]
+            end
+            
+            subgraph "AI協調テスト手法"
+                AIGenerated["AI生成テスト<br/>・自動テストケース<br/>・境界値テスト<br/>・パフォーマンステスト"]
+                AIAssisted["AI支援テスト<br/>・テスト設計<br/>・データ生成<br/>・結果解析"]
+                HumanVerification["人間検証<br/>・AI出力レビュー<br/>・品質判定<br/>・戦略的判断"]
+                ContinuousAdaptation["継続的適応<br/>・フィードバック学習<br/>・戦略調整<br/>・プロセス改善"]
+            end
+            
+            subgraph "品質ゲートとガバナンス"
+                QualityGates["品質ゲート<br/>・コード品質<br/>・セキュリティ<br/>・性能"]
+                RiskMonitoring["リスク監視<br/>・継続的評価<br/>・メトリクス追跡<br/>・アラート"]
+                GovernanceFramework["ガバナンス<br/>・責任分担<br/>・承認プロセス<br/>・監査証跡"]
+            end
+        end
+        
+        subgraph "テスト戦略の実装プロセス"
+            StrategyPlanning["戦略立案<br/>・リスク評価<br/>・優先度付け<br/>・リソース計画"]
+            TestDesign["テスト設計<br/>・AI協調設計<br/>・自動化計画<br/>・検証ポイント"]
+            Execution["実行フェーズ<br/>・AI生成実行<br/>・人間レビュー<br/>・結果検証"]
+            FeedbackLoop["フィードバックループ<br/>・結果分析<br/>・戦略調整<br/>・学習記録"]
+            
+            StrategyPlanning --> TestDesign
+            TestDesign --> Execution
+            Execution --> FeedbackLoop
+            FeedbackLoop --> StrategyPlanning
+        end
+        
+        subgraph "成果と効果測定"
+            Efficiency["効率性向上<br/>・テスト自動化率<br/>・実行時間短縮<br/>・コスト削減"]
+            Quality["品質向上<br/>・バグ検出率<br/>・本番障害削減<br/>・顧客満足度"]
+            Innovation["イノベーション<br/>・新手法開発<br/>・プロセス革新<br/>・組織学習"]
+        end
+        
+        TraditionalStrategy --> AIStrategy
+        
+        AIStrategy --> BusinessImpact
+        AIStrategy --> TechnicalComplexity
+        AIStrategy --> AIUnderstanding
+        AIStrategy --> DataSensitivity
+        AIStrategy --> ComplianceRisk
+        
+        BusinessImpact --> AIGenerated
+        TechnicalComplexity --> AIAssisted
+        AIUnderstanding --> HumanVerification
+        DataSensitivity --> ContinuousAdaptation
+        
+        AIGenerated --> QualityGates
+        AIAssisted --> RiskMonitoring
+        HumanVerification --> GovernanceFramework
+        
+        QualityGates --> StrategyPlanning
+        RiskMonitoring --> TestDesign
+        GovernanceFramework --> Execution
+        
+        Execution --> Efficiency
+        FeedbackLoop --> Quality
+        ContinuousAdaptation --> Innovation
+    end
+    
+    style TraditionalStrategy fill:#ffebee
+    style AIStrategy fill:#e8f5e8
+    style BusinessImpact fill:#e3f2fd
+    style AIGenerated fill:#fff3e0
+    style QualityGates fill:#f3e5f5
+    style Efficiency fill:#c8e6c9
+```
+
 戦略なきテストは、暗闇での射撃に等しい。本章で学ぶ戦略的思考は、限られたリソースで最大の品質保証効果を得るための羅針盤となる。
 
 ## 4.1 リスクベースアプローチの再定義
