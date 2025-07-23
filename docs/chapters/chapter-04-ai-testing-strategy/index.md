@@ -29,7 +29,7 @@ graph TD
                 TechnicalComplexity["技術的複雑度<br/>・アルゴリズム複雑さ<br/>・依存関係<br/>・統合難易度"]
                 AIUnderstanding["AI理解度<br/>・生成精度<br/>・モデル信頼性<br/>・出力一貫性"]
                 DataSensitivity["データ機密性<br/>・個人情報<br/>・企業秘密<br/>・規制対象データ"]
-                ComplianceRisk["規制準拠<br/>・GDPR<br/>・SOX法<br/>・業界標準"]
+                ComplianceRisk["規制準拠<br/>・GDPR<br/>・SOX法<br/>・APPI（個人情報保護法）<br/>・ISO/IEC 27001<br/>・業界標準"]
             end
             
             subgraph "AI協調テスト手法"
