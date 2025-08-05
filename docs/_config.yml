@@ -1,49 +1,40 @@
-# Jekyll設定
 title: "AI主導開発時代のソフトウェアテスト戦略"
 description: "品質保証の新パラダイム - AI生成コードに対応した実践的テスト手法"
-author: 
-  name: "ITDO Inc."
-  github: "itdojp"
-  email: "knowledge@itdo.jp"
-baseurl: "/ai-testing-strategy-book"
-url: "https://itdojp.github.io"
+author: "株式会社アイティードゥ"
+version: "1.0.0"
+lang: "ja"
 
-# Repository settings for links
-repository:
-  github: https://github.com/itdojp/ai-testing-strategy-book
-  zenn: books/ai-testing-strategy-book
-
-# テーマ
-theme: minima
-plugins:
-  - jekyll-feed
-
-# 言語設定
-lang: ja
-
-# Markdown設定
+# Jekyll設定
 markdown: kramdown
 highlighter: rouge
+theme: minima
+
+# プラグイン
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-remote-theme
+
+# 除外ファイル
+exclude:
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - scripts/
+  - tests/
+  - "README.md"
+  - vendor/
+  - .bundle/
+  - Gemfile
+  - Gemfile.lock
+
+# 日本語対応
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-
-# Use custom book layout as default
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "book"
-
-# ビルド設定
-exclude:
-  - README.md
-  - package.json
-  - package-lock.json
-  - node_modules/
-  - scripts/
-  - .gitignore
-  - LICENSE
-  - CONTRIBUTING.md
-  - src/
+  
+# GitHub Pages設定
+url: "https://itdojp.github.io"
+baseurl: "/ai-testing-strategy-book"
+repository: "itdojp/ai-testing-strategy-book"

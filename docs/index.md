@@ -1,6 +1,10 @@
 ---
 layout: book
-title: AI主導開発時代のソフトウェアテスト戦略
+order: 1
+title: "AI主導開発時代のソフトウェアテスト戦略"
+author: "株式会社アイティードゥ"
+version: "1.0.0"
+permalink: /
 ---
 
 # AI主導開発時代のソフトウェアテスト戦略
