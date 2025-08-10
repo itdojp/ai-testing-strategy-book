@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .layer-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; }
+      .test-text { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .unit-layer { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .integration-layer { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .system-layer { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .e2e-layer { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .info-box { fill: #f8f9fa; stroke: #dee2e6; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" class="title" text-anchor="middle">AI システムテストピラミッド</text>
+
+  <!-- Test Pyramid -->
+  <g id="pyramid">
+    <!-- Unit Tests (Bottom) -->
+    <path d="M 200 450 L 600 450 L 550 380 L 250 380 Z" class="unit-layer"/>
+    <text x="400" y="420" class="layer-title" text-anchor="middle">ユニットテスト</text>
+    
+    <!-- Integration Tests -->
+    <path d="M 250 380 L 550 380 L 500 310 L 300 310 Z" class="integration-layer"/>
+    <text x="400" y="350" class="layer-title" text-anchor="middle">統合テスト</text>
+    
+    <!-- System Tests -->
+    <path d="M 300 310 L 500 310 L 450 240 L 350 240 Z" class="system-layer"/>
+    <text x="400" y="280" class="layer-title" text-anchor="middle">システムテスト</text>
+    
+    <!-- E2E Tests (Top) -->
+    <path d="M 350 240 L 450 240 L 400 170 Z" class="e2e-layer"/>
+    <text x="400" y="215" class="layer-title" text-anchor="middle">E2Eテスト</text>
+  </g>
+
+  <!-- Test Details -->
+  <g id="details">
+    <!-- Unit Test Details -->
+    <rect x="50" y="470" width="250" height="100" class="info-box" rx="5"/>
+    <text x="175" y="490" class="test-text" text-anchor="middle" font-weight="bold">ユニットテスト (70%)</text>
+    <text x="60" y="510" class="small-text">• 個別モデル/関数の検証</text>
+    <text x="60" y="525" class="small-text">• データ前処理の正確性</text>
+    <text x="60" y="540" class="small-text">• 特徴量エンジニアリング</text>
+    <text x="60" y="555" class="small-text">• 高速実行・頻繁な実行</text>
+    
+    <!-- Integration Test Details -->
+    <rect x="500" y="470" width="250" height="100" class="info-box" rx="5"/>
+    <text x="625" y="490" class="test-text" text-anchor="middle" font-weight="bold">統合テスト (20%)</text>
+    <text x="510" y="510" class="small-text">• パイプライン連携</text>
+    <text x="510" y="525" class="small-text">• API統合テスト</text>
+    <text x="510" y="540" class="small-text">• データフロー検証</text>
+    <text x="510" y="555" class="small-text">• モデル間の連携</text>
+    
+    <!-- System Test Details -->
+    <rect x="50" y="120" width="250" height="100" class="info-box" rx="5"/>
+    <text x="175" y="140" class="test-text" text-anchor="middle" font-weight="bold">システムテスト (7%)</text>
+    <text x="60" y="160" class="small-text">• パフォーマンステスト</text>
+    <text x="60" y="175" class="small-text">• 負荷テスト</text>
+    <text x="60" y="190" class="small-text">• セキュリティテスト</text>
+    <text x="60" y="205" class="small-text">• 回帰テスト</text>
+    
+    <!-- E2E Test Details -->
+    <rect x="500" y="120" width="250" height="100" class="info-box" rx="5"/>
+    <text x="625" y="140" class="test-text" text-anchor="middle" font-weight="bold">E2Eテスト (3%)</text>
+    <text x="510" y="160" class="small-text">• ユーザーシナリオテスト</text>
+    <text x="510" y="175" class="small-text">• 本番環境相当での検証</text>
+    <text x="510" y="190" class="small-text">• A/Bテスト</text>
+    <text x="510" y="205" class="small-text">• ユーザー受け入れテスト</text>
+  </g>
+
+  <!-- AI-Specific Considerations -->
+  <g id="ai-specific">
+    <rect x="150" y="250" width="100" height="180" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="5" opacity="0.8"/>
+    <text x="200" y="270" class="test-text" text-anchor="middle" font-weight="bold">AI特有</text>
+    <text x="200" y="290" class="small-text" text-anchor="middle">データ品質</text>
+    <text x="200" y="305" class="small-text" text-anchor="middle">モデル精度</text>
+    <text x="200" y="320" class="small-text" text-anchor="middle">バイアス検証</text>
+    <text x="200" y="335" class="small-text" text-anchor="middle">説明可能性</text>
+    <text x="200" y="350" class="small-text" text-anchor="middle">ドリフト検知</text>
+    <text x="200" y="365" class="small-text" text-anchor="middle">フェアネス</text>
+    <text x="200" y="380" class="small-text" text-anchor="middle">プライバシー</text>
+    <text x="200" y="395" class="small-text" text-anchor="middle">ロバスト性</text>
+    <text x="200" y="410" class="small-text" text-anchor="middle">再現性</text>
+  </g>
+
+  <!-- Arrows and Labels -->
+  <g id="labels">
+    <path d="M 650 200 L 700 200" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="710" y="205" class="small-text">コスト: 低</text>
+    
+    <path d="M 650 420 L 700 420" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="710" y="425" class="small-text">コスト: 高</text>
+    
+    <path d="M 100 200 L 50 200" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead-left)"/>
+    <text x="40" y="205" class="small-text" text-anchor="end">頻度: 低</text>
+    
+    <path d="M 100 420 L 50 420" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead-left)"/>
+    <text x="40" y="425" class="small-text" text-anchor="end">頻度: 高</text>
+  </g>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e"/>
+    </marker>
+    <marker id="arrowhead-left" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto">
+      <polygon points="10 0, 0 3, 10 6" fill="#34495e"/>
+    </marker>
+  </defs>
+</svg>

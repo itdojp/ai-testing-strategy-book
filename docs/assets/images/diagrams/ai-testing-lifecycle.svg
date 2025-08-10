@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="600" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .phase-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: bold; fill: #fff; }
+      .activity-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 9px; fill: #7f8c8d; }
+      .planning-phase { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .design-phase { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; }
+      .execution-phase { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .analysis-phase { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .optimization-phase { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .activity-box { fill: #fff; stroke: #95a5a6; stroke-width: 1; }
+      .cycle-arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">AI システムテストライフサイクル</text>
+
+  <!-- Central Hub -->
+  <circle cx="450" cy="300" r="60" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2"/>
+  <text x="450" y="295" class="phase-title" text-anchor="middle" fill="#2c3e50">継続的</text>
+  <text x="450" y="310" class="phase-title" text-anchor="middle" fill="#2c3e50">テストサイクル</text>
+
+  <!-- Phase 1: Test Planning -->
+  <g id="planning" transform="translate(450, 120)">
+    <circle cx="0" cy="0" r="50" class="planning-phase"/>
+    <text x="0" y="5" class="phase-title" text-anchor="middle">計画</text>
+    
+    <rect x="70" y="-40" width="150" height="80" class="activity-box" rx="3"/>
+    <text x="145" y="-20" class="activity-text" text-anchor="middle" font-weight="bold">テスト計画</text>
+    <text x="80" y="0" class="small-text">• テスト戦略策定</text>
+    <text x="80" y="15" class="small-text">• リスク評価</text>
+    <text x="80" y="30" class="small-text">• リソース計画</text>
+  </g>
+
+  <!-- Phase 2: Test Design -->
+  <g id="design" transform="translate(650, 220)">
+    <circle cx="0" cy="0" r="50" class="design-phase"/>
+    <text x="0" y="5" class="phase-title" text-anchor="middle">設計</text>
+    
+    <rect x="70" y="-40" width="150" height="80" class="activity-box" rx="3"/>
+    <text x="145" y="-20" class="activity-text" text-anchor="middle" font-weight="bold">テスト設計</text>
+    <text x="80" y="0" class="small-text">• テストケース作成</text>
+    <text x="80" y="15" class="small-text">• テストデータ準備</text>
+    <text x="80" y="30" class="small-text">• 評価基準定義</text>
+  </g>
+
+  <!-- Phase 3: Test Execution -->
+  <g id="execution" transform="translate(600, 420)">
+    <circle cx="0" cy="0" r="50" class="execution-phase"/>
+    <text x="0" y="5" class="phase-title" text-anchor="middle">実行</text>
+    
+    <rect x="70" y="-40" width="150" height="80" class="activity-box" rx="3"/>
+    <text x="145" y="-20" class="activity-text" text-anchor="middle" font-weight="bold">テスト実行</text>
+    <text x="80" y="0" class="small-text">• 自動テスト実行</text>
+    <text x="80" y="15" class="small-text">• 手動テスト実施</text>
+    <text x="80" y="30" class="small-text">• 結果記録</text>
+  </g>
+
+  <!-- Phase 4: Result Analysis -->
+  <g id="analysis" transform="translate(300, 420)">
+    <circle cx="0" cy="0" r="50" class="analysis-phase"/>
+    <text x="0" y="5" class="phase-title" text-anchor="middle">分析</text>
+    
+    <rect x="-220" y="-40" width="150" height="80" class="activity-box" rx="3"/>
+    <text x="-145" y="-20" class="activity-text" text-anchor="middle" font-weight="bold">結果分析</text>
+    <text x="-210" y="0" class="small-text">• メトリクス評価</text>
+    <text x="-210" y="15" class="small-text">• バグ分析</text>
+    <text x="-210" y="30" class="small-text">• レポート作成</text>
+  </g>
+
+  <!-- Phase 5: Optimization -->
+  <g id="optimization" transform="translate(250, 220)">
+    <circle cx="0" cy="0" r="50" class="optimization-phase"/>
+    <text x="0" y="5" class="phase-title" text-anchor="middle">最適化</text>
+    
+    <rect x="-220" y="-40" width="150" height="80" class="activity-box" rx="3"/>
+    <text x="-145" y="-20" class="activity-text" text-anchor="middle" font-weight="bold">改善・最適化</text>
+    <text x="-210" y="0" class="small-text">• プロセス改善</text>
+    <text x="-210" y="15" class="small-text">• モデル調整</text>
+    <text x="-210" y="30" class="small-text">• 再テスト計画</text>
+  </g>
+
+  <!-- Cycle Arrows -->
+  <path d="M 480 145 Q 550 160 625 195" class="cycle-arrow"/>
+  <path d="M 650 270 Q 640 340 580 390" class="cycle-arrow"/>
+  <path d="M 550 420 Q 450 430 350 420" class="cycle-arrow"/>
+  <path d="M 280 390 Q 260 320 260 270" class="cycle-arrow"/>
+  <path d="M 280 190 Q 340 150 420 145" class="cycle-arrow"/>
+
+  <!-- AI-Specific Testing Considerations -->
+  <g id="ai-considerations">
+    <rect x="50" y="500" width="800" height="80" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+    <text x="450" y="520" class="activity-text" text-anchor="middle" font-weight="bold">AI特有のテスト考慮事項</text>
+    
+    <text x="100" y="540" class="small-text">データ品質テスト</text>
+    <text x="100" y="555" class="small-text">• 完全性</text>
+    <text x="100" y="570" class="small-text">• 一貫性</text>
+    
+    <text x="250" y="540" class="small-text">モデルテスト</text>
+    <text x="250" y="555" class="small-text">• 精度・再現率</text>
+    <text x="250" y="570" class="small-text">• 過学習検証</text>
+    
+    <text x="400" y="540" class="small-text">バイアステスト</text>
+    <text x="400" y="555" class="small-text">• 公平性</text>
+    <text x="400" y="570" class="small-text">• 差別検出</text>
+    
+    <text x="550" y="540" class="small-text">説明可能性</text>
+    <text x="550" y="555" class="small-text">• 解釈性</text>
+    <text x="550" y="570" class="small-text">• 透明性</text>
+    
+    <text x="700" y="540" class="small-text">セキュリティ</text>
+    <text x="700" y="555" class="small-text">• 敵対的攻撃</text>
+    <text x="700" y="570" class="small-text">• プライバシー</text>
+  </g>
+</svg>
