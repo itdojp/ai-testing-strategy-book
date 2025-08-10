@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>AI vs 人間コード比較フロー</title>
+  <desc>生成コードと手動コードの品質比較プロセスとレビューワークフロー図</desc>
+  <defs>
+    <style>
+      :root {
+        --svg-bg: #ffffff;
+        --svg-text: #1a1a1a;
+        --svg-primary: #0066cc;
+        --svg-success: #16a34a;
+        --svg-warning: #ca8a04;
+        --svg-error: #dc2626;
+        --svg-neutral: #6b7280;
+      }
+      .title-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: var(--svg-text); }
+      .section-title { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: var(--svg-bg); }
+      .step-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 400; fill: var(--svg-text); }
+      .annotation-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 400; fill: var(--svg-neutral); }
+      .decision-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 400; fill: var(--svg-text); }
+      .ai-source { fill: var(--svg-primary); stroke: var(--svg-primary); stroke-width: 2; }
+      .human-source { fill: var(--svg-warning); stroke: var(--svg-warning); stroke-width: 2; }
+      .analysis-box { fill: var(--svg-success); fill-opacity: 0.1; stroke: var(--svg-success); stroke-width: 2; }
+      .decision-diamond { fill: var(--svg-warning); fill-opacity: 0.2; stroke: var(--svg-warning); stroke-width: 2; }
+      .result-box { fill: var(--svg-neutral); fill-opacity: 0.1; stroke: var(--svg-neutral); stroke-width: 2; }
+      .flow-arrow { stroke: var(--svg-primary); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .approval-arrow { stroke: var(--svg-success); stroke-width: 2; fill: none; marker-end: url(#arrowhead-green); }
+      .reject-arrow { stroke: var(--svg-error); stroke-width: 2; fill: none; marker-end: url(#arrowhead-red); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-primary)"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-success)"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-error)"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="40" class="title-text" text-anchor="middle">AI vs 人間コード比較フロー</text>
+
+  <!-- Source Code Generation -->
+  <g id="source-generation">
+    <!-- AI Generated Code -->
+    <rect x="80" y="70" width="140" height="60" class="ai-source" rx="4"/>
+    <text x="150" y="90" class="section-title" text-anchor="middle">AI生成コード</text>
+    <text x="90" y="110" class="annotation-text">• GitHub Copilot</text>
+    <text x="90" y="125" class="annotation-text">• ChatGPT/Claude</text>
+    
+    <!-- Human Written Code -->
+    <rect x="280" y="70" width="140" height="60" class="human-source" rx="4"/>
+    <text x="350" y="90" class="section-title" text-anchor="middle">人間記述コード</text>
+    <text x="290" y="110" class="annotation-text">• 手動実装</text>
+    <text x="290" y="125" class="annotation-text">• 経験ベース</text>
+  </g>
+
+  <!-- Comparative Analysis -->
+  <g id="analysis">
+    <rect x="480" y="70" width="200" height="60" class="analysis-box" rx="4"/>
+    <text x="580" y="90" class="step-text" text-anchor="middle" font-weight="500">比較分析システム</text>
+    <text x="490" y="110" class="annotation-text">• 静的解析ツール</text>
+    <text x="490" y="125" class="annotation-text">• パフォーマンス測定</text>
+  </g>
+
+  <!-- Quality Metrics Comparison -->
+  <g id="metrics-comparison">
+    <rect x="150" y="160" width="500" height="120" fill="var(--svg-neutral)" fill-opacity="0.05" stroke="var(--svg-text)" stroke-width="2" rx="4"/>
+    <text x="400" y="180" class="section-title" text-anchor="middle">品質メトリクス比較</text>
+    
+    <!-- Complexity -->
+    <text x="170" y="200" class="step-text">循環的複雑度</text>
+    <rect x="260" y="192" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="260" y="192" width="45" height="15" fill="var(--svg-primary)" rx="2"/>
+    <text x="350" y="203" class="annotation-text">AI: 3.2</text>
+    <rect x="380" y="192" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="380" y="192" width="55" height="15" fill="var(--svg-warning)" rx="2"/>
+    <text x="470" y="203" class="annotation-text">人間: 4.1</text>
+    
+    <!-- Maintainability -->
+    <text x="170" y="220" class="step-text">保守性指標</text>
+    <rect x="260" y="212" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="260" y="212" width="60" height="15" fill="var(--svg-primary)" rx="2"/>
+    <text x="350" y="223" class="annotation-text">AI: 85</text>
+    <rect x="380" y="212" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="380" y="212" width="68" height="15" fill="var(--svg-warning)" rx="2"/>
+    <text x="470" y="223" class="annotation-text">人間: 92</text>
+    
+    <!-- Performance -->
+    <text x="170" y="240" class="step-text">実行性能</text>
+    <rect x="260" y="232" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="260" y="232" width="70" height="15" fill="var(--svg-success)" rx="2"/>
+    <text x="350" y="243" class="annotation-text">AI: 95ms</text>
+    <rect x="380" y="232" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="380" y="232" width="50" height="15" fill="var(--svg-error)" rx="2"/>
+    <text x="470" y="243" class="annotation-text">人間: 120ms</text>
+    
+    <!-- Test Coverage -->
+    <text x="170" y="260" class="step-text">テストカバレッジ</text>
+    <rect x="260" y="252" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="260" y="252" width="52" height="15" fill="var(--svg-primary)" rx="2"/>
+    <text x="350" y="263" class="annotation-text">AI: 65%</text>
+    <rect x="380" y="252" width="80" height="15" fill="var(--svg-neutral)" fill-opacity="0.3" rx="2"/>
+    <rect x="380" y="252" width="64" height="15" fill="var(--svg-success)" rx="2"/>
+    <text x="470" y="263" class="annotation-text">人間: 88%</text>
+  </g>
+
+  <!-- Review Process -->
+  <g id="review-process">
+    <!-- Human Reviewer -->
+    <rect x="80" y="310" width="120" height="60" class="human-source" rx="4"/>
+    <text x="140" y="330" class="section-title" text-anchor="middle">人間レビュアー</text>
+    <text x="90" y="350" class="annotation-text">• コードレビュー</text>
+    <text x="90" y="365" class="annotation-text">• 設計検証</text>
+    
+    <!-- Automated Analysis -->
+    <rect x="220" y="310" width="120" height="60" class="analysis-box" rx="4"/>
+    <text x="280" y="330" class="step-text" text-anchor="middle" font-weight="500">自動分析</text>
+    <text x="230" y="350" class="annotation-text">• SAST/DAST</text>
+    <text x="230" y="365" class="annotation-text">• 依存関係検査</text>
+    
+    <!-- Quality Gate -->
+    <polygon points="400,310 440,340 400,370 360,340" class="decision-diamond"/>
+    <text x="400" y="335" class="decision-text" text-anchor="middle" font-weight="500">品質</text>
+    <text x="400" y="350" class="decision-text" text-anchor="middle">ゲート</text>
+  </g>
+
+  <!-- Decision Outcomes -->
+  <g id="outcomes">
+    <!-- Approval Path -->
+    <rect x="480" y="280" width="120" height="40" fill="var(--svg-success)" fill-opacity="0.1" stroke="var(--svg-success)" stroke-width="2" rx="4"/>
+    <text x="540" y="295" class="step-text" text-anchor="middle" font-weight="500">承認</text>
+    <text x="540" y="310" class="annotation-text" text-anchor="middle">デプロイ準備完了</text>
+    
+    <!-- Rejection Path -->
+    <rect x="480" y="340" width="120" height="40" fill="var(--svg-error)" fill-opacity="0.1" stroke="var(--svg-error)" stroke-width="2" rx="4"/>
+    <text x="540" y="355" class="step-text" text-anchor="middle" font-weight="500">却下</text>
+    <text x="540" y="370" class="annotation-text" text-anchor="middle">修正・再生成</text>
+    
+    <!-- Conditional Approval -->
+    <rect x="480" y="400" width="120" height="40" fill="var(--svg-warning)" fill-opacity="0.1" stroke="var(--svg-warning)" stroke-width="2" rx="4"/>
+    <text x="540" y="415" class="step-text" text-anchor="middle" font-weight="500">条件付き承認</text>
+    <text x="540" y="430" class="annotation-text" text-anchor="middle">軽微な修正要</text>
+  </g>
+
+  <!-- Performance Indicators -->
+  <g id="performance-indicators">
+    <rect x="80" y="480" width="640" height="80" class="result-box" rx="4"/>
+    <text x="400" y="500" class="section-title" text-anchor="middle">パフォーマンス指標</text>
+    
+    <!-- AI Code Performance -->
+    <text x="100" y="520" class="step-text" font-weight="500">AI生成コード</text>
+    <text x="110" y="535" class="annotation-text">• 生成速度: 2分</text>
+    <text x="110" y="548" class="annotation-text">• 初回品質: 75%</text>
+    
+    <!-- Human Code Performance -->
+    <text x="280" y="520" class="step-text" font-weight="500">人間記述コード</text>
+    <text x="290" y="535" class="annotation-text">• 開発時間: 45分</text>
+    <text x="290" y="548" class="annotation-text">• 初回品質: 85%</text>
+    
+    <!-- Hybrid Approach -->
+    <text x="460" y="520" class="step-text" font-weight="500">ハイブリッド手法</text>
+    <text x="470" y="535" class="annotation-text">• 総開発時間: 15分</text>
+    <text x="470" y="548" class="annotation-text">• 最終品質: 95%</text>
+    
+    <!-- Success Rate -->
+    <text x="600" y="520" class="step-text" font-weight="500">成功率</text>
+    <circle cx="650" cy="535" r="15" fill="none" stroke="var(--svg-success)" stroke-width="3"/>
+    <circle cx="650" cy="535" r="15" fill="none" stroke="var(--svg-success)" stroke-width="3" 
+            stroke-dasharray="75 94" stroke-dashoffset="23" transform="rotate(-90 650 535)"/>
+    <text x="650" y="540" class="annotation-text" text-anchor="middle" font-weight="500">92%</text>
+  </g>
+
+  <!-- Flow Arrows -->
+  <path d="M 220 100 L 280 100" class="flow-arrow"/>
+  <path d="M 420 100 L 480 100" class="flow-arrow"/>
+  <path d="M 580 130 L 580 160" class="flow-arrow"/>
+  <path d="M 400 280 L 400 310" class="flow-arrow"/>
+  
+  <!-- Review Flow -->
+  <path d="M 200 340 L 220 340" class="flow-arrow"/>
+  <path d="M 340 340 L 360 340" class="flow-arrow"/>
+  
+  <!-- Decision Paths -->
+  <path d="M 440 330 L 480 300" class="approval-arrow"/>
+  <path d="M 440 340 L 480 360" class="reject-arrow"/>
+  <path d="M 440 350 L 480 420" class="flow-arrow"/>
+  
+  <!-- Feedback Loop -->
+  <path d="M 480 360 L 400 400 L 150 400 L 150 160" stroke="var(--svg-error)" stroke-width="2" 
+        stroke-dasharray="5,3" fill="none" marker-end="url(#arrowhead-red)"/>
+  <text x="300" y="395" class="annotation-text">フィードバックループ</text>
+</svg>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>品質評価フレームワーク</title>
+  <desc>AIコードの品質メトリクスダッシュボードと従来テストとの比較分析図</desc>
+  <defs>
+    <style>
+      :root {
+        --svg-bg: #ffffff;
+        --svg-text: #1a1a1a;
+        --svg-primary: #0066cc;
+        --svg-success: #16a34a;
+        --svg-warning: #ca8a04;
+        --svg-error: #dc2626;
+        --svg-neutral: #6b7280;
+      }
+      .title-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: var(--svg-text); }
+      .section-title { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: var(--svg-text); }
+      .metric-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 400; fill: var(--svg-text); }
+      .value-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 600; fill: var(--svg-text); }
+      .annotation-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 400; fill: var(--svg-neutral); }
+      .traditional-box { fill: var(--svg-neutral); fill-opacity: 0.1; stroke: var(--svg-neutral); stroke-width: 2; }
+      .ai-assisted-box { fill: var(--svg-primary); fill-opacity: 0.1; stroke: var(--svg-primary); stroke-width: 2; }
+      .quality-metric-box { fill: var(--svg-success); fill-opacity: 0.1; stroke: var(--svg-success); stroke-width: 2; }
+      .risk-box { fill: var(--svg-error); fill-opacity: 0.1; stroke: var(--svg-error); stroke-width: 2; }
+      .comparison-arrow { stroke: var(--svg-warning); stroke-width: 3; fill: none; marker-end: url(#arrowhead-orange); }
+    </style>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-warning)"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="40" class="title-text" text-anchor="middle">品質評価フレームワーク</text>
+
+  <!-- Traditional vs AI-Assisted Comparison -->
+  <g id="comparison-matrix">
+    <text x="400" y="70" class="section-title" text-anchor="middle">従来テスト vs AI支援テスト比較マトリックス</text>
+    
+    <!-- Traditional Testing Column -->
+    <g id="traditional">
+      <rect x="80" y="90" width="200" height="180" class="traditional-box" rx="4"/>
+      <text x="180" y="110" class="section-title" text-anchor="middle">従来テスト手法</text>
+      
+      <text x="90" y="130" class="metric-text" font-weight="500">効率性</text>
+      <rect x="140" y="122" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="140" y="122" width="30" height="12" fill="var(--svg-warning)" rx="2"/>
+      <text x="210" y="132" class="value-text">50%</text>
+      
+      <text x="90" y="150" class="metric-text" font-weight="500">精度</text>
+      <rect x="140" y="142" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="140" y="142" width="45" height="12" fill="var(--svg-success)" rx="2"/>
+      <text x="210" y="152" class="value-text">75%</text>
+      
+      <text x="90" y="170" class="metric-text" font-weight="500">速度</text>
+      <rect x="140" y="162" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="140" y="162" width="24" height="12" fill="var(--svg-error)" rx="2"/>
+      <text x="210" y="172" class="value-text">40%</text>
+      
+      <text x="90" y="190" class="metric-text" font-weight="500">カバレッジ</text>
+      <rect x="140" y="182" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="140" y="182" width="42" height="12" fill="var(--svg-warning)" rx="2"/>
+      <text x="210" y="192" class="value-text">70%</text>
+      
+      <text x="90" y="210" class="metric-text" font-weight="500">コスト</text>
+      <rect x="140" y="202" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="140" y="202" width="48" height="12" fill="var(--svg-error)" rx="2"/>
+      <text x="210" y="212" class="value-text">高</text>
+      
+      <text x="90" y="235" class="annotation-text">• 手動テスト中心</text>
+      <text x="90" y="248" class="annotation-text">• 経験に依存</text>
+      <text x="90" y="261" class="annotation-text">• 時間コスト大</text>
+    </g>
+    
+    <!-- AI-Assisted Testing Column -->
+    <g id="ai-assisted">
+      <rect x="320" y="90" width="200" height="180" class="ai-assisted-box" rx="4"/>
+      <text x="420" y="110" class="section-title" text-anchor="middle">AI支援テスト手法</text>
+      
+      <text x="330" y="130" class="metric-text" font-weight="500">効率性</text>
+      <rect x="380" y="122" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="380" y="122" width="54" height="12" fill="var(--svg-success)" rx="2"/>
+      <text x="450" y="132" class="value-text">90%</text>
+      
+      <text x="330" y="150" class="metric-text" font-weight="500">精度</text>
+      <rect x="380" y="142" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="380" y="142" width="51" height="12" fill="var(--svg-success)" rx="2"/>
+      <text x="450" y="152" class="value-text">85%</text>
+      
+      <text x="330" y="170" class="metric-text" font-weight="500">速度</text>
+      <rect x="380" y="162" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="380" y="162" width="57" height="12" fill="var(--svg-success)" rx="2"/>
+      <text x="450" y="172" class="value-text">95%</text>
+      
+      <text x="330" y="190" class="metric-text" font-weight="500">カバレッジ</text>
+      <rect x="380" y="182" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="380" y="182" width="54" height="12" fill="var(--svg-success)" rx="2"/>
+      <text x="450" y="192" class="value-text">90%</text>
+      
+      <text x="330" y="210" class="metric-text" font-weight="500">コスト</text>
+      <rect x="380" y="202" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
+      <rect x="380" y="202" width="36" height="12" fill="var(--svg-success)" rx="2"/>
+      <text x="450" y="212" class="value-text">低</text>
+      
+      <text x="330" y="235" class="annotation-text">• 自動テスト生成</text>
+      <text x="330" y="248" class="annotation-text">• AI品質分析</text>
+      <text x="330" y="261" class="annotation-text">• 継続的学習</text>
+    </g>
+    
+    <!-- Improvement Arrow -->
+    <path d="M 280 180 L 320 180" class="comparison-arrow"/>
+    <text x="300" y="175" class="annotation-text" text-anchor="middle" font-weight="500">改善</text>
+  </g>
+
+  <!-- Quality Metrics Dashboard -->
+  <g id="dashboard">
+    <rect x="560" y="90" width="180" height="180" class="quality-metric-box" rx="4"/>
+    <text x="650" y="110" class="section-title" text-anchor="middle">品質メトリクス</text>
+    
+    <!-- Code Quality Score Circle -->
+    <circle cx="650" cy="150" r="25" fill="none" stroke="var(--svg-success)" stroke-width="4"/>
+    <circle cx="650" cy="150" r="25" fill="none" stroke="var(--svg-success)" stroke-width="4" 
+            stroke-dasharray="110 157" stroke-dashoffset="39" transform="rotate(-90 650 150)"/>
+    <text x="650" y="155" class="value-text" text-anchor="middle" font-size="14">92</text>
+    <text x="650" y="180" class="annotation-text" text-anchor="middle">品質スコア</text>
+    
+    <text x="570" y="200" class="metric-text">• 複雑度: 低</text>
+    <text x="570" y="215" class="metric-text">• 保守性: 高</text>
+    <text x="570" y="230" class="metric-text">• 可読性: 良好</text>
+    
+    <text x="570" y="250" class="annotation-text">リアルタイム監視</text>
+    <text x="570" y="265" class="annotation-text">自動レポート生成</text>
+  </g>
+
+  <!-- Risk Assessment Matrix -->
+  <g id="risk-assessment">
+    <rect x="80" y="300" width="440" height="160" class="risk-box" rx="4"/>
+    <text x="300" y="320" class="section-title" text-anchor="middle">リスク評価とミティゲーション戦略</text>
+    
+    <!-- High Risk -->
+    <rect x="100" y="335" width="120" height="50" fill="var(--svg-error)" fill-opacity="0.2" stroke="var(--svg-error)" stroke-width="2" rx="4"/>
+    <text x="160" y="350" class="metric-text" text-anchor="middle" font-weight="500">高リスク</text>
+    <text x="110" y="365" class="annotation-text">• AIハルシネーション</text>
+    <text x="110" y="378" class="annotation-text">• セキュリティ脆弱性</text>
+    
+    <!-- Medium Risk -->
+    <rect x="240" y="335" width="120" height="50" fill="var(--svg-warning)" fill-opacity="0.2" stroke="var(--svg-warning)" stroke-width="2" rx="4"/>
+    <text x="300" y="350" class="metric-text" text-anchor="middle" font-weight="500">中リスク</text>
+    <text x="250" y="365" class="annotation-text">• パフォーマンス劣化</text>
+    <text x="250" y="378" class="annotation-text">• 互換性問題</text>
+    
+    <!-- Low Risk -->
+    <rect x="380" y="335" width="120" height="50" fill="var(--svg-success)" fill-opacity="0.2" stroke="var(--svg-success)" stroke-width="2" rx="4"/>
+    <text x="440" y="350" class="metric-text" text-anchor="middle" font-weight="500">低リスク</text>
+    <text x="390" y="365" class="annotation-text">• コードスタイル</text>
+    <text x="390" y="378" class="annotation-text">• ドキュメント</text>
+    
+    <!-- Mitigation Strategies -->
+    <text x="100" y="410" class="section-title">対策手法:</text>
+    <text x="110" y="425" class="annotation-text">• 多段階検証プロセス</text>
+    <text x="110" y="438" class="annotation-text">• 自動セキュリティスキャン</text>
+    <text x="110" y="451" class="annotation-text">• 人間による最終承認</text>
+    
+    <text x="300" y="410" class="section-title">継続的改善:</text>
+    <text x="310" y="425" class="annotation-text">• フィードバックループ</text>
+    <text x="310" y="438" class="annotation-text">• モデル再訓練</text>
+    <text x="310" y="451" class="annotation-text">• プロンプト最適化</text>
+  </g>
+
+  <!-- Performance Comparison Chart -->
+  <g id="performance-chart">
+    <rect x="560" y="300" width="180" height="160" fill="var(--svg-neutral)" fill-opacity="0.05" stroke="var(--svg-text)" stroke-width="2" rx="4"/>
+    <text x="650" y="320" class="section-title" text-anchor="middle">パフォーマンス比較</text>
+    
+    <!-- Bar Chart -->
+    <text x="570" y="340" class="annotation-text">テスト実行時間 (分)</text>
+    
+    <!-- Traditional Testing Bar -->
+    <rect x="580" y="350" width="15" height="60" fill="var(--svg-neutral)" rx="2"/>
+    <text x="587" y="420" class="annotation-text" text-anchor="middle">従来</text>
+    <text x="587" y="345" class="annotation-text" text-anchor="middle">120</text>
+    
+    <!-- AI-Assisted Testing Bar -->
+    <rect x="610" y="380" width="15" height="30" fill="var(--svg-primary)" rx="2"/>
+    <text x="617" y="420" class="annotation-text" text-anchor="middle">AI支援</text>
+    <text x="617" y="375" class="annotation-text" text-anchor="middle">30</text>
+    
+    <!-- Coverage Comparison -->
+    <text x="650" y="340" class="annotation-text">カバレッジ (%)</text>
+    <rect x="660" y="350" width="15" height="42" fill="var(--svg-neutral)" rx="2"/>
+    <text x="667" y="420" class="annotation-text" text-anchor="middle">従来</text>
+    <text x="667" y="345" class="annotation-text" text-anchor="middle">70</text>
+    
+    <rect x="690" y="350" width="15" height="54" fill="var(--svg-success)" rx="2"/>
+    <text x="697" y="420" class="annotation-text" text-anchor="middle">AI支援</text>
+    <text x="697" y="345" class="annotation-text" text-anchor="middle">90</text>
+    
+    <text x="650" y="440" class="annotation-text" text-anchor="middle" font-weight="500">4倍の効率化</text>
+    <text x="650" y="453" class="annotation-text" text-anchor="middle">20%の品質向上</text>
+  </g>
+</svg>
