@@ -37,4 +37,15 @@ kramdown:
 # GitHub Pages設定
 url: "https://itdojp.github.io"
 baseurl: "/ai-testing-strategy-book"
-repository: "itdojp/ai-testing-strategy-book"
+repository: "itdojp/ai-testing-strategy-book"permalink: pretty
+
+# Use custom book layout as default
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "book"
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+permalink: pretty
