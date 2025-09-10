@@ -88,3 +88,4 @@ AI技術の進歩に対応して、内容を継続的に更新。最新情報は
 ---
 
 © 2025 ITDO Inc. All Rights Reserved.
+{% include page-navigation.html %}
