@@ -461,7 +461,7 @@ class PropertyGenerator:
             properties.append(Property(
                 name="monotonicity",
                 description="入力の増加に対して出力も増加",
-                test=lambda f, x, y: (x <= y) implies (f(x) <= f(y))
+                test=lambda f, x, y: (not (x <= y)) or (f(x) <= f(y))
             ))
         
         return properties

@@ -113,7 +113,7 @@ graph TD
 ```python
 from enum import Enum
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import Any, Dict, List
 
 class RiskDimension(Enum):
     """リスク評価の次元"""
@@ -160,7 +160,7 @@ class RiskAssessment:
         else:
             return "LOW"
     
-    def get_test_strategy(self) -> Dict[str, any]:
+    def get_test_strategy(self) -> Dict[str, Any]:
         """リスクレベルに応じたテスト戦略"""
         category = self.get_risk_category()
         
@@ -256,7 +256,7 @@ class BusinessImpactAnalysis:
             "competitor_advantage": self._assess_competitive_impact()
         }
     
-    def analyze_operational_impact(self) -> Dict[str, any]:
+    def analyze_operational_impact(self) -> Dict[str, Any]:
         """運用への影響分析"""
         return {
             "affected_users": self._count_affected_users(),
@@ -265,7 +265,7 @@ class BusinessImpactAnalysis:
             "recovery_time": self._estimate_recovery_time()
         }
     
-    def analyze_compliance_impact(self) -> Dict[str, any]:
+    def analyze_compliance_impact(self) -> Dict[str, Any]:
         """コンプライアンスへの影響"""
         return {
             "regulatory_violations": self._check_regulatory_violations(),
@@ -937,7 +937,7 @@ class AITestDataGenerator:
         
         return validated_data
     
-    def generate_edge_cases(self, field_type: str) -> List[any]:
+    def generate_edge_cases(self, field_type: str) -> List[Any]:
         """エッジケースの自動生成"""
         
         edge_cases = []
