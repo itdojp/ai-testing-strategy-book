@@ -29,17 +29,9 @@ appendices:
   path: /appendices/appendix-a/
 - title: 付録A テンプレート集
   path: /appendices/appendix-a-templates/
-- title: appendix-a-templates
-  path: /appendices/appendix-a-templates/
 - title: 付録B チェックリスト
-  path: /appendices/appendix-b-checklists/
-- title: appendix-b-checklists
   path: /appendices/appendix-b-checklists/
 - title: 付録C ツール比較表
   path: /appendices/appendix-c-tool-comparison/
-- title: appendix-c-tool-comparison
-  path: /appendices/appendix-c-tool-comparison/
 - title: 付録D 用語集
-  path: /appendices/appendix-d-glossary/
-- title: appendix-d-glossary
   path: /appendices/appendix-d-glossary/
