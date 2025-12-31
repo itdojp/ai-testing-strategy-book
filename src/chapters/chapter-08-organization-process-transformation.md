@@ -1170,7 +1170,7 @@ class AdaptiveTransformationRoadmap:
         
         roadmap = TransformationRoadmap()
         
-        # フェーズ1: 基盤構築（3-6ヶ月）
+        # フェーズ1: 基盤構築（3〜6ヶ月）
         roadmap.add_phase(
             Phase(
                 name="Foundation Building",
@@ -1255,7 +1255,7 @@ class AdaptiveTransformationRoadmap:
             )
         )
         
-        # フェーズ2: 拡大展開（6-12ヶ月）
+        # フェーズ2: 拡大展開（6〜12ヶ月）
         roadmap.add_phase(
             Phase(
                 name="Scaled Implementation",
@@ -1329,7 +1329,7 @@ class AdaptiveTransformationRoadmap:
             )
         )
         
-        # フェーズ3: 最適化と革新（12-24ヶ月）
+        # フェーズ3: 最適化と革新（12〜24ヶ月）
         roadmap.add_phase(
             Phase(
                 name="Optimization and Innovation",
@@ -2269,7 +2269,7 @@ class StrategicResistanceManagement:
             ],
             
             tipping_points=[
-                "Critical mass of adopters (typically 15-20%)",
+                "Critical mass of adopters (typically 15〜20%)",
                 "Visible success from respected peer",
                 "Executive mandate with support",
                 "Personal 'aha' moment"
