@@ -455,7 +455,7 @@ class PracticalBoundaryExamples:
         relative_boundaries = [
             # 月の加算・減算
             (datetime(2024, 1, 31), "add_months", 1),  # 1/31 + 1ヶ月 = 2/29?
-            (datetime(2024, 3, 31), "subtract_months", 1),  # 3/31〜1ヶ月 = 2/29?
+            (datetime(2024, 3, 31), "subtract_months", 1),  # 3/31 - 1ヶ月 = 2/29?
             
             # 年の加算・減算（うるう年考慮）
             (datetime(2024, 2, 29), "add_years", 1),  # 2/29 + 1年 = 2/28?
