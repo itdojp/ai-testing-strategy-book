@@ -123,7 +123,7 @@ AIコーディング支援ツールは急速に進化しており、それぞれ
 - **テスト自動化**: Cypress（Web）/ Jest（単体）
 - **品質分析**: SonarQube Community + Sentry
 
-#### 中規模チーム（10-50名）
+#### 中規模チーム（10〜50名）
 - **AIコーディング**: Copilot + Tabnine（カスタム）
 - **テスト自動化**: Playwright + TestRigor（重要フロー）
 - **品質分析**: SonarQube Developer + Datadog
