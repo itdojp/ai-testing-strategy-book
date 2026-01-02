@@ -534,7 +534,7 @@ def calculate_discount(is_member, purchase_amount, is_birthday):
 
 *構造化された探索*：
 1. **チャーター（憲章）の設定**
-   - 時間枠（通常1-2時間）
+   - 時間枠（通常1〜2時間）
    - 探索領域
    - 重点確認項目
 
