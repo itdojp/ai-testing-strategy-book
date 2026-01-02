@@ -43,4 +43,4 @@
 - **チェックリスト**: AI生成コードレビューの観点一覧
 - **ツール比較表**: 選択の指針となる機能・特性比較
 
-次に読む： [第1章 AI主導開発の現状と課題](../chapters/chapter-01-ai-driven-development.md)
+次に読む： [第1章 AI主導開発の現状と課題](../chapters/chapter-01-ai-driven-development.md) / [目次（トップ）](../)
