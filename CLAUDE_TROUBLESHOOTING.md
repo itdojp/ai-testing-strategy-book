@@ -49,7 +49,7 @@
 - **違い**: 
   - Branch: GitHubが自動的にJekyllビルド
   - Actions: カスタムビルドプロセスを使用可能
-- **選択基準**
+- **選択基準**:
   - 通常 → "Deploy from a branch"
   - Jekyll競合が多い → "GitHub Actions"
 - **注意**: 勝手に変更せず、ユーザーの意向を確認
