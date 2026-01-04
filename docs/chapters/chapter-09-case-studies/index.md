@@ -887,7 +887,7 @@ class ProjectOutcomes:
                     """,
                     root_cause="AIの能力を過大評価",
                     resolution="人間による設計 + AI による拡張",
-                    lesson="AIは文脈理解において人間を代替できない"
+                    lesson="AIは文脈の把握が不完全になり得るため、人間のレビューと最終判断が不可欠"
                 ),
                 
                 Setback(

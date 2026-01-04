@@ -383,7 +383,7 @@ def reserve_inventory_complete(product_id, quantity, customer_tier, timestamp):
 
 *AIの「創造性」の正体*：
 
-AIの創造性は、既存パターンの新しい組み合わせに過ぎない。真に革新的なアプローチは生成できない。
+AIの出力は学習データの影響を強く受けるため、既存パターンの再構成に寄りやすい。革新性は保証できない。
 
 ```python
 # AIが生成する「創造的」なコード

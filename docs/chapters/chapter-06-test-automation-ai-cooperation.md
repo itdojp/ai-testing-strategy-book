@@ -2227,7 +2227,7 @@ class AutomationBoundaryMapper:
         
         boundary_map = AutomationBoundaryMap()
         
-        # 完全自動化可能な領域
+        # 高い自動化が可能な領域
         fully_automatable = self._identify_fully_automatable(process)
         boundary_map.fully_automatable = fully_automatable
         
@@ -2303,10 +2303,10 @@ class PracticalAutomationExamples:
     def demonstrate_test_automation_boundaries(self):
         """テスト自動化における境界の実例"""
         
-        # 完全自動化可能：回帰テスト
+        # 高い自動化が可能：回帰テスト
         class FullyAutomatedRegressionTest:
             def run_regression_suite(self):
-                """完全自動化された回帰テスト"""
+                """高い自動化を前提とした回帰テスト"""
                 # 以下はすべて自動実行
                 steps = [
                     "コード変更の検出",
