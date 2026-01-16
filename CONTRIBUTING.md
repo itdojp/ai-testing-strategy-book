@@ -28,6 +28,22 @@
 6. **レビュー** - 内容確認・調整
 7. **マージ** - 変更の取り込み
 
+## 📁 本文ファイルの場所（編集対象）
+
+本リポジトリでは、本文が複数箇所に存在します。PRでは、内容の不整合が起きないよう、編集対象を意識してください。
+
+- **執筆用ソース**: `src/` 配下（原則としてここを正とする）
+- **公開用（GitHub Pages）**: `docs/` 配下（`npm run build` / `scripts/build-simple.js` により生成されるビルド成果物）
+
+### `docs/chapters/` のファイルが2系統ある点について
+
+`docs/chapters/` には、互換性のため以下の2つの形式が並存しています（いずれもビルド時に生成されます）。
+
+- `docs/chapters/chapter-NN-*.md`（フラットな `.md`。例: `chapter-01-ai-driven-development.md`）
+- `docs/chapters/chapter-NN-*/index.md`（ディレクトリ配下の `index.md`。例: `chapter-01-ai-driven-development/index.md`）
+
+章本文を修正する場合は、原則として `src/` 配下の執筆用ソースを編集したうえで `npm run build` を実行し、`docs/` を更新して PR 内で不要な差分が生じないようにしてください（`docs/` は通常、直接編集不要です）。
+
 ## 📝 ライセンス同意
 
 コントリビューションを行うことで、以下に同意したものとみなします。
