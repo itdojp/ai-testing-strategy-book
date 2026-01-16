@@ -151,7 +151,7 @@ class TechInnovateCaseStudy:
                 Challenge(
                     name="Quality Gates Inadequacy",
                     description="""
-                    既存の品質ゲートがAI特有の問題を検出できない。
+                    既存の品質ゲートだけではAI特有の問題を検出しきれない。
                     """,
                     impact="中-高",
                     gaps=[
@@ -882,7 +882,7 @@ class ProjectOutcomes:
                     """,
                     root_cause="AIの能力を過大評価",
                     resolution="人間による設計 + AI による拡張",
-                    lesson="AIは文脈理解において人間を代替できない"
+                    lesson="AIは文脈の把握が不完全になり得るため、人間のレビューと最終判断が不可欠"
                 ),
                 
                 Setback(
@@ -958,7 +958,7 @@ TechInnovate社の成功は、技術的解決策と人間中心のアプロー�
 
 最も重要な洞察は、品質の定義自体を進化させたことである。従来の「バグの少なさ」から、「ビジネス価値の正確な実現」へと品質観を転換した。これにより、技術的な正確性とビジネス的な成功が一致するようになった。
 
-また、失敗を恐れずに実験し、そこから学ぶ文化を構築したことも成功の鍵であった。AIという新しい技術領域では、最初から完璧な答えを持つことは不可能である。重要なのは、継続的に学習し、適応することである。
+また、失敗を恐れずに実験し、そこから学ぶ文化を構築したことも成功の鍵であった。AIという新しい技術領域では、最初から完璧な答えを持つことは難しい。重要なのは、継続的に学習し、適応することである。
 
 ## 9.2 モバイルアプリ開発
 
@@ -1221,7 +1221,7 @@ class MobileAppQualityChallenges:
                     name="Real-World Condition Simulation",
                     description="""
                     実際の使用条件（移動中、低電波、等）での
-                    テストをAIが適切に生成できない。
+                    テストをAIだけで適切に生成しきれない場合がある。
                     """,
                     missing_scenarios=[
                         "Network condition variations",
