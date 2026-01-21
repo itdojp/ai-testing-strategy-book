@@ -1,0 +1,10 @@
+{
+  "name": "ai-testing-strategy-examples-node",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "node --check src/discount.js test/discount.test.js",
+    "test": "node --test"
+  }
+}
+
