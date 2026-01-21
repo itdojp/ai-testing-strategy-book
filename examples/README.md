@@ -33,3 +33,28 @@ npm ci
 npm run lint
 npm test
 ```
+
+## 演習用（意図的に失敗する版）
+
+以下のブランチには、典型的な不具合を *意図的に入れた* サンプルを置いています。
+
+- `exercise/discount-rounding-bug-v1`: 割引計算の丸め処理が誤っており、テストが失敗する状態
+
+### 使い方
+
+```bash
+git switch exercise/discount-rounding-bug-v1
+npm run test:examples  # 失敗を確認
+```
+
+修正後に、以下が成功する状態を目標にします。
+
+```bash
+npm run test:examples
+```
+
+演習後は `main` に戻します。
+
+```bash
+git switch main
+```
