@@ -284,5 +284,5 @@ class ComplianceTracker:
 
 ### 関連する付録・テンプレート
 
-- 説明可能性や倫理的配慮をテスト計画に反映する際には、[付録A テンプレート集](../appendices/appendix-a-templates.html) のリスク分析・品質基準のセクションを拡張して活用するとよい。
-- 関連する用語や概念の整理には、[付録D 用語集](../appendices/appendix-d-glossary.html) が役立つ。
+- 説明可能性や倫理的配慮をテスト計画に反映する際には、[付録A テンプレート集](../appendices/appendix-a-templates/) のリスク分析・品質基準のセクションを拡張して活用するとよい。
+- 関連する用語や概念の整理には、[付録D 用語集](../appendices/appendix-d-glossary/) が役立つ。

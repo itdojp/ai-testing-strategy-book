@@ -2700,6 +2700,6 @@ class ConcurrencySolutions:
 
 ### 関連する付録・テンプレート
 
-- 検証計画やテスト項目表を作成する際は、[付録A テンプレート集](../appendices/appendix-a-templates.html) の構成を参考に、自プロジェクト向けのドキュメントを整備するとよい。
-- AI生成コードレビューやテスト結果確認の観点整理には、[付録B チェックリスト](../appendices/appendix-b-checklists.html) が有用である。
-- 利用中および導入検討中の検証ツールの比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison.html) を参照し、特性や導入コストを整理してほしい。
+- 検証計画やテスト項目表を作成する際は、[付録A テンプレート集](../appendices/appendix-a-templates/) の構成を参考に、自プロジェクト向けのドキュメントを整備するとよい。
+- AI生成コードレビューやテスト結果確認の観点整理には、[付録B チェックリスト](../appendices/appendix-b-checklists/) が有用である。
+- 利用中および導入検討中の検証ツールの比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison/) を参照し、特性や導入コストを整理してほしい。

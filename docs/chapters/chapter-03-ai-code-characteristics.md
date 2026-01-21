@@ -1377,5 +1377,5 @@ processor.register_strategy("bank_transfer", BankTransferPayment(bank_config))
 
 ### 関連する付録・テンプレート
 
-- AIコード特有のリスクをテスト計画に落とし込む際は、[付録A テンプレート集](../appendices/appendix-a-templates.html) のリスク分析セクションを参考に、自プロジェクト向けのリスク一覧を作成するとよい。
-- コードレビューや静的解析の観点を整理するには、[付録B チェックリスト](../appendices/appendix-b-checklists.html) に含まれる AI生成コード向けチェックリストを土台としてカスタマイズすることを検討してほしい。
+- AIコード特有のリスクをテスト計画に落とし込む際は、[付録A テンプレート集](../appendices/appendix-a-templates/) のリスク分析セクションを参考に、自プロジェクト向けのリスク一覧を作成するとよい。
+- コードレビューや静的解析の観点を整理するには、[付録B チェックリスト](../appendices/appendix-b-checklists/) に含まれる AI生成コード向けチェックリストを土台としてカスタマイズすることを検討してほしい。

@@ -45,39 +45,39 @@ GitHub Copilot、ChatGPT、Claudeなど、AI支援ツールの急速な普及に
 
 ## 目次
 
-### [はじめに](introduction/preface.html)
+### [はじめに](introduction/preface/)
 
 ### 第1部：基礎編
 
-- [第1章 AI主導開発の現状と課題](chapters/chapter-01-ai-driven-development.html)
-- [第2章 ソフトウェアテストの基礎知識](chapters/chapter-02-software-testing-fundamentals.html)
-- [第3章 AIコードの特性理解](chapters/chapter-03-ai-code-characteristics.html)
+- [第1章 AI主導開発の現状と課題](chapters/chapter-01-ai-driven-development/)
+- [第2章 ソフトウェアテストの基礎知識](chapters/chapter-02-software-testing-fundamentals/)
+- [第3章 AIコードの特性理解](chapters/chapter-03-ai-code-characteristics/)
 
 ### 第2部：戦略編
 
-- [第4章 AI時代のテスト戦略](chapters/chapter-04-ai-testing-strategy.html)
-- [第5章 AIコード検証の実践技法](chapters/chapter-05-ai-code-verification.html)
-- [第6章 テスト自動化とAIの協調](chapters/chapter-06-test-automation-ai-cooperation.html)
+- [第4章 AI時代のテスト戦略](chapters/chapter-04-ai-testing-strategy/)
+- [第5章 AIコード検証の実践技法](chapters/chapter-05-ai-code-verification/)
+- [第6章 テスト自動化とAIの協調](chapters/chapter-06-test-automation-ai-cooperation/)
 
 ### 第3部：実践編
 
-- [第7章 品質メトリクスと評価](chapters/chapter-07-quality-metrics-evaluation.html)
-- [第8章 組織とプロセスの変革](chapters/chapter-08-organization-process-transformation.html)
-- [第9章 ケーススタディ](chapters/chapter-09-case-studies.html)
+- [第7章 品質メトリクスと評価](chapters/chapter-07-quality-metrics-evaluation/)
+- [第8章 組織とプロセスの変革](chapters/chapter-08-organization-process-transformation/)
+- [第9章 ケーススタディ](chapters/chapter-09-case-studies/)
 
 ### 第4部：発展編
 
-- [第10章 高度なトピック](chapters/chapter-10-advanced-topics.html)
-- [第11章 将来展望](chapters/chapter-11-future-outlook.html)
+- [第10章 高度なトピック](chapters/chapter-10-advanced-topics/)
+- [第11章 将来展望](chapters/chapter-11-future-outlook/)
 
 ### 付録
 
-- [付録A テンプレート集](appendices/appendix-a-templates.html)
-- [付録B チェックリスト](appendices/appendix-b-checklists.html)
-- [付録C ツール比較表](appendices/appendix-c-tool-comparison.html)
-- [付録D 用語集](appendices/appendix-d-glossary.html)
+- [付録A テンプレート集](appendices/appendix-a-templates/)
+- [付録B チェックリスト](appendices/appendix-b-checklists/)
+- [付録C ツール比較表](appendices/appendix-c-tool-comparison/)
+- [付録D 用語集](appendices/appendix-d-glossary/)
 
-### [あとがき](afterword/index.html)
+### [あとがき](afterword/)
 
 ## 本書の特徴
 
