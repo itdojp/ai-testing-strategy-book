@@ -12,7 +12,7 @@ test('rate 100% returns 0', () => {
 });
 
 test('round half up matches expected', () => {
-  assert.equal(applyDiscountCents(999, 3333), 666);
+  assert.equal(applyDiscountCents(999, 3_333), 666);
   assert.equal(applyDiscountCents(1, 5000), 1);
   assert.equal(applyDiscountCents(1, 4999), 1);
   assert.equal(applyDiscountCents(1, 5001), 0);
@@ -23,4 +23,3 @@ test('invalid inputs are rejected', () => {
   assert.throws(() => applyDiscountCents(0, -1), RangeError);
   assert.throws(() => applyDiscountCents(0, 10_001), RangeError);
 });
-
