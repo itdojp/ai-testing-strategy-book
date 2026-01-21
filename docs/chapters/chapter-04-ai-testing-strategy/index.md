@@ -5,6 +5,11 @@ title: "第4章 AI時代のテスト戦略"
 
 # 第4章 AI時代のテスト戦略
 
+> **この章の学習目標**
+> - AI生成コード前提のリスク評価（優先度付け）を説明できるようになること。
+> - テスト構造（ユニット/統合/プロパティ等）を「戦略」として配分設計できるようになること。
+> - 人間とAIの役割分担（生成/検証/判断）を定義し、品質ゲートに落とし込めるようになること。
+
 ## はじめに：なぜ新しいテスト戦略が必要なのか
 
 従来のテスト戦略は、人間が書いたコードを前提として発展してきた。しかし、AI生成コードの登場により、この前提が根本的に変わった。AIが1日で生成できるコード量は、人間の開発者が1ヶ月かけて書く量を超えることもある。この量的変化は、質的変化をもたらす。
@@ -200,6 +205,41 @@ class RiskAssessment:
         }
         
         return strategies[category]
+```
+
+**TypeScriptでの実装例（概念）**
+
+```typescript
+type RiskDimension =
+  | 'BUSINESS_IMPACT'
+  | 'TECHNICAL_COMPLEXITY'
+  | 'AI_UNDERSTANDING'
+  | 'DATA_SENSITIVITY'
+  | 'REGULATORY_COMPLIANCE';
+
+const weights: Record<RiskDimension, number> = {
+  BUSINESS_IMPACT: 0.3,
+  TECHNICAL_COMPLEXITY: 0.2,
+  AI_UNDERSTANDING: 0.25,
+  DATA_SENSITIVITY: 0.15,
+  REGULATORY_COMPLIANCE: 0.1,
+};
+
+export function calculateRiskScore(
+  dimensions: Partial<Record<RiskDimension, number>>,
+): number {
+  return (Object.entries(weights) as Array<[RiskDimension, number]>).reduce(
+    (total, [dimension, weight]) => total + (dimensions[dimension] ?? 0) * weight,
+    0,
+  );
+}
+
+export function riskCategory(score: number): 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' {
+  if (score >= 4.0) return 'CRITICAL';
+  if (score >= 3.0) return 'HIGH';
+  if (score >= 2.0) return 'MEDIUM';
+  return 'LOW';
+}
 ```
 
 **AI理解度の評価基準**
@@ -1647,3 +1687,16 @@ class PracticalCollaborationExample:
    - 明確なプロトコルによる効果的な協調
 
 これらの戦略は、単なる理論ではなく、実践的な実装を伴うものである。次章では、これらの戦略を具体的な検証技法として実装する方法を詳しく探求する。
+
+## チェックリスト（最小運用）
+
+- [ ] 「AI特有のリスク」を、機能単位ではなく *リスク単位* で棚卸しできている（例：境界値抜け、暗黙要件の欠落、入力検証の不足）。
+- [ ] 重要領域（影響が大きい領域）に対して、ユニット/統合/プロパティ等のテスト配分が定義されている。
+- [ ] 「AIに任せる範囲」と「人間が必ず確認する範囲」（責任分界）が明文化されている。
+- [ ] テスト戦略をドキュメント化できる（テンプレートは [付録A テンプレート集](../../appendices/appendix-a-templates/) を参照）。
+
+## ミニ演習（手を動かす）
+
+- [ ] 自分のプロジェクトを想定し、「重要機能を1つ」選び、多次元リスクの観点（影響度/複雑度/AI理解度/データ機密性 等）で簡易スコアリングしてみる。
+- [ ] その機能に対して、最小のテスト構成（ユニット/統合/異常系）を箇条書きで作成する。
+- [ ] レビュー時の観点を [付録B チェックリスト](../../appendices/appendix-b-checklists/) から3つ選び、PRレビューコメントの形に書いてみる。

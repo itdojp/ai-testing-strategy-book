@@ -5,6 +5,11 @@ title: "第6章 テスト自動化とAIの協調"
 
 # 第6章 テスト自動化とAIの協調
 
+> **この章の学習目標**
+> - AIによるテスト生成を自動化フローに組み込み、再現性のある実行手順を設計できるようになること。
+> - CI/PR の品質ゲート（lint/unit/coverage 等）の最小構成を定義できるようになること。
+> - AI支援を段階適用（IDE支援→PR支援→エージェント）する際の責任分界と運用ルールを説明できるようになること。
+
 ## はじめに：なぜAIとテスト自動化の協調が革新的なのか
 
 「力を合わせれば、1+1は3にも4にもなる」- この相乗効果の原理は、AIとテスト自動化の組み合わせにおいて特に顕著に現れる。AIは大量のテストケースを高速に生成できるが、その品質は一定しない。一方、従来の自動化技術は実行の再現性が高いが、テストケースの作成には人間の労力が必要である。
@@ -2063,6 +2068,41 @@ class AdaptiveQualityGate:
         return enhanced_gate
 ```
 
+**最小の品質ゲート（例）**
+
+以下は「最小運用」のイメージである。プロジェクトの言語やリポジトリ構成に合わせて調整すること（詳細は [付録A テンプレート集](../../appendices/appendix-a-templates/) の A.4 を参照）。
+
+```yaml
+name: CI (Minimal)
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - run: pytest -q
+```
+
 ### 6.3.2 自動化可能領域の見極め
 
 **自動化の境界を理解する重要性**
@@ -2871,3 +2911,16 @@ class PracticalFeedbackLoopExamples:
    - 継続的なフィードバックループによる改善
 
 これらの技術と手法を統合することで、AIは単なるコード生成ツールから、品質保証の強力なパートナーになり得る。次章では、これらの概念を実際のプロジェクトでどのように測定し、評価するかを探求する。
+
+## チェックリスト（最小運用）
+
+- [ ] 生成テストは「提案」であり、採用前に人間がレビューする運用（責任分界）が定義されている。
+- [ ] CIで最低限の品質ゲート（lint/unit/重要テスト）が動く状態になっている。
+- [ ] 失敗時の切り分け（テスト不備/実装不備/環境不備）の手順が共有されている。
+- [ ] 品質ゲートやレビュー観点はテンプレート化されている（例：[付録A テンプレート集](../../appendices/appendix-a-templates/) の A.4、[付録B チェックリスト](../../appendices/appendix-b-checklists/) を参照）。
+
+## ミニ演習（手を動かす）
+
+- [ ] 自分のプロジェクトを想定し、「CIの最小品質ゲート」を3項目で定義する（例：lint、unit、重要系の統合テスト）。
+- [ ] その3項目について、PR説明で確認できるチェックリスト（箇条書き）を作成する。
+- [ ] 生成テストをPRに含める前提で、レビュー観点（オラクル妥当性/フレーク/過剰モック）を [付録B チェックリスト](../../appendices/appendix-b-checklists/) から抽出して適用する。
