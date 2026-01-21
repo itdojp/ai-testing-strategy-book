@@ -2135,6 +2135,6 @@ class AdvancedPDCACycle:
 
 ### 関連する付録・テンプレート
 
-- 品質メトリクスをテスト計画や戦略に組み込むには、[付録A テンプレート集](../appendices/appendix-a-templates.html) の品質基準・メトリクス関連のセクションが参考になる。
-- メトリクスの観点抜けを防ぐためには、[付録B チェックリスト](../appendices/appendix-b-checklists.html) を基に、プロジェクト固有の指標を追加して整理してほしい。
-- メトリクス収集に関連するツール（監視、ログ分析、データ基盤など）の比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison.html) を参照するとよい。
+- 品質メトリクスをテスト計画や戦略に組み込むには、[付録A テンプレート集](../appendices/appendix-a-templates/) の品質基準・メトリクス関連のセクションが参考になる。
+- メトリクスの観点抜けを防ぐためには、[付録B チェックリスト](../appendices/appendix-b-checklists/) を基に、プロジェクト固有の指標を追加して整理してほしい。
+- メトリクス収集に関連するツール（監視、ログ分析、データ基盤など）の比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison/) を参照するとよい。

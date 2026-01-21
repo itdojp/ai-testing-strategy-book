@@ -2890,6 +2890,6 @@ class PracticalFeedbackLoopExamples:
 
 ### 関連する付録・テンプレート
 
-- 自動化対象の整理や品質ゲート設計には、[付録A テンプレート集](../appendices/appendix-a-templates.html) のテスト計画書・リソース計画のセクションが参考になる。
-- 自動テストの品質や安定性を評価する観点は、[付録B チェックリスト](../appendices/appendix-b-checklists.html) を基に、自動化特有の項目を追加して設計してほしい。
-- テスト自動化ツールや AI 駆動型テストプラットフォームの比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison.html) を活用するとよい。
+- 自動化対象の整理や品質ゲート設計には、[付録A テンプレート集](../appendices/appendix-a-templates/) のテスト計画書・リソース計画のセクションが参考になる。
+- 自動テストの品質や安定性を評価する観点は、[付録B チェックリスト](../appendices/appendix-b-checklists/) を基に、自動化特有の項目を追加して設計してほしい。
+- テスト自動化ツールや AI 駆動型テストプラットフォームの比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison/) を活用するとよい。

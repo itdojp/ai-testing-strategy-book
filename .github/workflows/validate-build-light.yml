@@ -18,6 +18,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
+
+    - name: Check internal links format (no *.html)
+      run: node scripts/check-no-html-internal-links.js
         
     - name: Install core dependencies only
       run: |

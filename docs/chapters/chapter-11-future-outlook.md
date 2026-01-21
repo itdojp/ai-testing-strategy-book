@@ -293,5 +293,5 @@ class PredictiveQualitySystem:
 
 ### 関連する付録・テンプレート
 
-- 今後の品質保証ロードマップや学習計画を文書化する際には、[付録A テンプレート集](../appendices/appendix-a-templates.html) の構成をヒントに、自分用／組織用の計画書を作成するとよい。
-- 本書で登場した用語や概念を振り返る際には、[付録D 用語集](../appendices/appendix-d-glossary.html) を参照しつつ、自身の業務と結びつけて再整理してほしい。
+- 今後の品質保証ロードマップや学習計画を文書化する際には、[付録A テンプレート集](../appendices/appendix-a-templates/) の構成をヒントに、自分用／組織用の計画書を作成するとよい。
+- 本書で登場した用語や概念を振り返る際には、[付録D 用語集](../appendices/appendix-d-glossary/) を参照しつつ、自身の業務と結びつけて再整理してほしい。

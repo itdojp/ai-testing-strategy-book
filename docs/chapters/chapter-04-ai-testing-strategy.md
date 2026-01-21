@@ -1579,6 +1579,6 @@ class PracticalCollaborationExample:
 
 ### 関連する付録・テンプレート
 
-- テスト戦略を文書化する際は、[付録A テンプレート集](../appendices/appendix-a-templates.html) のテスト計画書テンプレートをベースに、本章で検討した戦略要素を埋めていくとよい。
-- 戦略に基づくテスト観点の抜け漏れ確認には、[付録B チェックリスト](../appendices/appendix-b-checklists.html) を活用し、プロジェクト固有の項目を追加していくことを推奨する。
-- 戦略に沿ったツール選定を行う際は、[付録C ツール比較表](../appendices/appendix-c-tool-comparison.html) を参照し、AI支援ツールやテスト自動化ツールの特性を比較してほしい。
+- テスト戦略を文書化する際は、[付録A テンプレート集](../appendices/appendix-a-templates/) のテスト計画書テンプレートをベースに、本章で検討した戦略要素を埋めていくとよい。
+- 戦略に基づくテスト観点の抜け漏れ確認には、[付録B チェックリスト](../appendices/appendix-b-checklists/) を活用し、プロジェクト固有の項目を追加していくことを推奨する。
+- 戦略に沿ったツール選定を行う際は、[付録C ツール比較表](../appendices/appendix-c-tool-comparison/) を参照し、AI支援ツールやテスト自動化ツールの特性を比較してほしい。
