@@ -266,7 +266,7 @@ class ComplianceTracker:
 
 ### 10.4.1 なぜ一致比較テストが破綻しやすいのか
 
-LLM内包機能では、次の要因により「同じ入力でも同じ出力になる」と限らない。
+LLM内包機能では、次の要因により「同じ入力でも同じ出力になる」とは限らない。
 
 - **非決定性**: 生成結果が揺れる（再現性が低い）
 - **コンテキスト依存**: 前後の会話や追加情報により出力が変わる
@@ -291,6 +291,52 @@ LLM内包機能では、回帰セット（golden set）を「テストデータ�
 - **入力の集合**: 代表的なユースケース、境界ケース、事故が起きやすいケース
 - **期待の表現**: 文字列ではなく「ルーブリック」「チェック項目」「禁止事項」などで持つ
 - **更新手順**: 改善により挙動が変わることを前提に、更新の責任者・承認手順・差分の根拠を残す
+
+#### 回帰セット（golden set）の最小構成例（実装の雛形）
+
+ここでは、golden set を `JSONL`（1行1ケース）で管理し、ルールベースで「合否」と「失敗理由」を返す最小構成例を示す。実運用では、要件に合わせて評価軸（ルーブリック）やレビュー手順（誰が、どの根拠で更新するか）を拡張してほしい。
+
+```jsonl
+{"id":"case-001","prompt":"（例）障害対応の手順を、前提→切り分け→暫定対応→恒久対応 の順で説明してください。","must_include":["前提","切り分け","暫定","恒久"],"min_chars":200,"max_chars":600}
+```
+
+```python
+import json
+from pathlib import Path
+from typing import Callable
+
+
+def load_golden_set(path: Path) -> list[dict]:
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+
+
+def evaluate_output(output: str, spec: dict) -> tuple[bool, list[str]]:
+    errors: list[str] = []
+
+    for keyword in spec.get("must_include", []):
+        if keyword not in output:
+            errors.append(f"must_include: {keyword}")
+
+    min_chars = int(spec.get("min_chars", 0))
+    max_chars = int(spec.get("max_chars", 10**9))
+    if not (min_chars <= len(output) <= max_chars):
+        errors.append(f"length: {len(output)} (expected {min_chars}..{max_chars})")
+
+    return (len(errors) == 0), errors
+
+
+def eval_run(cases: list[dict], run: Callable[[str], str]) -> dict[str, dict]:
+    results: dict[str, dict] = {}
+    for case in cases:
+        output = run(case["prompt"])
+        ok, errors = evaluate_output(output, case)
+        results[case["id"]] = {"ok": ok, "errors": errors}
+    return results
+```
 
 ### 10.4.4 “LLM-as-judge” を使う場合の注意点（要確認）
 
