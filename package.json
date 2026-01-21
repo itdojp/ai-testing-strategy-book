@@ -21,6 +21,7 @@
     "fix-conflicts": "node scripts/jekyll-conflict-detector.js src --fix",
     "lint:light": "markdownlint 'src/**/*.md' --ignore node_modules",
     "test:light": "npm run lint:light && npm run build",
+    "test:examples": "bash scripts/test-examples.sh",
     "test:conflicts": "npm run check-conflicts",
     "check-links": "node scripts/check-links.js",
     "build:validate": "npm run build && npm run check-links",
