@@ -7,6 +7,5 @@ export function applyDiscountCents(priceCents, rateBps) {
   }
 
   const discountedScaled = priceCents * (10_000 - rateBps);
-  return Math.floor((discountedScaled + 5_000) / 10_000);
+  return Math.floor(discountedScaled / 10_000);
 }
-

@@ -5,5 +5,4 @@ def apply_discount_cents(price_cents: int, rate_bps: int) -> int:
         raise ValueError("rate_bps must be between 0 and 10_000")
 
     discounted_scaled = price_cents * (10_000 - rate_bps)
-    return (discounted_scaled + 5_000) // 10_000
-
+    return discounted_scaled // 10_000
