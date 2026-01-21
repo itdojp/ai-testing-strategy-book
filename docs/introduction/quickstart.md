@@ -69,5 +69,3 @@ git switch main
 - テストを「戦略」として設計する: 第4章
 - AI生成テストをレビューする観点: 第5章
 - PR/CI の品質ゲートを最小構成で定義する: 第6章、付録A（A.4）
-
-{% include page-navigation.html %}
