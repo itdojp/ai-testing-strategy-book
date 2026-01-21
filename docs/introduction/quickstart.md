@@ -25,6 +25,7 @@ npm run test:examples
 ## 2. あえて失敗する状態を作る（演習用ブランチ）
 
 演習用ブランチに切り替え、テストが失敗することを確認します。
+このブランチはリポジトリにあらかじめ用意されています。もしローカルに存在しない場合は、先に `git fetch --all` を実行してから、以下のコマンドを試してください。
 
 ```bash
 git switch exercise/discount-rounding-bug-v1
@@ -70,4 +71,3 @@ git switch main
 - PR/CI の品質ゲートを最小構成で定義する: 第6章、付録A（A.4）
 
 {% include page-navigation.html %}
-
