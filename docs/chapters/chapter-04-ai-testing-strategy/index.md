@@ -207,6 +207,41 @@ class RiskAssessment:
         return strategies[category]
 ```
 
+**TypeScriptでの実装例（概念）**
+
+```typescript
+type RiskDimension =
+  | 'BUSINESS_IMPACT'
+  | 'TECHNICAL_COMPLEXITY'
+  | 'AI_UNDERSTANDING'
+  | 'DATA_SENSITIVITY'
+  | 'REGULATORY_COMPLIANCE';
+
+const weights: Record<RiskDimension, number> = {
+  BUSINESS_IMPACT: 0.3,
+  TECHNICAL_COMPLEXITY: 0.2,
+  AI_UNDERSTANDING: 0.25,
+  DATA_SENSITIVITY: 0.15,
+  REGULATORY_COMPLIANCE: 0.1,
+};
+
+export function calculateRiskScore(
+  dimensions: Partial<Record<RiskDimension, number>>,
+): number {
+  return (Object.entries(weights) as Array<[RiskDimension, number]>).reduce(
+    (total, [dimension, weight]) => total + (dimensions[dimension] ?? 0) * weight,
+    0,
+  );
+}
+
+export function riskCategory(score: number): 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' {
+  if (score >= 4.0) return 'CRITICAL';
+  if (score >= 3.0) return 'HIGH';
+  if (score >= 2.0) return 'MEDIUM';
+  return 'LOW';
+}
+```
+
 **AI理解度の評価基準**
 
 AIの理解度は、生成されるコードの品質を予測する重要な指標である。ここでは、次のパターンに分類する。

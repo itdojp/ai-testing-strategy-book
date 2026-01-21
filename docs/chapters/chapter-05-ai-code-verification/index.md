@@ -215,6 +215,24 @@ class NumericBoundaryAnalyzer:
 
 **境界値探索フレームワーク**
 
+**TypeScript（Vitest/Jest）での境界値テスト例**
+
+```typescript
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
+
+describe('clamp', () => {
+  it.each([
+    [-1, 0, 10, 0],
+    [0, 0, 10, 0],
+    [10, 0, 10, 10],
+    [11, 0, 10, 10],
+  ])('clamp(%i, %i, %i) => %i', (value, min, max, expected) => {
+    expect(clamp(value, min, max)).toBe(expected);
+  });
+});
+```
+
 ```python
 class SystematicBoundaryExplorer:
     """体系的な境界値探索フレームワーク"""

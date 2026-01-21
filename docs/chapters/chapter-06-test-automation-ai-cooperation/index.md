@@ -2068,6 +2068,41 @@ class AdaptiveQualityGate:
         return enhanced_gate
 ```
 
+**最小の品質ゲート（例）**
+
+以下は「最小運用」のイメージである。プロジェクトの言語やリポジトリ構成に合わせて調整すること（詳細は [付録A テンプレート集](../../appendices/appendix-a-templates/) の A.4 を参照）。
+
+```yaml
+name: CI (Minimal)
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - run: pytest -q
+```
+
 ### 6.3.2 自動化可能領域の見極め
 
 **自動化の境界を理解する重要性**
