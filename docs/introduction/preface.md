@@ -94,7 +94,7 @@ AI周辺の状況は変化が速いため、本書では「更新が必要な情
 - 非決定性や不確実性を前提に、評価基準と責任分界を明確にすること
 - 自動化しても、人間のレビューと説明責任を残すという方針
 
-更新履歴は `CHANGELOG.md`（GitHub）を参照してください： https://github.com/itdojp/ai-testing-strategy-book/blob/main/CHANGELOG.md
+本書および関連テンプレートの更新履歴は、今後 `CHANGELOG.md`（GitHub）で管理します。現時点ではテンプレート統合作業の履歴が中心ですが、今後は書籍本文の改訂も同ファイルに追記します： https://github.com/itdojp/ai-testing-strategy-book/blob/main/CHANGELOG.md
 
 ---
 
