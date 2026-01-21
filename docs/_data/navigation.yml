@@ -1,4 +1,8 @@
 introduction:
+- title: はじめに
+  path: /introduction/preface/
+- title: クイックスタート
+  path: /introduction/quickstart/
 - title: 序章
   path: /introduction/
 chapters:
