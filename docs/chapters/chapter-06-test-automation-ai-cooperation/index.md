@@ -2917,7 +2917,7 @@ class PracticalFeedbackLoopExamples:
 - [ ] 生成テストは「提案」であり、採用前に人間がレビューする運用（責任分界）が定義されている。
 - [ ] CIで最低限の品質ゲート（lint/unit/重要テスト）が動く状態になっている。
 - [ ] 失敗時の切り分け（テスト不備/実装不備/環境不備）の手順が共有されている。
-- [ ] 品質ゲートやレビュー観点はテンプレ化されている（例：[付録A テンプレート集](../../appendices/appendix-a-templates/) の A.4、[付録B チェックリスト](../../appendices/appendix-b-checklists/) を参照）。
+- [ ] 品質ゲートやレビュー観点はテンプレート化されている（例：[付録A テンプレート集](../../appendices/appendix-a-templates/) の A.4、[付録B チェックリスト](../../appendices/appendix-b-checklists/) を参照）。
 
 ## ミニ演習（手を動かす）
 
