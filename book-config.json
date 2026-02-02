@@ -59,5 +59,22 @@
   },
   "_comments": {
     "enableAutoNavigation": "Set to true to automatically inject navigation includes into individual markdown files. Default false for v3.0 as book layout already provides navigation."
+  },
+  "ux": {
+    "profile": "B",
+    "modules": {
+      "quickStart": false,
+      "readingGuide": false,
+      "checklistPack": true,
+      "troubleshootingFlow": true,
+      "conceptMap": false,
+      "figureIndex": true,
+      "legalNotice": false,
+      "glossary": false
+    }
+  },
+  "shared": {
+    "version": "3.2.0",
+    "lastSync": "2026-02-02T15:59:49.242Z"
   }
 }
