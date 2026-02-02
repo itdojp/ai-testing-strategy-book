@@ -94,6 +94,7 @@
   }
 
   // Re-render on theme changes (best-effort).
+  if (window.MutationObserver) {
   var themeObserver = new MutationObserver(function (mutations) {
     for (var i = 0; i < mutations.length; i++) {
       if (mutations[i].attributeName === 'data-theme') {
@@ -103,4 +104,5 @@
     }
   });
   themeObserver.observe(document.documentElement, { attributes: true });
+  }
 })();
