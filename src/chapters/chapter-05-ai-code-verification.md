@@ -558,7 +558,7 @@ class PropertyBasedEdgeCaseGenerator:
             
             # Unicode
             lambda: "🎌🎍🎎🎏",  # 絵文字
-            lambda: "��",  # 不正なUnicode
+            lambda: "\ud800",  # 不正なUnicode（不正なサロゲート）
             
             # インジェクション
             lambda: "<script>alert('xss')</script>",
