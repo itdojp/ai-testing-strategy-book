@@ -18,4 +18,4 @@
 
 ## 次の章へ
 
-[第1章: 基本機能](../chapters/01-basic-features.md)に進みましょう。
+[第1章: AI主導開発の現状と課題](../chapters/chapter-01-ai-driven-development.md)に進みましょう。
