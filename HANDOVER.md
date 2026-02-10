@@ -167,13 +167,10 @@ v2.0テンプレートの使用を強く推奨します
 ## 🔧 開発環境セットアップ
 
 ### 前提条件
-```bash
-# 必要なツール
 - Node.js 20+
 - Git
 - GitHub CLI (gh)
 - 適切なGitHub権限（itdojp organizationのmaintain権限）
-```
 
 ### 環境構築手順
 ```bash
