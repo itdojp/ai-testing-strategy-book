@@ -159,7 +159,7 @@ if __name__ == "__main__":
 
 **実行結果例：**
 
-```
+```text
 === PaymentProcessor ===
 リスクスコア: 4.45
 リスクカテゴリ: CRITICAL
