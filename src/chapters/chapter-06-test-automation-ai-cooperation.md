@@ -2124,6 +2124,8 @@ class AdaptiveQualityGate:
         
         return enhanced_gate
 
+```
+
 ### 6.3.2 自動化可能領域の見極め
 
 **自動化の境界を理解する重要性**
