@@ -341,7 +341,7 @@ def eval_run(cases: list[dict], run: Callable[[str], str]) -> dict[str, dict]:
     return results
 ```
 
-### 10.4.4 “LLM-as-judge” を使う場合の注意点（要確認）
+### 10.4.4 “LLM-as-judge” を使う場合の注意点
 
 評価を自動化するために「LLMでLLMの出力を採点する」方式が検討されることがある。ただし以下のリスクがあるため、運用では注意が必要である。
 
