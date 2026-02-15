@@ -29,8 +29,6 @@ chapters:
 - title: 第11章 将来展望
   path: /chapters/chapter-11-future-outlook/
 appendices:
-- title: '付録A: 設定リファレンス'
-  path: /appendices/appendix-a/
 - title: 付録A テンプレート集
   path: /appendices/appendix-a-templates/
 - title: 付録B チェックリスト
