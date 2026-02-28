@@ -37,7 +37,8 @@ node scripts/navigation-cleaner.js
 git diff
 
 # Commit if satisfied
-git add -A && git commit -m "Remove duplicate navigation includes"
+git add -p
+git commit -m "Remove duplicate navigation includes"
 ```
 
 #### 3. Rebuild Your Book
