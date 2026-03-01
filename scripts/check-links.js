@@ -18,6 +18,8 @@ const colors = {
   blue: (text) => `\x1b[34m${text}\x1b[0m`
 };
 
+const JEKYLL_INTERNAL_IGNORE = ['**/_*/**'];
+
 class LinkChecker {
   constructor() {
     this.brokenLinks = [];
@@ -44,7 +46,7 @@ class LinkChecker {
       absolute: false,
       // Exclude Jekyll-internal template/data directories. These files often contain
       // Liquid placeholders that cannot be resolved at link-check time.
-      ignore: ['**/_*/**']
+      ignore: JEKYLL_INTERNAL_IGNORE
     });
     
     for (const file of files) {
@@ -293,7 +295,8 @@ class LinkChecker {
     // Check all HTML and Markdown files
     const files = await glob('**/*.{html,md}', {
       cwd: docsDir,
-      absolute: false
+      absolute: false,
+      ignore: JEKYLL_INTERNAL_IGNORE
     });
     
     this.log(`Checking links in ${files.length} files...`);
