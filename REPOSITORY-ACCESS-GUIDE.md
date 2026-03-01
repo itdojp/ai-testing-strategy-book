@@ -154,7 +154,9 @@ node easy-setup.js
 npm run build
 
 # 4. Gitにコミット
-git add -A
+git status
+git add -N .  # 新規ファイルも対話的にステージできるよう intent-to-add を付与
+git add -p
 git commit -m "Initial commit"
 
 # 5. GitHubにリポジトリ作成してプッシュ
