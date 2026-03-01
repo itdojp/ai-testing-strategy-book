@@ -33,6 +33,7 @@ npm run preview
 
 ```bash
 git status
+git add -N .  # 新規ファイルも対話的にステージできるよう intent-to-add を付与
 git add -p
 git commit -m "Initial commit"
 # GitHubでリポジトリを作成後

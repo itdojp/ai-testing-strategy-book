@@ -36,7 +36,10 @@ node scripts/navigation-cleaner.js
 # Review changes
 git diff
 
-# Commit if satisfied
+# Stage newly copied scripts (if any)
+git add scripts/build-simple.js scripts/navigation-cleaner.js
+
+# Stage other changes interactively, then commit
 git add -p
 git commit -m "Remove duplicate navigation includes"
 ```
