@@ -18,6 +18,8 @@ const colors = {
   blue: (text) => `\x1b[34m${text}\x1b[0m`
 };
 
+const JEKYLL_INTERNAL_IGNORE = ['**/_*/**'];
+
 class LinkChecker {
   constructor() {
     this.brokenLinks = [];
@@ -41,24 +43,40 @@ class LinkChecker {
     
     const files = await glob('**/*.{html,md}', {
       cwd: docsDir,
-      absolute: false
+      absolute: false,
+      // Exclude Jekyll-internal template/data directories. These files often contain
+      // Liquid placeholders that cannot be resolved at link-check time.
+      ignore: JEKYLL_INTERNAL_IGNORE
     });
     
     for (const file of files) {
       const normalizedPath = file.replace(/\\/g, '/');
       this.existingFiles.set(normalizedPath, true);
       
-      // Also store without extension for directory URLs
+      // Jekyll pretty-permalink compatibility:
+      // - foo.md          -> /foo/   (permalink: pretty)
+      // - dir/index.md    -> /dir/
+      if (normalizedPath.endsWith('/index.md')) {
+        const dirPath = normalizedPath.replace('/index.md', '/');
+        this.existingFiles.set(dirPath, true);
+        this.existingFiles.set(dirPath.replace(/\/$/, ''), true);
+        this.existingFiles.set(normalizedPath.replace(/\.md$/, '.html'), true);
+      } else if (normalizedPath.endsWith('.md')) {
+        const basePath = normalizedPath.replace(/\.md$/, '');
+        this.existingFiles.set(basePath, true);
+        this.existingFiles.set(basePath + '/', true);
+        this.existingFiles.set(basePath + '.html', true);
+      }
+      
+      // Also store without extension for directory URLs (HTML)
       if (normalizedPath.endsWith('/index.html')) {
         const dirPath = normalizedPath.replace('/index.html', '/');
         this.existingFiles.set(dirPath, true);
         this.existingFiles.set(dirPath.replace(/\/$/, ''), true);
-      }
-      
-      // Store .html version for .md files
-      if (normalizedPath.endsWith('.md')) {
-        const htmlPath = normalizedPath.replace(/\.md$/, '.html');
-        this.existingFiles.set(htmlPath, true);
+      } else if (normalizedPath.endsWith('.html')) {
+        const basePath = normalizedPath.replace(/\.html$/, '');
+        this.existingFiles.set(basePath, true);
+        this.existingFiles.set(basePath + '/', true);
       }
     }
     
@@ -116,10 +134,10 @@ class LinkChecker {
       links.push(url);
     }
     
-    // Match image sources
-    const imgSrcs = content.match(/(?:src|\!\[[^\]]*\]\()([^"')]+)/g) || [];
-    for (const match of imgSrcs) {
-      const url = match.replace(/^(src=|!\[[^\]]*\]\()/, '').replace(/["']$/, '');
+    // Match HTML src attributes (e.g., <img src="...">)
+    const htmlSrcs = content.match(/\ssrc=["']([^"']+)["']/g) || [];
+    for (const match of htmlSrcs) {
+      const url = match.match(/\ssrc=["']([^"']+)["']/)[1];
       links.push(url);
     }
     
@@ -127,11 +145,15 @@ class LinkChecker {
   }
 
   isInternalLink(url) {
+    // Skip Liquid placeholders (Jekyll)
+    if (url.includes('{{') || url.includes('{%')) return false;
+
     // Skip external URLs
     if (url.match(/^https?:\/\//)) return false;
     if (url.match(/^mailto:/)) return false;
     if (url.match(/^tel:/)) return false;
     if (url.match(/^#/)) return true; // Fragment only
+    if (url.match(/^javascript:/i)) return false;
     if (url.startsWith('//')) return false;
     
     return true;
@@ -163,6 +185,11 @@ class LinkChecker {
     
     // Normalize path
     resolvedPath = resolvedPath.replace(/\/+/g, '/');
+    resolvedPath = resolvedPath.replace(/^\.\//, '');
+    if (resolvedPath === '.' || resolvedPath === '') {
+      // Root (docs/index.md)
+      resolvedPath = 'index.md';
+    }
     
     return {
       file: resolvedPath,
@@ -182,7 +209,11 @@ class LinkChecker {
     } else if (!file.endsWith('.html') && !file.endsWith('.md')) {
       // Try with index.html
       if (this.existingFiles.has(file + '/index.html') ||
-          this.existingFiles.has(file + 'index.html')) {
+          this.existingFiles.has(file + 'index.html') ||
+          this.existingFiles.has(file + '/index.md') ||
+          this.existingFiles.has(file + 'index.md') ||
+          this.existingFiles.has(file.replace(/\/$/, '') + '.md') ||
+          this.existingFiles.has(file.replace(/\/$/, '') + '.html')) {
         fileExists = true;
       }
     }
@@ -264,7 +295,8 @@ class LinkChecker {
     // Check all HTML and Markdown files
     const files = await glob('**/*.{html,md}', {
       cwd: docsDir,
-      absolute: false
+      absolute: false,
+      ignore: JEKYLL_INTERNAL_IGNORE
     });
     
     this.log(`Checking links in ${files.length} files...`);
