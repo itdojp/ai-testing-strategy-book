@@ -1465,7 +1465,7 @@ class MetaTestExamples:
             points = [(0, 0), (1, 1), (2, 0), (1, -1)]
             result = optimize_route(points)
             # 何と比較すればいい？
-            assert result == ???  # 問題：最適解が不明
+            # assert result == expected  # 問題: 最適解が不明（テストオラクル問題）
         
         # メタテストアプローチ
         def meta_test_optimization():
