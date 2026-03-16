@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize]
 
 env:
+  # Temporary opt-in during GitHub Actions' Node 20 -> Node 24 transition.
+  # Ref: https://github.blog/changelog/2026-03-06-github-actions-transitions-from-node-20-to-node-24/
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
@@ -19,71 +21,73 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     
     steps:
-    - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
         
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
       
-    - name: Build with preview baseurl
-      run: |
-        # Backup original config
-        cp _config.yml _config.yml.bak || true
-        cp docs/_config.yml docs/_config.yml.bak || true
+      - name: Build with preview baseurl
+        run: |
+          # Backup original config
+          cp _config.yml _config.yml.bak || true
+          cp docs/_config.yml docs/_config.yml.bak || true
         
-        # Build with PR-specific baseurl
-        npm run build
+          # Build with PR-specific baseurl
+          npm run build
         
-        # Update baseurl for preview
-        if [ -f docs/_config.yml ]; then
-          sed -i 's|baseurl:.*|baseurl: "/pr-preview/pr-${{ github.event.pull_request.number }}"|' docs/_config.yml
-        fi
+          # Update baseurl for preview
+          if [ -f docs/_config.yml ]; then
+            sed -i 's|baseurl:.*|baseurl: "/pr-preview/pr-${{ github.event.pull_request.number }}"|' docs/_config.yml
+          fi
         
-    - name: Deploy to preview environment
-      uses: rossjrw/pr-preview-action@v1
-      with:
-        source-dir: ./docs/
-        preview-branch: gh-pages
-        umbrella-dir: pr-preview
-        action: deploy
+      - name: Deploy to preview environment
+        uses: rossjrw/pr-preview-action@v1
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: ''
+        with:
+          source-dir: ./docs/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: deploy
         
-    - name: Comment preview URL
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const prNumber = context.payload.pull_request.number;
-          const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${prNumber}/`;
+      - name: Comment preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${prNumber}/`;
           
-          const comment = `## 📚 Preview Deployment\n\nYour changes have been deployed to a preview environment:\n\n🔗 **Preview URL**: ${previewUrl}\n\n---\n\n<details>\n<summary>Preview Details</summary>\n\n- Branch: \`${{ github.event.pull_request.head.ref }}\`\n- Commit: \`${{ github.event.pull_request.head.sha.substring(0, 7) }}\`\n- Updated: ${new Date().toUTCString()}\n\n</details>`;
+            const comment = `## 📚 Preview Deployment\n\nYour changes have been deployed to a preview environment:\n\n🔗 **Preview URL**: ${previewUrl}\n\n---\n\n<details>\n<summary>Preview Details</summary>\n\n- Branch: \`${{ github.event.pull_request.head.ref }}\`\n- Commit: \`${{ github.event.pull_request.head.sha.substring(0, 7) }}\`\n- Updated: ${new Date().toUTCString()}\n\n</details>`;
           
-          // Find existing comment
-          const { data: comments } = await github.rest.issues.listComments({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: prNumber
-          });
-          
-          const botComment = comments.find(comment => 
-            comment.user.type === 'Bot' && comment.body.includes('Preview Deployment')
-          );
-          
-          if (botComment) {
-            await github.rest.issues.updateComment({
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              comment_id: botComment.id,
-              body: comment
+              issue_number: prNumber
             });
-          } else {
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: comment
-            });
-          }
+          
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && comment.body.includes('Preview Deployment')
+            );
+          
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: comment
+              });
+            }
