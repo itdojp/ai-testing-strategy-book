@@ -5,7 +5,12 @@ title: "第4章 AI時代のテスト戦略"
 
 # 第4章 AI時代のテスト戦略
 
-> **注記**  
+> **この章の学習目標**
+> - AI生成コード前提のリスク評価（優先度付け）を説明できるようになること。
+> - テスト構造（ユニット/統合/プロパティ等）を「戦略」として配分設計できるようになること。
+> - 人間とAIの役割分担（生成/検証/判断）を定義し、品質ゲートに落とし込めるようになること。
+
+> **注記**
 > 本章中のコードブロックは、概念説明のために一部を省略した擬似コード（Pseudo code）を含む。動作する最小サンプルは `examples/` を参照してほしい。
 
 ## はじめに：なぜ新しいテスト戦略が必要なのか
@@ -116,6 +121,79 @@ class RiskAssessment:
         }
         
         return strategies[category]
+
+# 実践的な使用例とテストケース
+
+def example_risk_assessment():
+    """リスク評価の実例デモンストレーション"""
+    
+    # 例1: ECサイトの決済処理（高リスク）
+    payment_component = RiskAssessment(
+        component_name="PaymentProcessor",
+        dimensions={
+            RiskDimension.BUSINESS_IMPACT: 5,      # 売上に直結
+            RiskDimension.TECHNICAL_COMPLEXITY: 4, # 外部API連携
+            RiskDimension.AI_UNDERSTANDING: 3,     # 標準的なパターン
+            RiskDimension.DATA_SENSITIVITY: 5,     # 個人情報・金融情報
+            RiskDimension.REGULATORY_COMPLIANCE: 5 # PCI DSS準拠
+        }
+    )
+    
+    # 例2: ログ出力機能（低リスク）
+    logging_component = RiskAssessment(
+        component_name="Logger",
+        dimensions={
+            RiskDimension.BUSINESS_IMPACT: 1,      # 直接的影響は小
+            RiskDimension.TECHNICAL_COMPLEXITY: 1, # シンプルな構造
+            RiskDimension.AI_UNDERSTANDING: 1,     # よく理解されたパターン
+            RiskDimension.DATA_SENSITIVITY: 2,     # ログ内容次第
+            RiskDimension.REGULATORY_COMPLIANCE: 1 # 一般的な要件
+        }
+    )
+    
+    # 結果出力と戦略決定
+    components = [payment_component, logging_component]
+    
+    for comp in components:
+        risk_score = comp.calculate_risk_score()
+        category = comp.get_risk_category()
+        strategy = comp.get_test_strategy()
+        
+        print(f"\n=== {comp.component_name} ===")
+        print(f"リスクスコア: {risk_score:.2f}")
+        print(f"リスクカテゴリ: {category}")
+        print(f"推奨テスト戦略:")
+        for key, value in strategy.items():
+            print(f"  {key}: {value}")
+
+if __name__ == "__main__":
+    example_risk_assessment()
+```
+
+**実行結果例：**
+
+```text
+=== PaymentProcessor ===
+リスクスコア: 4.45
+リスクカテゴリ: CRITICAL
+推奨テスト戦略:
+  manual_review: 必須（シニアエンジニア）
+  automated_tests: 包括的（カバレッジ95%以上）
+  security_scan: 詳細スキャン
+  performance_test: 負荷テスト必須
+  exploratory_test: 8時間以上
+  monitoring: リアルタイム監視
+
+=== Logger ===
+リスクスコア: 1.20
+リスクカテゴリ: LOW
+推奨テスト戦略:
+  manual_review: オプション
+  automated_tests: 基本（カバレッジ50%以上）
+  security_scan: 自動チェックのみ
+  performance_test: 不要
+  exploratory_test: オプション
+  monitoring: エラーログのみ
 ```
 
 **AI理解度の評価基準**
@@ -1564,24 +1642,15 @@ class PracticalCollaborationExample:
 
 これらの戦略は、単なる理論ではなく、実践的な実装を伴うものである。次章では、これらの戦略を具体的な検証技法として実装する方法を詳しく探求する。
 
----
+## チェックリスト（最小運用）
 
-## この章のまとめとチェックリスト
+- [ ] 「AI特有のリスク」を、機能単位ではなく *リスク単位* で棚卸しできている（例：境界値抜け、暗黙要件の欠落、入力検証の不足）。
+- [ ] 重要領域（影響が大きい領域）に対して、ユニット/統合/プロパティ等のテスト配分が定義されている。
+- [ ] 「AIに任せる範囲」と「人間が必ず確認する範囲」（責任分界）が明文化されている。
+- [ ] テスト戦略を文書化できる（テンプレートは [付録A テンプレート集](../appendices/appendix-a-templates/) を参照）。
 
-### この章のまとめ
+## ミニ演習（手を動かす）
 
-- AI主導開発におけるテスト戦略を、「どこで・何を・どの粒度でテストするか」という観点から再設計する必要性を整理した。
-- テストピラミッドやリスクベーステストを、AIコードの特性（非決定性、モデル更新、データ依存性など）を踏まえて拡張するアプローチを示した。
-- 人間とAIそれぞれの強みを活かし、協調的に品質保証を行うための高レベルな戦略パターンを提示した。
-
-### この章を読み終えたら確認したいこと
-
-- [ ] 自分のプロジェクトにおいて、「どのレベルでどの品質特性をテストするか」を簡単な表や図で整理できるか。
-- [ ] AIコード固有のリスク（例: ハルシネーション、ドリフト）が、どのテストレベル・テストタイプで扱われるべきかを説明できるか。
-- [ ] 本章で示された戦略パターンのうち、自組織に適用したいものを 1〜2 個選び、その理由と想定される効果を言語化できるか。
-
-### 関連する付録・テンプレート
-
-- テスト戦略を文書化する際は、[付録A テンプレート集](../appendices/appendix-a-templates/) のテスト計画書テンプレートをベースに、本章で検討した戦略要素を埋めていくとよい。
-- 戦略に基づくテスト観点の抜け漏れ確認には、[付録B チェックリスト](../appendices/appendix-b-checklists/) を活用し、プロジェクト固有の項目を追加していくことを推奨する。
-- 戦略に沿ったツール選定を行う際は、[付録C ツール比較表](../appendices/appendix-c-tool-comparison/) を参照し、AI支援ツールやテスト自動化ツールの特性を比較してほしい。
+- [ ] 自分のプロジェクトを想定し、「重要機能を1つ」選び、多次元リスクの観点（影響度/複雑度/AI理解度/データ機密性 等）で簡易スコアリングしてみる。
+- [ ] その機能に対して、最小のテスト構成（ユニット/統合/異常系）を箇条書きで作成する。
+- [ ] レビュー時の観点を [付録B チェックリスト](../appendices/appendix-b-checklists/) から3つ選び、PRレビューコメントの形に書いてみる。

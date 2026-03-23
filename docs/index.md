@@ -38,7 +38,12 @@ GitHub Copilot、ChatGPT、Claudeなど、AI支援ツールの急速な普及に
 
 ## クイックスタート（30〜60分）
 
-まず手を動かして「テストをガードレールとして使う」体験をしたい場合は、[クイックスタート](introduction/quickstart/) を参照してください。
+まず手を動かして「テストをガードレールとして使う」体験をしたい場合は、[はじめに](introduction/) で全体像を確認し、[第4章 AI時代のテスト戦略](chapters/chapter-04-ai-testing-strategy/) の最小運用チェックリストとミニ演習から始めてください。
+
+## 関連書籍
+
+- [要件から始めるソフトウェア設計（小規模TS Webアプリの実践）](https://itdojp.github.io/small-webapp-software-design-book/) - 仕様の分解や設計判断を先に整理し、どこをテストで保証すべきかを明確にしたい場合に有効である。
+- [AI開発のためのGitHubワークフロー実践ガイド](https://itdojp.github.io/github-workflow-book/) - PRレビュー、CI、運用フローまで含めて品質保証を組織実装したい場合に接続しやすい。
 
 ## 想定読者
 - QAエンジニア/テストエンジニア（AI生成コードの品質保証を設計したい方）
