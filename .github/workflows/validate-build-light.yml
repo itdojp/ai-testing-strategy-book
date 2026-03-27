@@ -6,35 +6,40 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  # Temporary opt-in during GitHub Actions' Node 20 -> Node 24 transition.
+  # Ref: https://github.blog/changelog/2026-03-06-github-actions-transitions-from-node-20-to-node-24/
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   validate-light:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
 
-    - name: Check internal links format (no *.html)
-      run: node scripts/check-no-html-internal-links.js
+      - name: Check internal links format (no *.html)
+        run: node scripts/check-no-html-internal-links.js
         
-    - name: Install core dependencies only
-      run: |
-        echo "Installing core dependencies..."
-        npm install --no-optional --no-audit --no-fund
-      timeout-minutes: 2
+      - name: Install core dependencies only
+        run: |
+          echo "Installing core dependencies..."
+          npm install --no-optional --no-audit --no-fund
+        timeout-minutes: 2
       
-    - name: Build book
-      run: npm run build
+      - name: Build book
+        run: npm run build
       
-    - name: Quick validation
-      run: |
-        echo "Checking build output..."
-        [ -d "docs" ] && echo "✓ docs directory exists"
-        [ -f "docs/_config.yml" ] && echo "✓ _config.yml exists"
-        [ -f "docs/index.md" ] && echo "✓ index.md exists"
-        echo "Build validation completed!"
+      - name: Quick validation
+        run: |
+          echo "Checking build output..."
+          [ -d "docs" ] && echo "✓ docs directory exists"
+          [ -f "docs/_config.yml" ] && echo "✓ _config.yml exists"
+          [ -f "docs/index.md" ] && echo "✓ index.md exists"
+          echo "Build validation completed!"
