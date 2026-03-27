@@ -40,6 +40,12 @@ GitHub Copilot、ChatGPT、Claudeなど、AI支援ツールの急速な普及に
 
 まず手を動かして「テストをガードレールとして使う」体験をしたい場合は、[はじめに](introduction/) で全体像を確認し、[第4章 AI時代のテスト戦略](chapters/chapter-04-ai-testing-strategy/) の最小運用チェックリストとミニ演習から始めてください。
 
+## 安全に使うための注意
+
+- AI生成コードや生成テストは、そのまま本番品質を保証するものではない。重要な変更は、人手レビュー、既存テスト、静的解析、運用観点を組み合わせて検証すること。
+- 生成AIへ入力するコード、ログ、障害情報には機密情報が含まれ得る。社内規程、契約、個人情報保護、学習利用ポリシーを確認してから投入すること。
+- 本書で扱うツール比較や料金、機能差分は変化しやすい。導入判断では公式ドキュメント、価格表、利用規約を確認すること。
+
 ## 関連書籍
 
 - [要件から始めるソフトウェア設計（小規模TS Webアプリの実践）](https://itdojp.github.io/small-webapp-software-design-book/) - 仕様の分解や設計判断を先に整理し、どこをテストで保証すべきかを明確にしたい場合に有効である。
@@ -63,6 +69,13 @@ GitHub Copilot、ChatGPT、Claudeなど、AI支援ツールの急速な普及に
 
 ## ライセンス
 本書は CC BY-NC-SA 4.0 で公開されています。商用利用は別途契約が必要です。
+
+## 利用と更新情報
+
+- 公開ページ: [https://itdojp.github.io/ai-testing-strategy-book/](https://itdojp.github.io/ai-testing-strategy-book/)
+- リポジトリ: [https://github.com/itdojp/ai-testing-strategy-book](https://github.com/itdojp/ai-testing-strategy-book)
+- ツール比較、料金、モデル依存の記述は変化しやすい。導入前にはリポジトリの更新履歴と各ツールの公式情報を確認すること。
+- 生成AIの利用範囲、テストデータの扱い、ログの保存方針は、組織のセキュリティ/法務ポリシーと整合させてから適用すること。
 
 ## 目次
 
