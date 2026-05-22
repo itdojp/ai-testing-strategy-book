@@ -1805,6 +1805,19 @@ class CoverageGapFiller:
 
 AI生成コードとテストの品質は変動する。すべてを一度にチェックするのではなく、段階的にフィルタリングすることで、問題を早期に発見し、フィードバックループを短縮できる。各ゲートは特定の品質側面に焦点を当て、累積的に品質を保証する。
 
+**PR review と eval evidence を含む品質ゲート**
+
+AI 生成コードや agent 実行結果を扱う CI/CD では、テスト結果だけでなく「誰が、どの条件で、どの証跡を見て merge 可能と判断したか」を残す。最小ゲートは次を分離して設計する。
+
+| ゲート | 必須証跡 | block 条件 | override 条件 |
+|---|---|---|---|
+| current-run verification | 実行した command、timestamp、pass / fail、失敗時 stderr | 必須 command が未実行、または失敗 | 環境起因の失敗を issue 化し、owner が承認 |
+| eval / benchmark evidence | eval ID、golden dataset version、rubric、model/runtime profile、確認日 | model/runtime profile が未記録、または差分比較条件が不一致 | 比較不能として扱い、過去値との優劣判断をしない |
+| external input boundary | データ分類、redaction、provider 条件、承認者 | 秘密情報・個人情報・未公開仕様を未分類で外部投入 | 投入せず、匿名化した synthetic case に置換 |
+| PR review completion | review 本文、inline comment、suggestion、未解決 thread 数 | 未返信の指摘、未解決 thread、CI red | 修正不要理由を PR に返信し、reviewer が確認 |
+
+この表は、`ai-agent-engineering-book` の review completion gate と同じ考え方を、テスト戦略側へ移したものである。CI は機械的な gate、human review は仕様・リスク・運用影響の gate、eval は model / prompt / workflow 変更の回帰 gate として扱う。どれか 1 つだけを通過しても、AI 由来の変更全体が安全とは言えない。
+
 **品質ゲートアーキテクチャ**
 
 ```python

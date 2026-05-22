@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  # Temporary opt-in during GitHub Actions' Node 20 -> Node 24 transition.
+  # Keep JavaScript actions on the Node 24 runtime while the ecosystem transition is active.
   # Ref: https://github.blog/changelog/2026-03-06-github-actions-transitions-from-node-20-to-node-24/
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
         
       - name: Install dependencies

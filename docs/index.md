@@ -43,11 +43,15 @@ GitHub Copilot、ChatGPT、Claudeなど、AI支援ツールの急速な普及に
 ## 安全に使うための注意
 
 - AI生成コードや生成テストは、そのまま本番品質を保証するものではない。重要な変更は、人手レビュー、既存テスト、静的解析、運用観点を組み合わせて検証すること。
-- 生成AIへ入力するコード、ログ、障害情報には機密情報が含まれ得る。社内規程、契約、個人情報保護、学習利用ポリシーを確認してから投入すること。
+- eval、benchmark、golden dataset は固定した入力・rubric・model/runtime profile・確認日と一緒に扱う。モデル、API、SDK、テスト runner が変わった場合は、過去結果と単純比較せず再実行または差分評価を行うこと。
+- 生成AIへ入力するコード、ログ、障害情報、eval case には機密情報が含まれ得る。社内規程、契約、個人情報保護、学習利用ポリシーを確認し、external input boundary で分類・redaction・承認を記録してから投入すること。
 - 本書で扱うツール比較や料金、機能差分は変化しやすい。導入判断では公式ドキュメント、価格表、利用規約を確認すること。
 
 ## 関連書籍
 
+- [AI Agent Engineering 実践ガイド](https://itdojp.github.io/ai-agent-engineering-book/) - agent / tool / harness / eval / review completion gate の用語を先に揃えたい場合に参照する。
+- [GitHub AgentOps 実践ガイド](https://itdojp.github.io/GitHub-AgentOps-book/) - Issue / PR / CI / review を agent 運用へ接続する際の governance と運用観点を確認する。
+- [形式的手法の基礎と応用](https://itdojp.github.io/formal-methods-book/) - テストではなく仕様・不変条件・モデル検査で保証すべき領域を切り分けたい場合に参照する。
 - [要件から始めるソフトウェア設計（小規模TS Webアプリの実践）](https://itdojp.github.io/small-webapp-software-design-book/) - 仕様の分解や設計判断を先に整理し、どこをテストで保証すべきかを明確にしたい場合に有効である。
 - [AI開発のためのGitHubワークフロー実践ガイド](https://itdojp.github.io/github-workflow-book/) - PRレビュー、CI、運用フローまで含めて品質保証を組織実装したい場合に接続しやすい。
 
