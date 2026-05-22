@@ -8,9 +8,11 @@ env:
   # Keep JavaScript actions on the Node 24 runtime while the ecosystem transition is active.
   # Ref: https://github.blog/changelog/2026-03-06-github-actions-transitions-from-node-20-to-node-24/
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  # The preview build does not run browser tests; skip Puppeteer's browser download.
+  PUPPETEER_SKIP_DOWNLOAD: 'true'
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
   pages: write
   id-token: write
@@ -63,7 +65,12 @@ jobs:
             const prNumber = context.payload.pull_request.number;
             const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${prNumber}/`;
           
-            const comment = `## 📚 Preview Deployment\n\nYour changes have been deployed to a preview environment:\n\n🔗 **Preview URL**: ${previewUrl}\n\n---\n\n<details>\n<summary>Preview Details</summary>\n\n- Branch: \`${{ github.event.pull_request.head.ref }}\`\n- Commit: \`${{ github.event.pull_request.head.sha.substring(0, 7) }}\`\n- Updated: ${new Date().toUTCString()}\n\n</details>`;
+            const sanitizeInlineCode = (value) => String(value ?? '')
+              .replace(/[\u0000-\u001f\u007f]/g, '-')
+              .replace(/`/g, "'");
+            const branch = sanitizeInlineCode(context.payload.pull_request.head.ref);
+            const commit = sanitizeInlineCode(context.payload.pull_request.head.sha.slice(0, 7));
+            const comment = `## 📚 Preview Deployment\n\nYour changes have been deployed to a preview environment:\n\n🔗 **Preview URL**: ${previewUrl}\n\n---\n\n<details>\n<summary>Preview Details</summary>\n\n- Branch: \`${branch}\`\n- Commit: \`${commit}\`\n- Updated: ${new Date().toUTCString()}\n\n</details>`;
           
             // Find existing comment
             const { data: comments } = await github.rest.issues.listComments({
