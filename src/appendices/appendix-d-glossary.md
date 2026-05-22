@@ -43,6 +43,26 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 実務での意味：コンテンツ作成の自動化、創造的タスクの支援
 - 関連：LLM、Diffusion Models、GANs
 
+**Benchmark（ベンチマーク）**
+- 定義：複数の実装、モデル、prompt、workflow を同じ条件で比較するための測定
+- 実務での意味：導入判断、モデル変更影響、性能・品質トレンドの比較
+- 関連：Eval、Golden Dataset、Model/runtime Profile
+
+**Eval（評価）**
+- 定義：prompt、model、workflow、agent 出力が固定入力と rubric を満たすかを確認する評価単位
+- 実務での意味：モデル・prompt・tool 変更時の回帰検知、品質ゲートの補助
+- 関連：Benchmark、Golden Dataset、Human Review、Regression Testing
+
+**External Input Boundary（外部投入境界）**
+- 定義：issue、PR、log、eval case、trace、golden dataset を AI / 外部サービスに渡す前の分類・redaction・承認境界
+- 実務での意味：秘密情報、個人情報、未公開仕様、脆弱性詳細の誤投入防止
+- 関連：Guardrail、Data Governance、Audit Trail
+
+**Golden Dataset（ゴールデンデータセット）**
+- 定義：回帰検知や eval に使う固定入力と期待結果の基準データ
+- 実務での意味：モデル・prompt・実装変更時に品質差分を検出する基準
+- 関連：Regression Testing、Benchmark、Test Oracle
+
 ### H-M
 
 **Hallucination（幻覚）**
@@ -145,6 +165,16 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 実務での意味：依存関係の分離、単体テストの独立性確保
 - 関連：Stub、Test Double、Dependency Injection
 
+**Metamorphic Testing（メタモルフィックテスト）**
+- 定義：正解値を直接得にくい対象に対し、入力変換後も成り立つ性質を使って検証する手法
+- 実務での意味：AI出力、推薦、検索、最適化など oracle が曖昧な対象の検証
+- 関連：Property-based Testing、Test Oracle、Adversarial Testing
+
+**Model/runtime Profile（モデル・ランタイムプロファイル）**
+- 定義：評価時に固定する model、API、SDK、runner、tool set、approval policy、確認日の組み合わせ
+- 実務での意味：eval / benchmark の再現性確保、過去結果との比較条件の明確化
+- 関連：Eval、Benchmark、Reproducibility
+
 **Mutation Testing（変異テスト）**
 - 定義：コードに意図的な変更を加えてテストの有効性を評価する手法
 - 実務での意味：テストスイートの品質評価、見逃しの発見
@@ -219,6 +249,11 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 定義：リスクの大きさに基づいてテストの優先順位を決定する手法
 - 実務での意味：限られたリソースの効果的配分、重要領域への集中
 - 関連：Risk Assessment、Priority、Test Strategy
+
+**Review Completion Gate（レビュー完了ゲート）**
+- 定義：PR review 本文、inline comment、suggestion、未解決 thread、CI、merge 後確認を完了判定に含める gate
+- 実務での意味：AI 生成差分や eval 結果の見落としを防ぎ、merge 前後の証跡を固定する
+- 関連：Human Review、CI/CD、Quality Gate
 
 ### S-Z
 

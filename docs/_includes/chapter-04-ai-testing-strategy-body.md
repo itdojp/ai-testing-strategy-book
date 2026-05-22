@@ -104,6 +104,23 @@ graph TD
 
 戦略なきテストは、暗闇での射撃に等しい。本章で学ぶ戦略的思考は、限られたリソースで最大の品質保証効果を得るための羅針盤となる。
 
+### 4.0.1 本書で使う評価用語と責務分界
+
+AI testing strategy では、通常の test と AI / agent 向け eval を同じ言葉で扱うと責務が曖昧になる。本書では次のように分ける。
+
+| 用語 | 本書での意味 | 主な証跡 | PR / CI での扱い |
+|---|---|---|---|
+| test | コードやシステムの期待動作を検証する実行可能な確認 | test command、結果ログ、失敗時の再現手順 | lint / unit / integration / E2E を品質ゲートに組み込む |
+| eval | prompt、model、workflow、agent 出力が rubric を満たすかを確認する評価単位 | eval case、rubric、judge、human spot-check、model/runtime profile | モデル・runtime・tool 変更時は再実行または差分評価を要求する |
+| benchmark | 複数の model、prompt、tool、実装を同じ条件で比較する測定 | dataset version、環境、しきい値、集計方法 | 過去結果と比較する前に条件の同一性を確認する |
+| golden dataset | 回帰検知に使う固定入力と期待結果の基準データ | dataset ID、作成根拠、更新理由、承認者 | 変更時は PR で差分理由と影響範囲を明記する |
+| metamorphic testing | 正解値を直接持ちにくい対象に対し、入力変換後も保つべき性質を検証する方法 | property、変換規則、反例、seed | hallucination や境界条件の見逃しを補完する |
+| human review | 自動判定では拾いにくい仕様妥当性、リスク、倫理、運用影響の確認 | review comment、未解決 thread 数、承認/保留理由 | review completion gate として未解決 thread 0 を完了条件に含める |
+
+ここでいう `model/runtime profile` は、モデル名だけではない。API、SDK、runner、tool set、approval policy、確認日を含む評価条件である。eval や benchmark の結果を PR で示すときは、この profile を一緒に記録しなければならない。
+
+また、eval case や golden dataset には issue、PR、log、顧客データ、障害情報が混ざることがある。AI / 外部サービスへ送る前に、`external input boundary` としてデータ分類、redaction、provider の retention / training use / logging 条件、承認者を確認する。自動 test が green でも、この境界と human review を通っていなければ、AI 由来の変更を完了とは扱わない。
+
 ## 4.1 リスクベースアプローチの再定義
 
 ### 4.1.1 AI特有のリスク評価マトリクス

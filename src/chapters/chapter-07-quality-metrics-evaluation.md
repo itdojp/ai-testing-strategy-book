@@ -8,6 +8,20 @@
 
 重要なのは、メトリクスは目的ではなく手段であることを忘れないことだ。最終的な目標は、ユーザーに価値を提供する高品質なソフトウェアを、持続可能な方法で開発することである。
 
+### 7.0.1 AI testing / eval 指標の最小分類
+
+AI testing のメトリクスは、通常の品質指標に加えて、評価条件と証跡の再現性を測る必要がある。最低限、次の分類で dashboard と PR evidence を分ける。
+
+| 分類 | 指標例 | 見るべき問い | 注意点 |
+|---|---|---|---|
+| Correctness | eval pass rate、golden dataset pass rate、metamorphic property violation count | 期待される振る舞いを満たしているか | model/runtime profile が変わった結果を同一系列として扱わない |
+| Regression | regression escape rate、flaky eval rate、benchmark drift | 既存品質を壊していないか | golden dataset の更新は改善ではなく評価条件変更として記録する |
+| Review Quality | review completion rate、unresolved review threads、human spot-check coverage | 自動判定の外側を人間が確認したか | comment への返信だけでなく thread resolve まで追跡する |
+| Reproducibility | current-run command coverage、dataset version coverage、seed / trace availability | 後から同じ条件を再現できるか | trace や log に秘密情報が含まれる場合は redaction を先に行う |
+| External Boundary | external-input exception count、redaction defect count、provider-term confirmation age | AI / 外部サービス投入の境界を守れているか | tool や provider の仕様変更時は確認日を更新する |
+
+これらは「数字がよければ安全」という指標ではない。数値は review と改善の入口であり、しきい値の背景、対象 dataset、評価条件、例外承認を一緒に読む必要がある。特に eval pass rate は、model、prompt、SDK、tool、runner、approval policy が揃っている場合にだけ過去値と比較できる。
+
 ## 7.1 AI時代の品質指標
 
 ### 7.1.1 従来メトリクスの再評価

@@ -6,7 +6,7 @@ AI主導開発において、適切なツールの選択は成功の鍵となる
 
 > **注記（更新対象の情報について）**
 > 本付録に含まれるツール名・機能・価格・提供形態は変化が速い。特に価格は改定頻度が高いため、ここでは「無料/有料/要問い合わせ」程度の粒度に留める。最新情報は各ツールの公式サイトで確認すること。
-> **最終更新日**: 2026-01-20
+> **最終更新日**: 2026-05-23（Asia/Tokyo）
 
 ## C.1 AIコーディング支援ツール
 
@@ -62,7 +62,7 @@ AIコーディング支援ツールは急速に進化しており、それぞれ
 |----------|----------|---------|----------|---------|----------|----------|---------|
 | **Selenium** | 従来型 | 限定的 | Web | オープンソース | ・業界標準<br>・豊富なエコシステム<br>・多言語対応 | ・大規模Webアプリ<br>・クロスブラウザテスト<br>・既存資産活用 | ・メンテナンスコスト<br>・AI機能は外部連携<br>・学習曲線 |
 | **Cypress** | 現代型 | 限定的 | Web | オープンソース<br>+有料Dashboard | ・高速実行<br>・デバッグ容易<br>・時間遡行 | ・モダンWebアプリ<br>・開発者テスト<br>・CI/CD統合 | ・ブラウザ制限<br>・非同期処理<br>・マルチタブ非対応 |
-| **Playwright** | 現代型 | 基本的 | Web | オープンソース | ・マルチブラウザ<br>・並列実行<br>・ネットワーク制御 | ・E2Eテスト<br>・API統合テスト<br>・視覚的テスト | ・比較的新しい<br>・コミュニティ規模<br>・ドキュメント整備中 |
+| **Playwright** | 現代型 | 基本的 | Web | オープンソース | ・Chromium / Firefox / WebKit 対応<br>・並列実行<br>・auto-waiting / trace viewer | ・E2Eテスト<br>・API統合テスト<br>・視覚的テスト<br>・CI失敗時の trace 調査 | ・ブラウザ差分の管理<br>・テスト設計と fixture 管理<br>・trace / screenshot の機密情報 redaction |
 | **Appium** | モバイル | 限定的 | モバイル | オープンソース | ・クロスプラットフォーム<br>・実機対応<br>・標準プロトコル | ・モバイルアプリ<br>・ハイブリッドアプリ<br>・マルチデバイス | ・設定複雑<br>・実行速度<br>・デバイス依存 |
 | **TestRigor** | AI駆動 | 高度 | Web/モバイル | 有料（要問い合わせ）<br>価格は公式で要確認 | ・自然言語テスト<br>・自己修復<br>・要件からテスト生成 | ・非技術者参加<br>・保守コスト削減<br>・迅速な開始 | ・コスト<br>・カスタマイズ制限<br>・ベンダーロックイン |
 | **Mabl** | AI駆動 | 高度 | Web/API | 有料（要問い合わせ）<br>価格は公式で要確認 | ・自動修復<br>・視覚的変更検出<br>・インサイト提供 | ・継続的テスト<br>・回帰テスト<br>・品質分析 | ・価格<br>・学習期間<br>・複雑シナリオ |
@@ -177,3 +177,14 @@ AIコーディング支援ツールは急速に進化しており、それぞれ
 - **人材投資**: ツールを使いこなす人材育成
 
 最適なツールの組み合わせは、プロジェクトの特性、チームの成熟度、予算制約などによって異なる。本比較表を参考に、自組織に最適な選択を行うことが重要である。
+
+### 公式情報確認メモ
+
+2026-05-23（Asia/Tokyo）時点で、次の公式情報を確認した。ツール採用時は、この日付ではなく導入時点の公式情報で再確認する。
+
+- Node.js: 本番・CI では Active LTS または Maintenance LTS の release line を使う。v20 は EOL であるため、本書の CI 例は v24 LTS を基準にする。
+- Playwright: Test runner は auto-waiting、assertions、tracing、parallelism を備え、Chromium / Firefox / WebKit を対象にできる。CI 失敗調査では trace を evidence として残せるが、trace には画面・入力・ネットワーク情報が含まれ得るため redaction 方針を決める。
+- GitHub Actions: workflow は `.github/workflows` の YAML で定義し、`GITHUB_TOKEN` permissions は最小権限を明示する。
+- OpenAI Evals: eval は testing criteria と data source を持つ評価構造として管理できる。外部 API に eval case を渡す場合は、external input boundary を通す。
+
+確認先: Node.js Releases / End-Of-Life、Playwright Assertions / Auto-waiting / Trace viewer、GitHub Actions workflow syntax / `GITHUB_TOKEN`、OpenAI Evals API / evaluation best practices。
