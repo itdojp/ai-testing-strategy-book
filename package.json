@@ -1,8 +1,8 @@
 {
-  "name": "book-publishing-template-improved",
-  "version": "2.0.0",
-  "description": "Improved Book Publishing Template with Easy Setup",
-  "author": "Book Publishing Template Contributors",
+  "name": "ai-testing-strategy-book",
+  "version": "1.0.0",
+  "description": "品質保証の新パラダイム - AI生成コードに対応した実践的テスト手法",
+  "author": "ITDO Inc.",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
     "node": ">=22.0.0"
@@ -52,10 +52,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itdojp/book-publishing-template2.git"
+    "url": "git+https://github.com/itdojp/ai-testing-strategy-book.git"
   },
   "bugs": {
-    "url": "https://github.com/itdojp/book-publishing-template2/issues"
+    "url": "https://github.com/itdojp/ai-testing-strategy-book/issues"
   },
-  "homepage": "https://github.com/itdojp/book-publishing-template2#readme"
+  "homepage": "https://itdojp.github.io/ai-testing-strategy-book/"
 }
