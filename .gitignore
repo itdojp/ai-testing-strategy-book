@@ -168,3 +168,13 @@ content-validation-report.json
 
 # Pre-commit
 .pre-commit-cache/
+
+# GitHub Pages / Jekyll local builds
+_site/
+docs/_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/bundle/
+Gemfile.lock
+docs/Gemfile.lock
