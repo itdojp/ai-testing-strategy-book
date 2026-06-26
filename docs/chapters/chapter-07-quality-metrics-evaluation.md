@@ -166,7 +166,7 @@ class TraditionalMetricsReinterpreter:
             
             if trend.is_improving and development_context.ai_usage_increasing:
                 reinterpreted.insight = """
-                AI導入により欠陥密度が改善傾向にあります。
+                AI 導入により欠陥密度が改善傾向にあります。
                 ただし、新しいタイプの欠陥が出現していないか注意が必要です。
                 """
         
@@ -438,7 +438,7 @@ class AISpecificQualityMetrics:
         return diversity_score
 ```
 
-**高度なAI品質メトリクス**
+**高度な AI 品質メトリクス**
 
 ```python
 class AdvancedAIQualityMetrics:
@@ -490,7 +490,7 @@ class AdvancedAIQualityMetrics:
         self,
         project_data: ProjectData
     ) -> AIGenerationROI:
-        """AI活用の投資収益率を測定"""
+        """AI 活用の投資収益率を測定"""
         
         roi = AIGenerationROI()
         
@@ -551,7 +551,7 @@ class CompositeQualityIndicators:
         metrics: Dict[str, float],
         context: ProjectContext
     ) -> AIQualityIndex:
-        """AI品質総合指標の作成"""
+        """AI 品質総合指標の作成"""
         
         index = AIQualityIndex()
         

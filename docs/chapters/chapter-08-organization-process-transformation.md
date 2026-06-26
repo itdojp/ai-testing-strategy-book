@@ -11,7 +11,7 @@ title: "第8章 組織とプロセスの変革"
 
 ## はじめに：なぜ組織変革がAI時代の品質保証に不可欠なのか
 
-「技術は簡単、人間は難しい」－ この格言は、AI導入においてより一層の真実味を帯びる。最先端のAIツールを導入しても、組織構造、プロセス、そして最も重要な人材が変化に対応できなければ、その価値は実現されない。
+「技術は簡単、人間は難しい」－ この格言は、AI 導入においてより一層の真実味を帯びる。最先端のAIツールを導入しても、組織構造、プロセス、そして最も重要な人材が変化に対応できなければ、その価値は実現されない。
 
 本章では、AI主導開発時代における組織とプロセスの変革を探求する。これは単なる「デジタルトランスフォーメーション」ではない。品質保証の本質的な再定義であり、人間とAIが共創する新しい働き方の構築である。
 
@@ -41,7 +41,7 @@ class QAEngineer2_0_RoleDefinition:
         
         hierarchy = RoleHierarchy()
         
-        # レベル1: AIテスト実践者
+        # レベル1: AI テスト実践者
         hierarchy.add_role(
             Role(
                 title="AI-Augmented Test Practitioner",
@@ -53,7 +53,7 @@ class QAEngineer2_0_RoleDefinition:
                     "バグレポートの作成と追跡"
                 ],
                 required_skills={
-                    "technical": ["基本的なプログラミング", "テスト自動化ツール", "AI支援ツールの操作"],
+                    "technical": ["基本的なプログラミング", "テスト自動化ツール", "AI 支援ツールの操作"],
                     "analytical": ["パターン認識", "データ解釈", "問題分析"],
                     "soft": ["コミュニケーション", "継続学習", "適応力"]
                 },
@@ -70,7 +70,7 @@ class QAEngineer2_0_RoleDefinition:
                 level=2,
                 primary_responsibilities=[
                     "品質戦略の設計と実装",
-                    "AIテストフレームワークの構築",
+                    "AI テストフレームワークの構築",
                     "複雑な品質問題の解決",
                     "チームメンバーのメンタリング"
                 ],
@@ -98,7 +98,7 @@ class QAEngineer2_0_RoleDefinition:
             )
         )
         
-        # レベル3: AI品質エバンジェリスト
+        # レベル3: AI 品質エバンジェリスト
         hierarchy.add_role(
             Role(
                 title="AI Quality Evangelist",
@@ -883,9 +883,9 @@ class AdaptiveLearningProgram:
 
 **なぜ成熟度評価が重要なのか**
 
-組織の現在地を知らずして、目的地への道筋は描けない。AI導入における成熟度評価は、技術的な側面だけでなく、文化、プロセス、人材の準備度を包括的に評価する必要がある。
+組織の現在地を知らずして、目的地への道筋は描けない。AI 導入における成熟度評価は、技術的な側面だけでなく、文化、プロセス、人材の準備度を包括的に評価する必要がある。
 
-**AI品質成熟度モデル**
+**AI 品質成熟度モデル**
 
 ```python
 class AIQualityMaturityModel:
@@ -944,7 +944,7 @@ class AIQualityMaturityModel:
                     "学習曲線の途上"
                 ],
                 typical_practices=[
-                    "特定チームでのAI活用",
+                    "特定チームでの AI 活用",
                     "基本的な品質チェック",
                     "ROI測定の試み"
                 ],
@@ -963,13 +963,13 @@ class AIQualityMaturityModel:
                 name="AI-Integrated",
                 description="AIが品質プロセスに統合",
                 characteristics=[
-                    "標準化されたAI活用プロセス",
+                    "標準化された AI 活用プロセス",
                     "品質ゲートへのAI組み込み",
                     "測定可能な品質向上",
                     "スキル開発プログラムの確立"
                 ],
                 typical_practices=[
-                    "AI支援テストの標準化",
+                    "AI 支援テストの標準化",
                     "自動品質チェック",
                     "継続的な改善サイクル"
                 ],
@@ -1281,7 +1281,7 @@ class AdaptiveTransformationRoadmap:
                 key_activities=[
                     Activity(
                         name="Process Standardization",
-                        description="AI活用品質プロセスの標準化",
+                        description="AI 活用品質プロセスの標準化",
                         workstreams=[
                             Workstream(
                                 name="Test Automation Enhancement",
@@ -1863,7 +1863,7 @@ class StrategicPilotManagement:
 
 **なぜステークホルダー管理が変革の成否を分けるのか**
 
-技術的に完璧な変革計画も、ステークホルダーの支持なしには失敗する。AI導入は特に、仕事の本質を変える可能性があるため、恐れ、抵抗、誤解を生みやすい。効果的なステークホルダー管理は、これらの課題を機会に変える。
+技術的に完璧な変革計画も、ステークホルダーの支持なしには失敗する。AI 導入は特に、仕事の本質を変える可能性があるため、恐れ、抵抗、誤解を生みやすい。効果的なステークホルダー管理は、これらの課題を機会に変える。
 
 **包括的ステークホルダー管理フレームワーク**
 

@@ -75,7 +75,7 @@ graph TB
 
 このフローにより、AIの創造性と自動化の再現性が相乗効果を生み出します。
 
-## 6.1 AI活用テスト生成
+## 6.1 AI 活用テスト生成
 
 ### 6.1.1 テストケース生成プロンプト設計
 
@@ -1563,7 +1563,7 @@ class MetaTestExamples:
 
 ### 6.2.3 カバレッジ分析と補完
 
-**AIテストにおけるカバレッジの新しい意味**
+**AI テストにおけるカバレッジの新しい意味**
 
 従来のカバレッジは主にコードカバレッジ（行、分岐、条件）に焦点を当てていた。しかし、AI生成テストでは、意味的カバレッジ、シナリオカバレッジ、リスクカバレッジなど、より高次のカバレッジが重要になる。
 
@@ -1797,7 +1797,7 @@ class CoverageGapFiller:
             return self._generate_with_constraint_solver(gap.branch)
 ```
 
-## 6.3 CI/CDパイプラインへの統合
+## 6.3 CI/CD パイプラインへの統合
 
 ### 6.3.1 段階的品質ゲート設計
 
@@ -1822,7 +1822,7 @@ AI 生成コードや agent 実行結果を扱う CI/CD では、テスト結果
 
 ```python
 class QualityGatePipeline:
-    """CI/CDパイプラインの品質ゲート設計"""
+    """CI/CD パイプラインの品質ゲート設計"""
     
     def __init__(self):
         self.gates = self._initialize_gates()
@@ -2265,7 +2265,7 @@ class AutomationSuitabilityAnalyzer:
                 human_role="例外ケースの処理"
             )
         
-        # フェーズ3: AI支援による高度な処理
+        # フェーズ3: AI 支援による高度な処理
         if characteristics.pattern_recognition_possible:
             plan.add_phase(
                 phase=3,
@@ -2503,7 +2503,7 @@ AIと自動化システムは、フィードバックなしには改善しない
 
 ```python
 class ComprehensiveFeedbackSystem:
-    """AI駆動開発のための包括的フィードバックシステム"""
+    """AI 駆動開発のための包括的フィードバックシステム"""
     
     def __init__(self):
         self.collectors = {
@@ -2931,7 +2931,7 @@ class PracticalFeedbackLoopExamples:
 
 本章では、AIとテスト自動化を協調させることで、従来はコストや工数の観点で実現が難しかった品質保証の水準に近づける方法を探求した。主要な学びは以下の通りである：
 
-1. **AI活用テスト生成の革新性**
+1. **AI 活用テスト生成の革新性**
    - 効果的なプロンプト設計による高品質なテスト生成
    - プロパティベーステストとの組み合わせによる網羅性
    - ミューテーションテストによる堅牢性の確保
@@ -2941,7 +2941,7 @@ class PracticalFeedbackLoopExamples:
    - メタテストによる有効性の検証
    - 包括的なカバレッジ分析と自動補完
 
-3. **CI/CDパイプラインとの統合**
+3. **CI/CD パイプラインとの統合**
    - 段階的品質ゲートによる効率的なフィルタリング
    - 自動化境界の適切な見極め
    - 継続的なフィードバックループによる改善

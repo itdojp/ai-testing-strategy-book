@@ -136,7 +136,7 @@ def example_risk_assessment():
         component_name="PaymentProcessor",
         dimensions={
             RiskDimension.BUSINESS_IMPACT: 5,      # 売上に直結
-            RiskDimension.TECHNICAL_COMPLEXITY: 4, # 外部API連携
+            RiskDimension.TECHNICAL_COMPLEXITY: 4, # 外部 API 連携
             RiskDimension.AI_UNDERSTANDING: 3,     # 標準的なパターン
             RiskDimension.DATA_SENSITIVITY: 5,     # 個人情報・金融情報
             RiskDimension.REGULATORY_COMPLIANCE: 5 # PCI DSS準拠
@@ -508,11 +508,11 @@ def test_calculate_discount():
 # 3. 実装と同じ前提に基づくテスト（同じ誤解を共有）
 ```
 
-### 4.2.2 AIテストダイヤモンドモデル
+### 4.2.2 AI テストダイヤモンドモデル
 
 **新しいモデルの必要性**
 
-AI時代には、テストの重点を統合レベルに移す「ダイヤモンドモデル」が効果的である。このモデルは、中間層（統合テスト、APIテスト）を最も厚くし、両端（単体テスト、E2Eテスト）を薄くする。
+AI時代には、テストの重点を統合レベルに移す「ダイヤモンドモデル」が効果的である。このモデルは、中間層（統合テスト、API テスト）を最も厚くし、両端（単体テスト、E2Eテスト）を薄くする。
 
 ```python
 class AITestDiamondModel:
@@ -1636,7 +1636,7 @@ class PracticalCollaborationExample:
 
 2. **テスト構造の革新**
    - ピラミッドからダイヤモンドモデルへの移行
-   - 統合テストとAPIテストの重要性増大
+   - 統合テストと API テストの重要性増大
    - 各層の動的な配分最適化
 
 3. **人間とAIの相補的関係**
