@@ -34,7 +34,7 @@
 
   <!-- Traditional vs AI-Assisted Comparison -->
   <g id="comparison-matrix">
-    <text x="400" y="70" class="section-title" text-anchor="middle">従来テスト vs AI支援テスト比較マトリックス</text>
+    <text x="400" y="70" class="section-title" text-anchor="middle">従来テスト vs AI 支援テスト比較マトリックス</text>
     
     <!-- Traditional Testing Column -->
     <g id="traditional">
@@ -74,7 +74,7 @@
     <!-- AI-Assisted Testing Column -->
     <g id="ai-assisted">
       <rect x="320" y="90" width="200" height="180" class="ai-assisted-box" rx="4"/>
-      <text x="420" y="110" class="section-title" text-anchor="middle">AI支援テスト手法</text>
+      <text x="420" y="110" class="section-title" text-anchor="middle">AI 支援テスト手法</text>
       
       <text x="330" y="130" class="metric-text" font-weight="500">効率性</text>
       <rect x="380" y="122" width="60" height="12" fill="var(--svg-neutral)" rx="2"/>
@@ -102,7 +102,7 @@
       <text x="450" y="212" class="value-text">低</text>
       
       <text x="330" y="235" class="annotation-text">• 自動テスト生成</text>
-      <text x="330" y="248" class="annotation-text">• AI品質分析</text>
+      <text x="330" y="248" class="annotation-text">• AI 品質分析</text>
       <text x="330" y="261" class="annotation-text">• 継続的学習</text>
     </g>
     
@@ -181,7 +181,7 @@
     
     <!-- AI-Assisted Testing Bar -->
     <rect x="610" y="380" width="15" height="30" fill="var(--svg-primary)" rx="2"/>
-    <text x="617" y="420" class="annotation-text" text-anchor="middle">AI支援</text>
+    <text x="617" y="420" class="annotation-text" text-anchor="middle">AI 支援</text>
     <text x="617" y="375" class="annotation-text" text-anchor="middle">30</text>
     
     <!-- Coverage Comparison -->
@@ -191,7 +191,7 @@
     <text x="667" y="345" class="annotation-text" text-anchor="middle">70</text>
     
     <rect x="690" y="350" width="15" height="54" fill="var(--svg-success)" rx="2"/>
-    <text x="697" y="420" class="annotation-text" text-anchor="middle">AI支援</text>
+    <text x="697" y="420" class="annotation-text" text-anchor="middle">AI 支援</text>
     <text x="697" y="345" class="annotation-text" text-anchor="middle">90</text>
     
     <text x="650" y="440" class="annotation-text" text-anchor="middle" font-weight="500">4倍の効率化</text>
