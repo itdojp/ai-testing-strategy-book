@@ -5,7 +5,7 @@
   "author": "ITDO Inc.",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "setup": "node easy-setup.js",
