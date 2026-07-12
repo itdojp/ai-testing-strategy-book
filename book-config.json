@@ -67,12 +67,12 @@
   "ux": {
     "profile": "B",
     "modules": {
-      "quickStart": false,
+      "quickStart": true,
       "readingGuide": true,
       "checklistPack": true,
-      "troubleshootingFlow": true,
+      "troubleshootingFlow": false,
       "conceptMap": false,
-      "figureIndex": true,
+      "figureIndex": false,
       "legalNotice": true,
       "glossary": true
     }
