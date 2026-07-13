@@ -30,7 +30,7 @@ TechInnovate社（仮名）は、月間アクティブユーザー500万人を�
 ```python
 class TechInnovateCaseStudy:
     """TechInnovate社のWebアプリケーション品質改革プロジェクト"""
-
+    
     def __init__(self):
         self.context = self._define_context()
         self.challenges = self._identify_challenges()
@@ -38,10 +38,10 @@ class TechInnovateCaseStudy:
         self.implementation = self._document_implementation()
         self.results = self._analyze_results()
         self.lessons = self._extract_lessons()
-
+    
     def _define_context(self) -> ProjectContext:
         """プロジェクトコンテキストの定義"""
-
+        
         return ProjectContext(
             company_profile={
                 "industry": "E-commerce/Social",
@@ -51,7 +51,7 @@ class TechInnovateCaseStudy:
                 "release_cycle": "Weekly deployments",
                 "quality_maturity": "Level 2 (Managed)"
             },
-
+            
             ai_adoption_timeline=[
                 Event("2024-01", "GitHub Copilot pilot with 10 developers"),
                 Event("2024-03", "Expansion to 50% of dev team"),
@@ -59,7 +59,7 @@ class TechInnovateCaseStudy:
                 Event("2024-05", "Emergency quality task force formed"),
                 Event("2024-06", "New AI-aware QA strategy launched")
             ],
-
+            
             initial_ai_impact={
                 "positive": {
                     "code_velocity": "+40% lines of code per developer",
@@ -74,12 +74,12 @@ class TechInnovateCaseStudy:
                 }
             }
         )
-
+    
     def _identify_challenges(self) -> ChallengeInventory:
         """直面した課題の特定と分析"""
-
+        
         challenges = ChallengeInventory()
-
+        
         # 技術的課題
         challenges.add_category(
             "Technical Challenges",
@@ -102,7 +102,7 @@ class TechInnovateCaseStudy:
                         "開発者の過度な信頼"
                     ]
                 ),
-
+                
                 Challenge(
                     name="Test Coverage Illusion",
                     description="""
@@ -118,7 +118,7 @@ class TechInnovateCaseStudy:
                     },
                     discovery_method="本番障害の事後分析で発覚"
                 ),
-
+                
                 Challenge(
                     name="Integration Complexity",
                     description="""
@@ -134,7 +134,7 @@ class TechInnovateCaseStudy:
                 )
             ]
         )
-
+        
         # プロセス課題
         challenges.add_category(
             "Process Challenges",
@@ -156,7 +156,7 @@ class TechInnovateCaseStudy:
                         "AI によるプレレビュー → False positive 多数"
                     ]
                 ),
-
+                
                 Challenge(
                     name="Quality Gates Inadequacy",
                     description="""
@@ -171,7 +171,7 @@ class TechInnovateCaseStudy:
                 )
             ]
         )
-
+        
         # 人的課題
         challenges.add_category(
             "Human Challenges",
@@ -194,7 +194,7 @@ class TechInnovateCaseStudy:
                         "品質に対する責任の希薄化"
                     ]
                 ),
-
+                
                 Challenge(
                     name="Team Dynamics Disruption",
                     description="""
@@ -209,7 +209,7 @@ class TechInnovateCaseStudy:
                 )
             ]
         )
-
+        
         return challenges
 ```
 
@@ -222,15 +222,15 @@ TechInnovate社は、単に問題に対処するのではなく、AI時代に適
 ```python
 class AIAwareTestingStrategy:
     """AI認識型テスト戦略の実装"""
-
+    
     def __init__(self):
         self.principles = self._define_principles()
         self.framework = self._build_framework()
         self.implementation_phases = self._plan_phases()
-
+    
     def _define_principles(self) -> StrategyPrinciples:
         """戦略の基本原則"""
-
+        
         return StrategyPrinciples(
             core_beliefs=[
                 Principle(
@@ -245,7 +245,7 @@ class AIAwareTestingStrategy:
                         "AIと人間のフィードバックループ"
                     ]
                 ),
-
+                
                 Principle(
                     name="Semantic Validation Focus",
                     description="""
@@ -258,7 +258,7 @@ class AIAwareTestingStrategy:
                         "Contract testing の強化"
                     ]
                 ),
-
+                
                 Principle(
                     name="Continuous Learning System",
                     description="""
@@ -272,12 +272,12 @@ class AIAwareTestingStrategy:
                 )
             ]
         )
-
+    
     def _build_framework(self) -> TestingFramework:
         """具体的なテスティングフレームワーク"""
-
+        
         framework = TestingFramework()
-
+        
         # レイヤー1: AI生成コードの静的検証
         framework.add_layer(
             StaticVerificationLayer(
@@ -324,7 +324,7 @@ class AIAwareTestingStrategy:
                         """,
                         effectiveness="60% の subtle bugs を事前検出"
                     ),
-
+                    
                     Component(
                         name="Pattern Anomaly Detector",
                         purpose="通常と異なるコードパターンを検出",
@@ -335,7 +335,7 @@ class AIAwareTestingStrategy:
                 ]
             )
         )
-
+        
         # レイヤー2: 動的検証の強化
         framework.add_layer(
             DynamicVerificationLayer(
@@ -347,7 +347,7 @@ class AIAwareTestingStrategy:
                         example="""
                         // fast-check を使用した property-based testing
                         import fc from 'fast-check';
-
+                        
                         describe('Shopping Cart with AI-generated code', () => {
                             it('should maintain invariants across all operations', () => {
                                 fc.assert(
@@ -368,7 +368,7 @@ class AIAwareTestingStrategy:
                                             const cart = new ShoppingCart();
                                             let totalItems = 0;
                                             let totalPrice = 0;
-
+                                            
                                             actions.forEach(({ action, item }) => {
                                                 // AI生成コードのテスト
                                                 switch(action) {
@@ -379,7 +379,7 @@ class AIAwareTestingStrategy:
                                                         break;
                                                     // ... 他のアクション
                                                 }
-
+                                                
                                                 // 不変条件の検証
                                                 expect(cart.getTotalItems()).toBeGreaterThanOrEqual(0);
                                                 expect(cart.getTotalPrice()).toBeGreaterThanOrEqual(0);
@@ -387,7 +387,7 @@ class AIAwareTestingStrategy:
                                                     calculateExpectedTotal(cart.getItems()), 2
                                                 );
                                             });
-
+                                            
                                             // ビジネスルールの検証
                                             expect(cart.getTotalDiscount()).toBeLessThanOrEqual(
                                                 cart.getTotalPrice() * 0.5 // 最大50%割引
@@ -400,7 +400,7 @@ class AIAwareTestingStrategy:
                         """,
                         findings="15% のケースで不変条件違反を発見"
                     ),
-
+                    
                     Component(
                         name="Chaos Engineering for AI Code",
                         purpose="AI生成コードの耐障害性を検証",
@@ -415,7 +415,7 @@ class AIAwareTestingStrategy:
                 ]
             )
         )
-
+        
         # レイヤー3: ビジネスロジック検証
         framework.add_layer(
             BusinessLogicValidationLayer(
@@ -442,7 +442,7 @@ class AIAwareTestingStrategy:
                                 order.finalPrice == order.total * (1 - discount.percentage/100)
                             }
                         }
-
+                        
                         rule "Free Shipping Threshold" {
                             when {
                                 order.subtotal >= 50
@@ -462,7 +462,7 @@ class AIAwareTestingStrategy:
                             "違反時の自動修正提案"
                         ]
                     ),
-
+                    
                     Component(
                         name="State Transition Validator",
                         purpose="複雑な状態遷移の正確性確保",
@@ -472,7 +472,7 @@ class AIAwareTestingStrategy:
                 ]
             )
         )
-
+        
         return framework
 ```
 
@@ -481,12 +481,12 @@ class AIAwareTestingStrategy:
 ```python
 class ImplementationDetails:
     """戦略実装の詳細"""
-
+    
     def create_quality_pipeline(self) -> QualityPipeline:
         """品質パイプラインの構築"""
-
+        
         pipeline = QualityPipeline()
-
+        
         # ステージ1: プレコミット検証
         pipeline.add_stage(
             PreCommitStage(
@@ -521,7 +521,7 @@ class ImplementationDetails:
                 ]
             )
         )
-
+        
         # ステージ2: CI/CD統合検証
         pipeline.add_stage(
             ContinuousIntegrationStage(
@@ -553,7 +553,7 @@ class ImplementationDetails:
                 ]
             )
         )
-
+        
         # ステージ3: プレプロダクション検証
         pipeline.add_stage(
             PreProductionStage(
@@ -596,14 +596,14 @@ class ImplementationDetails:
                 ]
             )
         )
-
+        
         return pipeline
-
+    
     def implement_cultural_changes(self) -> CulturalTransformation:
         """文化的変革の実装"""
-
+        
         transformation = CulturalTransformation()
-
+        
         # 品質に対する考え方の変革
         transformation.mindset_shift = MindsetShift(
             from_mindset=[
@@ -616,7 +616,7 @@ class ImplementationDetails:
                 "意味的な正確性が最重要",
                 "品質は全員の責任"
             ],
-
+            
             reinforcement_mechanisms=[
                 Mechanism(
                     type="Education",
@@ -628,7 +628,7 @@ class ImplementationDetails:
                     frequency="Bi-weekly",
                     participation="Mandatory for all engineers"
                 ),
-
+                
                 Mechanism(
                     type="Incentives",
                     positive=[
@@ -642,7 +642,7 @@ class ImplementationDetails:
                         "Velocity → Sustainable pace"
                     ]
                 ),
-
+                
                 Mechanism(
                     type="Rituals",
                     new_practices=[
@@ -666,7 +666,7 @@ class ImplementationDetails:
                 )
             ]
         )
-
+        
         return transformation
 ```
 
@@ -677,16 +677,16 @@ class ImplementationDetails:
 ```python
 class ProjectOutcomes:
     """プロジェクトの成果分析"""
-
+    
     def analyze_quantitative_results(self) -> QuantitativeResults:
         """定量的成果の分析"""
-
+        
         results = QuantitativeResults()
-
+        
         # 品質メトリクスの改善
         results.quality_improvements = QualityMetrics(
             timeline="6 months after implementation",
-
+            
             defect_metrics={
                 "production_bug_rate": {
                     "before": "12.5 bugs per 1000 lines",
@@ -707,7 +707,7 @@ class ProjectOutcomes:
                     "business_impact": "$2.3M saved in incident costs"
                 }
             },
-
+            
             code_quality_metrics={
                 "technical_debt_ratio": {
                     "before": "35% (SonarQube)",
@@ -727,10 +727,10 @@ class ProjectOutcomes:
                 }
             }
         )
-
+        
         # 生産性への影響
         results.productivity_impact = ProductivityMetrics(
-
+            
             development_velocity={
                 "story_points_delivered": {
                     "before_ai": "120 per sprint",
@@ -749,7 +749,7 @@ class ProjectOutcomes:
                     "improvement": "60% less rework"
                 }
             },
-
+            
             team_efficiency={
                 "code_review_time": {
                     "before": "7 days average",
@@ -768,17 +768,17 @@ class ProjectOutcomes:
                 }
             }
         )
-
+        
         # 財務的影響
         results.financial_impact = FinancialAnalysis(
-
+            
             cost_savings={
                 "reduced_production_incidents": "$2.3M annually",
                 "decreased_customer_churn": "$1.8M annually",
                 "efficiency_gains": "$3.1M annually",
                 "total_savings": "$7.2M annually"
             },
-
+            
             investments={
                 "ai_tools_licensing": "$450K annually",
                 "training_programs": "$200K one-time",
@@ -786,7 +786,7 @@ class ProjectOutcomes:
                 "additional_infrastructure": "$150K annually",
                 "total_investment": "$950K first year, $600K ongoing"
             },
-
+            
             roi_calculation={
                 "first_year_roi": "558%",
                 "ongoing_annual_roi": "1100%",
@@ -794,17 +794,17 @@ class ProjectOutcomes:
                 "5_year_npv": "$28.5M"
             }
         )
-
+        
         return results
-
+    
     def extract_qualitative_learnings(self) -> QualitativeLearnings:
         """定性的な学習事項の抽出"""
-
+        
         learnings = QualitativeLearnings()
-
+        
         # 成功要因の分析
         learnings.success_factors = SuccessFactorAnalysis(
-
+            
             critical_factors=[
                 Factor(
                     name="Executive Sponsorship",
@@ -815,7 +815,7 @@ class ProjectOutcomes:
                     """,
                     lesson="トップのコミットメントなしに文化は変わらない"
                 ),
-
+                
                 Factor(
                     name="Incremental Approach",
                     importance="High",
@@ -829,7 +829,7 @@ class ProjectOutcomes:
                         "成功事例を即座に横展開"
                     ]
                 ),
-
+                
                 Factor(
                     name="Developer Experience Focus",
                     importance="High",
@@ -844,7 +844,7 @@ class ProjectOutcomes:
                     ]
                 )
             ],
-
+            
             unexpected_discoveries=[
                 Discovery(
                     finding="AI がジュニア開発者の成長を加速",
@@ -855,7 +855,7 @@ class ProjectOutcomes:
                     """,
                     implication="メンタリングプログラムの再設計"
                 ),
-
+                
                 Discovery(
                     finding="品質文化がイノベーションを促進",
                     explanation="""
@@ -865,7 +865,7 @@ class ProjectOutcomes:
                     """,
                     metrics="新機能提案が300%増加"
                 ),
-
+                
                 Discovery(
                     finding="顧客が品質向上を即座に認識",
                     explanation="""
@@ -877,10 +877,10 @@ class ProjectOutcomes:
                 )
             ]
         )
-
+        
         # 失敗と教訓
         learnings.failures_and_lessons = FailureAnalysis(
-
+            
             major_setbacks=[
                 Setback(
                     incident="初期の過度な自動化",
@@ -893,7 +893,7 @@ class ProjectOutcomes:
                     resolution="人間による設計 + AI による拡張",
                     lesson="AIは文脈の把握が不完全になり得るため、人間のレビューと最終判断が不可欠"
                 ),
-
+                
                 Setback(
                     incident="品質ゲートの厳格化による反発",
                     description="""
@@ -906,7 +906,7 @@ class ProjectOutcomes:
                     lesson="技術的に正しいことと、組織的に実現可能なことは異なる"
                 )
             ],
-
+            
             ongoing_challenges=[
                 Challenge(
                     area="AIモデルの更新への対応",
@@ -917,7 +917,7 @@ class ProjectOutcomes:
                     """,
                     mitigation="モデル変更の影響分析プロセス確立"
                 ),
-
+                
                 Challenge(
                     area="レガシーコードとの統合",
                     description="""
@@ -928,14 +928,14 @@ class ProjectOutcomes:
                 )
             ]
         )
-
+        
         return learnings
-
+    
     def derive_recommendations(self) -> Recommendations:
         """他組織への推奨事項"""
-
+        
         return Recommendations(
-
+            
             for_similar_organizations=[
                 "品質文化の構築を技術導入より優先する",
                 "小さく始めて、成功を可視化しながら拡大",
@@ -943,7 +943,7 @@ class ProjectOutcomes:
                 "ビジネスチームを品質定義に巻き込む",
                 "失敗を学習機会として組織的に活用"
             ],
-
+            
             anti_patterns_to_avoid=[
                 "AI ツールを導入すれば品質が自動的に向上すると期待",
                 "従来の品質メトリクスにこだわりすぎる",
@@ -951,7 +951,7 @@ class ProjectOutcomes:
                 "一度に全てを変えようとする Big Bang アプローチ",
                 "トップダウンのみ、またはボトムアップのみの変革"
             ],
-
+            
             future_considerations=[
                 "AIモデルの進化に適応する柔軟な品質フレームワーク",
                 "品質エンジニアリングスキルの継続的な更新",
@@ -980,15 +980,15 @@ TechInnovate社の成功は、技術的解決策と人間中心のアプロー�
 ```python
 class MobileAppQualityChallenges:
     """モバイルアプリ開発における品質課題"""
-
+    
     def __init__(self):
         self.context = self._define_mobile_context()
         self.ai_specific_challenges = self._identify_ai_challenges()
         self.quality_dimensions = self._analyze_quality_dimensions()
-
+    
     def _define_mobile_context(self) -> MobileProjectContext:
         """モバイルプロジェクトのコンテキスト"""
-
+        
         return MobileProjectContext(
             company_profile={
                 "name": "HealthTech Innovations",
@@ -999,7 +999,7 @@ class MobileAppQualityChallenges:
                 "team_size": "45 engineers (iOS: 15, Android: 15, Backend: 15)",
                 "release_cycle": "2-week sprints, monthly releases"
             },
-
+            
             technical_landscape={
                 "ios_stack": ["Swift", "SwiftUI", "Combine", "CoreML"],
                 "android_stack": ["Kotlin", "Jetpack Compose", "Coroutines", "ML Kit"],
@@ -1007,7 +1007,7 @@ class MobileAppQualityChallenges:
                 "ai_tools": ["GitHub Copilot", "Tabnine", "Android Studio AI"],
                 "cross_platform_considerations": ["React Native for some features"]
             },
-
+            
             unique_challenges={
                 "device_fragmentation": {
                     "ios": "iPhone 6s to 15 Pro, iPad variants",
@@ -1026,12 +1026,12 @@ class MobileAppQualityChallenges:
                 }
             }
         )
-
+    
     def _identify_ai_challenges(self) -> AIChallengeInventory:
         """AI特有の課題の特定"""
-
+        
         challenges = AIChallengeInventory()
-
+        
         # プラットフォーム固有の課題
         challenges.add_category(
             "Platform-Specific AI Challenges",
@@ -1050,7 +1050,7 @@ class MobileAppQualityChallenges:
                             // AI生成の問題のあるコード
                             struct HealthDataView: View {
                                 @State private var healthData: HealthData?
-
+                                
                                 var body: some View {
                                     VStack {
                                         // AndroidのonResumeパターンを模倣
@@ -1071,7 +1071,7 @@ class MobileAppQualityChallenges:
                             // 正しいSwiftUIパターン
                             struct HealthDataView: View {
                                 @StateObject private var viewModel = HealthDataViewModel()
-
+                                
                                 var body: some View {
                                     VStack {
                                         Text(viewModel.heartRate)
@@ -1083,23 +1083,23 @@ class MobileAppQualityChallenges:
                             }
                             """
                         ),
-
+                        
                         Example(
                             platform="Android",
                             issue="iOS的なメモリ管理パターンの誤用",
                             problem="Kotlin/Androidでは不要な weak reference の使用"
                         )
                     ],
-
+                    
                     impact="アプリのクラッシュ、メモリリーク、パフォーマンス低下",
-
+                    
                     detection_strategy=[
                         "Platform-specific lint rules",
                         "API usage pattern analysis",
                         "Cross-platform code review checklist"
                     ]
                 ),
-
+                
                 Challenge(
                     name="Sensor Data Handling Complexity",
                     description="""
@@ -1124,7 +1124,7 @@ class MobileAppQualityChallenges:
                         )
                     ]
                 ),
-
+                
                 Challenge(
                     name="UI/UX Consistency",
                     description="""
@@ -1140,7 +1140,7 @@ class MobileAppQualityChallenges:
                 )
             ]
         )
-
+        
         # パフォーマンス関連の課題
         challenges.add_category(
             "Performance and Resource Challenges",
@@ -1159,7 +1159,7 @@ class MobileAppQualityChallenges:
                             // メモリリークを起こすAI生成コード
                             class ImageProcessor {
                                 private var processedImages: [UIImage] = []
-
+                                
                                 func processHealthImage(_ image: UIImage) {
                                     // 問題: 無制限にメモリに保持
                                     let processed = applyFilters(image)
@@ -1169,21 +1169,21 @@ class MobileAppQualityChallenges:
                             """,
                             impact="OOM (Out of Memory) クラッシュ"
                         ),
-
+                        
                         Scenario(
                             name="Sensor Data Buffer Overflow",
                             description="継続的なセンサーデータでバッファオーバーフロー",
                             frequency="高負荷時の30%のセッション"
                         )
                     ],
-
+                    
                     mitigation_approaches=[
                         "Automatic memory profiling in CI/CD",
                         "Memory-aware code generation prompts",
                         "Runtime memory monitoring"
                     ]
                 ),
-
+                
                 Challenge(
                     name="Battery Optimization Failures",
                     description="""
@@ -1203,7 +1203,7 @@ class MobileAppQualityChallenges:
                 )
             ]
         )
-
+        
         # テスト特有の課題
         challenges.add_category(
             "Mobile Testing Challenges",
@@ -1225,7 +1225,7 @@ class MobileAppQualityChallenges:
                         "screen_size_coverage": "Tablet layouts 90% untested"
                     }
                 ),
-
+                
                 Challenge(
                     name="Real-World Condition Simulation",
                     description="""
@@ -1242,7 +1242,7 @@ class MobileAppQualityChallenges:
                 )
             ]
         )
-
+        
         return challenges
 ```
 
@@ -1255,29 +1255,29 @@ class MobileAppQualityChallenges:
 ```python
 class DeviceSpecificTestAutomation:
     """デバイス固有テストの自動化戦略"""
-
+    
     def __init__(self):
         self.device_matrix = self._create_device_matrix()
         self.test_generation_strategy = self._design_test_generation()
         self.automation_framework = self._build_automation_framework()
-
+    
     def _create_device_matrix(self) -> DeviceTestMatrix:
         """デバイステストマトリクスの作成"""
-
+        
         matrix = DeviceTestMatrix()
-
+        
         # デバイスプロファイリング
         matrix.device_profiles = DeviceProfiler.analyze_user_base(
             analytics_data="Firebase Analytics + App Store Connect",
-
+            
             segmentation_criteria=[
                 "device_model",
-                "os_version",
+                "os_version", 
                 "screen_size",
                 "performance_tier",
                 "sensor_availability"
             ],
-
+            
             result_summary={
                 "ios_devices": {
                     "top_80_percent": [
@@ -1312,7 +1312,7 @@ class DeviceSpecificTestAutomation:
                 }
             }
         )
-
+        
         # テスト優先順位マトリクス
         matrix.priority_calculation = PriorityAlgorithm(
             factors=[
@@ -1322,40 +1322,40 @@ class DeviceSpecificTestAutomation:
                 Factor("support_ticket_volume", weight=0.15),
                 Factor("strategic_importance", weight=0.1)
             ],
-
+            
             dynamic_adjustment="Weekly recalculation based on metrics"
         )
-
+        
         return matrix
-
+    
     def _design_test_generation(self) -> TestGenerationStrategy:
         """AI 支援テスト生成戦略"""
-
+        
         strategy = TestGenerationStrategy()
-
+        
         # デバイス特性を考慮したテスト生成
         strategy.device_aware_generation = DeviceAwareTestGenerator(
-
+            
             base_prompt_template="""
             Generate comprehensive test cases for a health tracking mobile app
             Target Device: {device_name}
             OS Version: {os_version}
             Screen Size: {screen_size}
             Special Characteristics: {characteristics}
-
+            
             Consider:
             1. Device-specific UI layouts and interactions
             2. Hardware capabilities (sensors, memory, CPU)
             3. OS-specific behaviors and limitations
             4. Common issues for this device model
-
+            
             Focus on:
             - Health sensor data accuracy
             - UI responsiveness during data collection
             - Background processing reliability
             - Battery efficiency
             """,
-
+            
             device_specific_rules={
                 "small_screen_devices": [
                     "Test UI element overlap",
@@ -1377,10 +1377,10 @@ class DeviceSpecificTestAutomation:
                 ]
             }
         )
-
+        
         # プラットフォーム固有のテストパターン
         strategy.platform_patterns = PlatformTestPatterns(
-
+            
             ios_patterns=[
                 Pattern(
                     name="SwiftUI Layout Testing",
@@ -1388,7 +1388,7 @@ class DeviceSpecificTestAutomation:
                     implementation="""
                     func testDynamicTypeScaling() {
                         let app = XCUIApplication()
-
+                        
                         // テストデータ
                         let textSizeCategories = [
                             UIContentSizeCategory.extraSmall,
@@ -1396,29 +1396,29 @@ class DeviceSpecificTestAutomation:
                             UIContentSizeCategory.extraExtraExtraLarge,
                             UIContentSizeCategory.accessibilityExtraLarge
                         ]
-
+                        
                         for category in textSizeCategories {
                             // Dynamic Type設定を変更
                             app.launchArguments = ["-UIPreferredContentSizeCategoryName", "\\(category.rawValue)"]
                             app.launch()
-
+                            
                             // スクリーンショット撮影
                             let screenshot = app.screenshot()
                             let attachment = XCTAttachment(screenshot: screenshot)
                             attachment.name = "DynamicType_\\(category.rawValue)"
                             attachment.lifetime = .keepAlways
                             add(attachment)
-
+                            
                             // レイアウトの検証
                             XCTAssertTrue(app.buttons["Start Workout"].exists)
                             XCTAssertTrue(app.buttons["Start Workout"].isHittable)
-
+                            
                             // テキスト切れがないか確認
                             let labels = app.staticTexts.allElementsBoundByIndex
                             for label in labels {
                                 XCTAssertFalse(label.label.contains("..."))
                             }
-
+                            
                             app.terminate()
                         }
                     }
@@ -1429,7 +1429,7 @@ class DeviceSpecificTestAutomation:
                         "iPhone 15 Pro: Dynamic Island interaction"
                     ]
                 ),
-
+                
                 Pattern(
                     name="HealthKit Integration Testing",
                     description="Device-specific health sensor testing",
@@ -1442,7 +1442,7 @@ class DeviceSpecificTestAutomation:
                     ]
                 )
             ],
-
+            
             android_patterns=[
                 Pattern(
                     name="Multi-Window Testing",
@@ -1454,12 +1454,12 @@ class DeviceSpecificTestAutomation:
                         val device = UiDevice.getInstance(
                             InstrumentationRegistry.getInstrumentation()
                         )
-
+                        
                         assumeTrue(
                             "Multi-window not supported",
                             device.hasFeature("android.software.freeform_window_management")
                         )
-
+                        
                         // マルチウィンドウモードに入る
                         device.pressRecentApps()
                         // デバイス固有のマルチウィンドウ起動方法
@@ -1482,15 +1482,15 @@ class DeviceSpecificTestAutomation:
                                 splitScreen?.click()
                             }
                         }
-
+                        
                         // レイアウトの確認
                         onView(withId(R.id.health_dashboard))
                             .check(matches(isDisplayed()))
-
+                        
                         // 小さいウィンドウでの可読性
                         onView(withId(R.id.heart_rate_text))
                             .check(matches(isCompletelyDisplayed()))
-
+                        
                         // グラフの適応を確認
                         onView(withId(R.id.health_chart))
                             .check { view, _ ->
@@ -1510,17 +1510,17 @@ class DeviceSpecificTestAutomation:
                 )
             ]
         )
-
+        
         return strategy
-
+    
     def _build_automation_framework(self) -> MobileTestAutomationFramework:
         """包括的な自動化フレームワークの構築"""
-
+        
         framework = MobileTestAutomationFramework()
-
+        
         # デバイスファーム統合
         framework.device_farm_integration = DeviceFarmOrchestrator(
-
+            
             providers=[
                 Provider(
                     name="AWS Device Farm",
@@ -1547,14 +1547,14 @@ class DeviceSpecificTestAutomation:
                     use_cases=["Sensor testing", "Performance profiling"]
                 )
             ],
-
+            
             orchestration_strategy="""
             1. PR Validation: Quick smoke tests on top 5 devices
             2. Nightly: Full regression on top 20 devices
             3. Release: Complete matrix coverage (50+ devices)
             4. Hotfix: Critical path on affected devices only
             """,
-
+            
             cost_optimization=[
                 "Parallel execution to reduce time",
                 "Smart test selection based on code changes",
@@ -1562,13 +1562,13 @@ class DeviceSpecificTestAutomation:
                 "Progressive device coverage based on risk"
             ]
         )
-
+        
         # AI 支援によるテスト結果分析
         framework.ai_result_analysis = AITestResultAnalyzer(
-
+            
             pattern_recognition=PatternRecognizer(
                 algorithms=["Clustering", "Anomaly Detection", "Trend Analysis"],
-
+                
                 device_specific_patterns=[
                     Pattern(
                         name="Samsung Memory Management Issues",
@@ -1580,7 +1580,7 @@ class DeviceSpecificTestAutomation:
                         ],
                         automated_response="Add Samsung-specific keep-alive service"
                     ),
-
+                    
                     Pattern(
                         name="iOS Background Refresh Failures",
                         description="HealthKit background delivery issues",
@@ -1592,14 +1592,14 @@ class DeviceSpecificTestAutomation:
                         automated_response="Implement iOS 16 workaround"
                     )
                 ],
-
+                
                 cross_device_insights=[
                     "Performance degradation correlation with RAM",
                     "UI rendering issues on specific GPU models",
                     "Network timeout patterns by region"
                 ]
             ),
-
+            
             intelligent_reporting=IntelligentReporter(
                 report_types=[
                     "Device-specific failure analysis",
@@ -1607,7 +1607,7 @@ class DeviceSpecificTestAutomation:
                     "User impact assessment",
                     "Fix priority recommendations"
                 ],
-
+                
                 stakeholder_customization={
                     "developers": "Technical root cause + fix suggestions",
                     "product_managers": "User impact + business metrics",
@@ -1615,10 +1615,10 @@ class DeviceSpecificTestAutomation:
                 }
             )
         )
-
+        
         # 継続的な改善メカニズム
         framework.continuous_improvement = ContinuousImprovement(
-
+            
             feedback_loops=[
                 FeedbackLoop(
                     source="Production crash reports",
@@ -1626,14 +1626,14 @@ class DeviceSpecificTestAutomation:
                     frequency="Daily",
                     automation_level="Full"
                 ),
-
+                
                 FeedbackLoop(
                     source="User reviews mentioning devices",
                     action="Adjust device priority matrix",
                     frequency="Weekly",
                     automation_level="Semi-automated"
                 ),
-
+                
                 FeedbackLoop(
                     source="Test flakiness metrics",
                     action="Refine test stability",
@@ -1641,7 +1641,7 @@ class DeviceSpecificTestAutomation:
                     automation_level="Full"
                 )
             ],
-
+            
             ml_optimization=MLTestOptimizer(
                 objectives=[
                     "Minimize test execution time",
@@ -1649,7 +1649,7 @@ class DeviceSpecificTestAutomation:
                     "Reduce false positives",
                     "Optimize device coverage"
                 ],
-
+                
                 techniques=[
                     "Test selection based on code changes",
                     "Dynamic timeout adjustment",
@@ -1658,7 +1658,7 @@ class DeviceSpecificTestAutomation:
                 ]
             )
         )
-
+        
         return framework
 ```
 
@@ -1671,23 +1671,23 @@ AIが技術的に正しいコードを生成しても、それがユーザーに
 ```python
 class MobileUsabilityValidation:
     """モバイルアプリのユーザビリティ検証戦略"""
-
+    
     def __init__(self):
         self.usability_framework = self._design_usability_framework()
         self.ai_augmented_testing = self._implement_ai_testing()
         self.user_feedback_integration = self._integrate_user_feedback()
-
+    
     def _design_usability_framework(self) -> UsabilityFramework:
         """包括的なユーザビリティフレームワーク"""
-
+        
         framework = UsabilityFramework()
-
+        
         # ユーザビリティの多次元評価
         framework.evaluation_dimensions = UsabilityDimensions(
-
+            
             effectiveness=EffectivenessMeasures(
                 definition="ユーザーが目標を達成できる正確さと完全性",
-
+                
                 health_app_specific_metrics=[
                     Metric(
                         name="Health Goal Completion Rate",
@@ -1696,7 +1696,7 @@ class MobileUsabilityValidation:
                         ai_challenge="AIが生成した複雑なUIフローによる離脱",
                         target="85% completion rate"
                     ),
-
+                    
                     Metric(
                         name="Data Entry Accuracy",
                         description="手動入力データの正確性",
@@ -1704,7 +1704,7 @@ class MobileUsabilityValidation:
                         ai_consideration="AIの予測入力が誤解を招く可能性",
                         validation_method="Cross-reference with device sensors"
                     ),
-
+                    
                     Metric(
                         name="Feature Discovery Rate",
                         description="重要機能の発見率",
@@ -1712,7 +1712,7 @@ class MobileUsabilityValidation:
                         ai_impact="AI生成のUIが機能を隠蔽する可能性"
                     )
                 ],
-
+                
                 testing_methods=[
                     "Task completion analysis",
                     "Error rate monitoring",
@@ -1720,10 +1720,10 @@ class MobileUsabilityValidation:
                     "A/B testing with AI variants"
                 ]
             ),
-
+            
             efficiency=EfficiencyMeasures(
                 definition="目標達成に必要なリソース（時間、操作数）",
-
+                
                 key_metrics=[
                     Metric(
                         name="Time to First Health Insight",
@@ -1732,7 +1732,7 @@ class MobileUsabilityValidation:
                         target="< 10 seconds",
                         ai_optimization="Smart data prioritization"
                     ),
-
+                    
                     Metric(
                         name="Workout Logging Efficiency",
                         description="運動記録の完了時間",
@@ -1743,17 +1743,17 @@ class MobileUsabilityValidation:
                         }
                     )
                 ],
-
+                
                 ai_specific_challenges=[
                     "過度に「スマート」なUIによる予測の失敗",
                     "コンテキスト理解の誤りによる無関係な提案",
                     "パーソナライゼーションの過剰による混乱"
                 ]
             ),
-
+            
             satisfaction=SatisfactionMeasures(
                 definition="ユーザーの主観的な満足度と快適さ",
-
+                
                 measurement_methods=[
                     Method(
                         name="In-App Micro-Surveys",
@@ -1783,14 +1783,14 @@ class MobileUsabilityValidation:
                         response_rate="32% average",
                         insights="Real-time satisfaction tracking"
                     ),
-
+                    
                     Method(
                         name="Emotion Detection",
                         description="表情認識によるフラストレーション検出",
                         ethical_considerations="Opt-in only, privacy-preserving",
                         use_cases="Usability lab testing only"
                     ),
-
+                    
                     Method(
                         name="Net Promoter Score (NPS)",
                         frequency="Monthly",
@@ -1798,10 +1798,10 @@ class MobileUsabilityValidation:
                     )
                 ]
             ),
-
+            
             accessibility=AccessibilityMeasures(
                 definition="障害を持つユーザーを含む全ての人の利用可能性",
-
+                
                 automated_testing=[
                     Test(
                         name="Screen Reader Compatibility",
@@ -1811,13 +1811,13 @@ class MobileUsabilityValidation:
                             "カスタムUIコンポーネントのアクセシビリティ"
                         ]
                     ),
-
+                    
                     Test(
                         name="Color Contrast Validation",
                         implementation="Automated WCAG 2.1 compliance checking",
                         device_specific="OLED vs LCD display differences"
                     ),
-
+                    
                     Test(
                         name="Touch Target Size Verification",
                         minimum_sizes={
@@ -1827,7 +1827,7 @@ class MobileUsabilityValidation:
                         }
                     )
                 ],
-
+                
                 manual_testing=[
                     "Users with visual impairments",
                     "Users with motor limitations",
@@ -1835,17 +1835,17 @@ class MobileUsabilityValidation:
                     "Users in high-stress medical situations"
                 ]
             ),
-
+            
             learnability=LearnabilityMeasures(
                 definition="新規ユーザーが効果的に使用できるまでの容易さ",
-
+                
                 metrics=[
                     "Time to first successful health entry",
                     "Tutorial completion rate",
                     "Feature adoption curve",
                     "Support ticket reduction over time"
                 ],
-
+                
                 ai_considerations=[
                     "AIの「賢すぎる」振る舞いが学習を妨げる",
                     "一貫性のないAI応答による混乱",
@@ -1853,17 +1853,17 @@ class MobileUsabilityValidation:
                 ]
             )
         )
-
+        
         return framework
-
+    
     def _implement_ai_testing(self) -> AIAugmentedUsabilityTesting:
         """AI強化ユーザビリティテスト"""
-
+        
         ai_testing = AIAugmentedUsabilityTesting()
-
+        
         # AIによるユーザー行動シミュレーション
         ai_testing.user_simulation = AIUserSimulator(
-
+            
             user_personas=[
                 Persona(
                     name="Tech-Savvy Fitness Enthusiast",
@@ -1880,7 +1880,7 @@ class MobileUsabilityValidation:
                         "Low tolerance for bugs"
                     ],
                     device_preferences=["Latest iPhone", "High-end Android"],
-
+                    
                     ai_simulation_rules="""
                     - Navigate efficiently to desired features
                     - Try advanced features immediately
@@ -1889,7 +1889,7 @@ class MobileUsabilityValidation:
                     - Share achievements socially
                     """
                 ),
-
+                
                 Persona(
                     name="Health-Conscious Senior",
                     characteristics=[
@@ -1910,7 +1910,7 @@ class MobileUsabilityValidation:
                         "Simple navigation",
                         "Voice input options"
                     ],
-
+                    
                     ai_simulation_rules="""
                     - Take time between actions
                     - Read all instructions carefully
@@ -1919,7 +1919,7 @@ class MobileUsabilityValidation:
                     - Avoid complex gestures
                     """
                 ),
-
+                
                 Persona(
                     name="Busy Parent Tracker",
                     characteristics=[
@@ -1934,36 +1934,36 @@ class MobileUsabilityValidation:
                         "Batch data entry",
                         "Notification-driven"
                     ],
-
+                    
                     ai_simulation_focus="""
                     Test interruption recovery, quick actions,
                     family member switching, reminder effectiveness
                     """
                 )
             ],
-
+            
             simulation_engine=SimulationEngine(
                 techniques=[
                     "Markov chain user flows",
                     "Reinforcement learning for path optimization",
                     "Monte Carlo for edge case discovery"
                 ],
-
+                
                 implementation_example="""
                 class AIUserSimulation:
                     def simulate_user_journey(
-                        self,
-                        persona: Persona,
+                        self, 
+                        persona: Persona, 
                         scenario: HealthScenario
                     ) -> UserJourney:
-
+                        
                         # ペルソナに基づく行動モデル
                         behavior_model = self.load_behavior_model(persona)
-
+                        
                         # シナリオ実行
                         journey = UserJourney()
                         current_state = scenario.initial_state
-
+                        
                         while not scenario.is_complete(current_state):
                             # AIが次のアクションを予測
                             next_action = behavior_model.predict_action(
@@ -1971,13 +1971,13 @@ class MobileUsabilityValidation:
                                 persona.characteristics,
                                 scenario.context
                             )
-
+                            
                             # デバイス固有の調整
                             adjusted_action = self.adjust_for_device(
                                 next_action,
                                 persona.device_preferences
                             )
-
+                            
                             # アクション実行と結果記録
                             result = self.execute_action(adjusted_action)
                             journey.record(
@@ -1985,11 +1985,11 @@ class MobileUsabilityValidation:
                                 result=result,
                                 timestamp=current_time(),
                                 cognitive_load=self.estimate_cognitive_load(
-                                    adjusted_action,
+                                    adjusted_action, 
                                     persona
                                 )
                             )
-
+                            
                             # エラー処理のシミュレーション
                             if result.is_error:
                                 recovery_action = behavior_model.predict_recovery(
@@ -1997,17 +1997,17 @@ class MobileUsabilityValidation:
                                     persona.tech_proficiency
                                 )
                                 journey.record_recovery(recovery_action)
-
+                            
                             current_state = result.new_state
-
+                        
                         return journey
                 """
             )
         )
-
+        
         # 感情分析とフラストレーション検出
         ai_testing.emotion_analysis = EmotionAnalysisSystem(
-
+            
             detection_methods=[
                 Method(
                     name="Touch Pattern Analysis",
@@ -2020,7 +2020,7 @@ class MobileUsabilityValidation:
                             frequency: tapFrequency(touches),
                             accuracy: tapAccuracy(touches)
                         )
-
+                        
                         // フラストレーションの指標
                         if metrics.velocity > threshold.high &&
                            metrics.frequency > threshold.rapid &&
@@ -2030,13 +2030,13 @@ class MobileUsabilityValidation:
                                 suggestedAction: .simplifyUI
                             )
                         }
-
+                        
                         return .normal
                     }
                     """,
                     accuracy="78% correlation with self-reported frustration"
                 ),
-
+                
                 Method(
                     name="Navigation Pattern Analysis",
                     description="迷いや混乱を示すナビゲーションパターン",
@@ -2047,7 +2047,7 @@ class MobileUsabilityValidation:
                         "Abandonment patterns"
                     ]
                 ),
-
+                
                 Method(
                     name="Micro-Expression via Front Camera",
                     description="ユーザーの表情から感情を推測（オプトイン）",
@@ -2055,7 +2055,7 @@ class MobileUsabilityValidation:
                     use_case="Usability lab testing"
                 )
             ],
-
+            
             response_strategies=[
                 Strategy(
                     trigger="High frustration detected",
@@ -2066,7 +2066,7 @@ class MobileUsabilityValidation:
                         "Log for analysis"
                     ]
                 ),
-
+                
                 Strategy(
                     trigger="Confusion pattern detected",
                     actions=[
@@ -2077,17 +2077,17 @@ class MobileUsabilityValidation:
                 )
             ]
         )
-
+        
         # ユーザビリティの予測モデル
         ai_testing.predictive_model = UsabilityPredictionModel(
-
+            
             training_data=[
                 "Historical user sessions",
                 "A/B test results",
                 "User feedback correlation",
                 "Device-specific patterns"
             ],
-
+            
             predictions=[
                 Prediction(
                     name="Feature Adoption Likelihood",
@@ -2095,14 +2095,14 @@ class MobileUsabilityValidation:
                     output="Probability of feature usage within 7 days",
                     accuracy="82% on validation set"
                 ),
-
+                
                 Prediction(
                     name="Frustration Points",
                     inputs=["Screen flow", "Touch targets", "Load times"],
                     output="Screens likely to cause frustration",
                     actionable_insights="Pre-emptive UI simplification"
                 ),
-
+                
                 Prediction(
                     name="Device-Specific Issues",
                     inputs=["Device model", "Screen size", "OS version"],
@@ -2111,17 +2111,17 @@ class MobileUsabilityValidation:
                 )
             ]
         )
-
+        
         return ai_testing
-
+    
     def _integrate_user_feedback(self) -> UserFeedbackIntegration:
         """ユーザーフィードバックの統合"""
-
+        
         integration = UserFeedbackIntegration()
-
+        
         # マルチチャネルフィードバック収集
         integration.feedback_channels = FeedbackChannels(
-
+            
             in_app_feedback=InAppFeedback(
                 mechanisms=[
                     Mechanism(
@@ -2130,7 +2130,7 @@ class MobileUsabilityValidation:
                         implementation="""
                         // Swift implementation
                         override func motionEnded(
-                            _ motion: UIEvent.EventSubtype,
+                            _ motion: UIEvent.EventSubtype, 
                             with event: UIEvent?
                         ) {
                             if motion == .motionShake {
@@ -2145,13 +2145,13 @@ class MobileUsabilityValidation:
                         """,
                         response_rate="15% of frustrated users"
                     ),
-
+                    
                     Mechanism(
                         type="Contextual feedback buttons",
                         placement="After key interactions",
                         ai_optimization="Placement timing based on emotion detection"
                     ),
-
+                    
                     Mechanism(
                         type="Voice feedback",
                         description="音声で問題を説明",
@@ -2159,7 +2159,7 @@ class MobileUsabilityValidation:
                     )
                 ]
             ),
-
+            
             app_store_reviews=AppStoreReviewAnalysis(
                 nlp_pipeline=[
                     "Review text extraction",
@@ -2168,7 +2168,7 @@ class MobileUsabilityValidation:
                     "Device mention detection",
                     "Usability issue categorization"
                 ],
-
+                
                 ai_categorization="""
                 Categories:
                 - UI/UX issues (navigation, layout, interactions)
@@ -2178,7 +2178,7 @@ class MobileUsabilityValidation:
                 - Accessibility concerns
                 - Data accuracy questions
                 """,
-
+                
                 automated_responses=[
                     "Thank you acknowledgment",
                     "Issue escalation to dev team",
@@ -2186,14 +2186,14 @@ class MobileUsabilityValidation:
                     "Follow-up for more details"
                 ]
             ),
-
+            
             social_media_monitoring=SocialMediaMonitor(
                 platforms=["Twitter", "Reddit", "Facebook groups"],
                 keywords=["app name", "health tracking", "fitness app"],
                 sentiment_tracking="Real-time sentiment dashboard",
                 issue_detection="Viral complaint early warning"
             ),
-
+            
             beta_tester_feedback=BetaTesterProgram(
                 size="500 active testers",
                 device_distribution="Mirrors user base",
@@ -2206,10 +2206,10 @@ class MobileUsabilityValidation:
                 incentives=["Early access", "Premium features", "Swag"]
             )
         )
-
+        
         # AI 駆動のフィードバック分析
         integration.ai_analysis = AIFeedbackAnalyzer(
-
+            
             pattern_recognition=PatternRecognizer(
                 algorithms=[
                     "Topic modeling (LDA)",
@@ -2217,7 +2217,7 @@ class MobileUsabilityValidation:
                     "Issue clustering",
                     "Trend detection"
                 ],
-
+                
                 insights_generated=[
                     Insight(
                         pattern="Workout logging frustration spike",
@@ -2226,7 +2226,7 @@ class MobileUsabilityValidation:
                         affected_users="Power users on Android",
                         recommended_action="Revert UI, A/B test improvements"
                     ),
-
+                    
                     Insight(
                         pattern="Senior user accessibility issues",
                         detection="Consistent feedback from 65+ users",
@@ -2239,7 +2239,7 @@ class MobileUsabilityValidation:
                     )
                 ]
             ),
-
+            
             predictive_analytics=PredictiveAnalytics(
                 models=[
                     Model(
@@ -2248,7 +2248,7 @@ class MobileUsabilityValidation:
                         output="Probability of app abandonment",
                         intervention="Proactive support outreach"
                     ),
-
+                    
                     Model(
                         name="Feature Success Prediction",
                         inputs=["Beta feedback", "Usage patterns", "Device data"],
@@ -2257,7 +2257,7 @@ class MobileUsabilityValidation:
                     )
                 ]
             ),
-
+            
             automated_prioritization=PriorityEngine(
                 factors=[
                     "User impact (number affected)",
@@ -2266,14 +2266,14 @@ class MobileUsabilityValidation:
                     "Fix complexity (dev effort)",
                     "Strategic alignment"
                 ],
-
+                
                 output="Ranked issue backlog with ROI estimates"
             )
         )
-
+        
         # フィードバックループの実装
         integration.feedback_loop = FeedbackLoop(
-
+            
             stages=[
                 Stage(
                     name="Collection",
@@ -2281,14 +2281,14 @@ class MobileUsabilityValidation:
                     tools=["In-app", "Reviews", "Social", "Beta"],
                     volume="~1000 feedback items/week"
                 ),
-
+                
                 Stage(
                     name="Analysis",
                     duration="Daily batch + real-time alerts",
                     ai_processing="Categorization, sentiment, priority",
                     human_review="High-priority items only"
                 ),
-
+                
                 Stage(
                     name="Action",
                     duration="Sprint planning integration",
@@ -2299,7 +2299,7 @@ class MobileUsabilityValidation:
                         "Documentation updates"
                     ]
                 ),
-
+                
                 Stage(
                     name="Validation",
                     duration="Post-release monitoring",
@@ -2310,7 +2310,7 @@ class MobileUsabilityValidation:
                         "Feature adoption rates"
                     ]
                 ),
-
+                
                 Stage(
                     name="Communication",
                     channels=[
@@ -2321,7 +2321,7 @@ class MobileUsabilityValidation:
                     ]
                 )
             ],
-
+            
             success_metrics={
                 "feedback_response_time": "< 48 hours acknowledgment",
                 "issue_resolution_time": "< 2 sprints for high priority",
@@ -2329,7 +2329,7 @@ class MobileUsabilityValidation:
                 "feedback_inspired_features": "> 50% of new features"
             }
         )
-
+        
         return integration
 ```
 
@@ -2368,15 +2368,15 @@ HealthTech Innovations社の取り組みは、以下の重要な成果をもた�
 ```python
 class EnterpriseSystemQualityAssurance:
     """エンタープライズシステムの品質保証戦略"""
-
+    
     def __init__(self):
         self.system_context = self._define_enterprise_context()
         self.complexity_analysis = self._analyze_system_complexity()
         self.quality_strategy = self._design_quality_strategy()
-
+    
     def _define_enterprise_context(self) -> EnterpriseContext:
         """エンタープライズシステムのコンテキスト定義"""
-
+        
         return EnterpriseContext(
             organization_profile={
                 "name": "GlobalBank",
@@ -2395,7 +2395,7 @@ class EnterpriseSystemQualityAssurance:
                     "Local banking regulations (30 jurisdictions)"
                 ]
             },
-
+            
             system_landscape={
                 "core_banking": {
                     "age": "30+ years (COBOL mainframe)",
@@ -2421,7 +2421,7 @@ class EnterpriseSystemQualityAssurance:
                     "message_volume": "1B+ messages/day"
                 }
             },
-
+            
             modernization_drivers={
                 "business_pressure": [
                     "Digital transformation competition",
@@ -2443,15 +2443,15 @@ class EnterpriseSystemQualityAssurance:
                 ]
             }
         )
-
+    
     def _analyze_system_complexity(self) -> ComplexityAnalysis:
         """システム複雑性の分析"""
-
+        
         analysis = ComplexityAnalysis()
-
+        
         # 技術的複雑性
         analysis.technical_complexity = TechnicalComplexity(
-
+            
             architectural_patterns={
                 "legacy_monolith": {
                     "characteristics": [
@@ -2473,7 +2473,7 @@ class EnterpriseSystemQualityAssurance:
                         "Audit trail complexity"
                     ]
                 },
-
+                
                 "microservices_layer": {
                     "services_count": "400+",
                     "technologies": ["Java", "Python", "Go", "Node.js"],
@@ -2485,7 +2485,7 @@ class EnterpriseSystemQualityAssurance:
                         "Version compatibility"
                     ]
                 },
-
+                
                 "event_driven_architecture": {
                     "event_types": "2000+",
                     "event_flow_complexity": "Non-linear, conditional",
@@ -2497,26 +2497,26 @@ class EnterpriseSystemQualityAssurance:
                     ]
                 }
             },
-
+            
             data_complexity=DataComplexity(
                 volume_challenges=[
                     "100TB daily data processing",
                     "10-year data retention requirement",
                     "Real-time + batch processing mix"
                 ],
-
+                
                 variety_challenges=[
                     "Structured (RDBMS): 60%",
                     "Semi-structured (JSON, XML): 25%",
                     "Unstructured (documents, images): 15%"
                 ],
-
+                
                 velocity_challenges=[
                     "Peak TPS: 100,000",
                     "Latency requirement: <100ms for 99%ile",
                     "Streaming analytics: Near real-time"
                 ],
-
+                
                 veracity_challenges=[
                     "Data quality issues from 50+ sources",
                     "Reconciliation complexity",
@@ -2524,7 +2524,7 @@ class EnterpriseSystemQualityAssurance:
                     "Regulatory data lineage"
                 ]
             ),
-
+            
             integration_complexity=IntegrationComplexity(
                 internal_integrations={
                     "point_to_point": "Legacy pattern, 2000+ connections",
@@ -2532,14 +2532,14 @@ class EnterpriseSystemQualityAssurance:
                     "api_based": "Growing, 30% of new integrations",
                     "event_based": "Target state, currently 10%"
                 },
-
+                
                 external_integrations={
                     "payment_networks": ["SWIFT", "ACH", "Card networks"],
                     "regulatory_reporting": ["Central banks", "Tax authorities"],
                     "third_party_services": ["Credit bureaus", "KYC providers"],
                     "fintech_partners": ["Open banking APIs", "BaaS platforms"]
                 },
-
+                
                 quality_implications=[
                     "End-to-end testing complexity",
                     "Mock/stub management",
@@ -2548,24 +2548,24 @@ class EnterpriseSystemQualityAssurance:
                 ]
             )
         )
-
+        
         # ビジネス複雑性
         analysis.business_complexity = BusinessComplexity(
-
+            
             product_complexity={
                 "retail_banking": ["Accounts", "Cards", "Loans", "Investments"],
                 "corporate_banking": ["Trade finance", "Cash management", "FX"],
                 "investment_banking": ["Trading", "Advisory", "Research"],
                 "cross_product_rules": "10,000+ business rules"
             },
-
+            
             regulatory_complexity={
                 "jurisdictions": 30,
                 "regulations": "500+ applicable regulations",
                 "change_frequency": "Monthly updates required",
                 "audit_requirements": "Continuous compliance proof"
             },
-
+            
             operational_complexity={
                 "24x7_operations": "Follow-the-sun model",
                 "language_support": "15 languages",
@@ -2573,17 +2573,17 @@ class EnterpriseSystemQualityAssurance:
                 "time_zone_handling": "Critical for cut-off times"
             }
         )
-
+        
         return analysis
-
+    
     def _design_quality_strategy(self) -> EnterpriseQualityStrategy:
         """エンタープライズ品質戦略の設計"""
-
+        
         strategy = EnterpriseQualityStrategy()
-
+        
         # リスクベースの品質アプローチ
         strategy.risk_based_approach = RiskBasedQuality(
-
+            
             risk_categorization=RiskMatrix(
                 dimensions={
                     "business_criticality": ["Payment processing", "Account management", "Reporting"],
@@ -2591,20 +2591,20 @@ class EnterpriseSystemQualityAssurance:
                     "regulatory_impact": ["AML screening", "Transaction reporting", "Data privacy"],
                     "customer_impact": ["Direct facing", "Indirect impact", "Internal only"]
                 },
-
+                
                 risk_scoring="""
-                Risk Score = Business Criticality × Technical Complexity ×
+                Risk Score = Business Criticality × Technical Complexity × 
                             Regulatory Impact × Customer Impact × Change Frequency
                 """,
-
+                
                 quality_investment_allocation="""
                 Tier 1 (Risk > 80): 50% of quality effort
-                Tier 2 (Risk 50-80): 30% of quality effort
+                Tier 2 (Risk 50-80): 30% of quality effort  
                 Tier 3 (Risk 20-50): 15% of quality effort
                 Tier 4 (Risk < 20): 5% of quality effort
                 """
             ),
-
+            
             ai_specific_risks=AIRiskAssessment(
                 categories=[
                     Risk(
@@ -2619,7 +2619,7 @@ class EnterpriseSystemQualityAssurance:
                             "Regular model validation"
                         ]
                     ),
-
+                    
                     Risk(
                         name="Financial Calculation Accuracy",
                         description="AI-generated code with subtle calculation errors",
@@ -2632,7 +2632,7 @@ class EnterpriseSystemQualityAssurance:
                             "Expert review for all financial logic"
                         ]
                     ),
-
+                    
                     Risk(
                         name="Integration Cascade Failures",
                         description="AI not understanding system-wide dependencies",
@@ -2645,7 +2645,7 @@ class EnterpriseSystemQualityAssurance:
                             "Comprehensive integration testing"
                         ]
                     ),
-
+                    
                     Risk(
                         name="Data Privacy Violations",
                         description="AI exposing sensitive data inappropriately",
@@ -2661,10 +2661,10 @@ class EnterpriseSystemQualityAssurance:
                 ]
             )
         )
-
+        
         # 多層品質ゲート
         strategy.quality_gates = MultiLayerQualityGates(
-
+            
             layers=[
                 QualityGate(
                     name="Development Quality Gate",
@@ -2688,7 +2688,7 @@ class EnterpriseSystemQualityAssurance:
                     ],
                     sla="< 10 minutes for automated, < 2 hours for manual"
                 ),
-
+                
                 QualityGate(
                     name="Integration Quality Gate",
                     stage="Pre-merge to main",
@@ -2714,7 +2714,7 @@ class EnterpriseSystemQualityAssurance:
                         "Error propagation testing"
                     ]
                 ),
-
+                
                 QualityGate(
                     name="Business Validation Gate",
                     stage="Pre-production",
@@ -2736,7 +2736,7 @@ class EnterpriseSystemQualityAssurance:
                         "Decision boundary validation"
                     ]
                 ),
-
+                
                 QualityGate(
                     name="Production Readiness Gate",
                     stage="Pre-deployment",
@@ -2756,10 +2756,10 @@ class EnterpriseSystemQualityAssurance:
                 )
             ]
         )
-
+        
         # テスト戦略の階層化
         strategy.test_pyramid = EnterpriseTestPyramid(
-
+            
             unit_tests=UnitTestLayer(
                 coverage_target="85% for new code, 70% overall",
                 ai_enhancement=[
@@ -2778,14 +2778,14 @@ class EnterpriseSystemQualityAssurance:
                     "Service virtualization"
                 ]
             ),
-
+            
             component_tests=ComponentTestLayer(
                 scope="Service boundaries, API contracts",
                 tools=["REST Assured", "Pact", "Spring Cloud Contract"],
                 ai_generation="Contract-first test generation",
                 data_management="Test data as code, version controlled"
             ),
-
+            
             integration_tests=IntegrationTestLayer(
                 scope="Cross-service workflows, data flows",
                 environments={
@@ -2804,7 +2804,7 @@ class EnterpriseSystemQualityAssurance:
                     "Failure prediction"
                 ]
             ),
-
+            
             system_tests=SystemTestLayer(
                 scope="End-to-end business processes",
                 scenarios=[
@@ -2824,7 +2824,7 @@ class EnterpriseSystemQualityAssurance:
                     "Intelligent wait strategies"
                 ]
             ),
-
+            
             performance_tests=PerformanceTestLayer(
                 types=[
                     "Load testing (normal day patterns)",
@@ -2845,7 +2845,7 @@ class EnterpriseSystemQualityAssurance:
                     "resource_utilization": "<70% at peak"
                 }
             ),
-
+            
             chaos_tests=ChaosTestLayer(
                 philosophy="Embrace failure to ensure resilience",
                 scope="Production-like environments only",
@@ -2864,7 +2864,7 @@ class EnterpriseSystemQualityAssurance:
                 ai_role="Intelligent failure scenario generation based on topology"
             )
         )
-
+        
         return strategy
 ```
 
@@ -2877,20 +2877,20 @@ class EnterpriseSystemQualityAssurance:
 ```python
 class LegacyIntegrationQuality:
     """レガシー統合の品質保証戦略"""
-
+    
     def __init__(self):
         self.legacy_assessment = self._assess_legacy_landscape()
         self.integration_patterns = self._define_integration_patterns()
         self.quality_framework = self._build_quality_framework()
-
+    
     def _assess_legacy_landscape(self) -> LegacyAssessment:
         """レガシーシステムの評価"""
-
+        
         assessment = LegacyAssessment()
-
+        
         # レガシーシステムの特性分析
         assessment.system_characteristics = LegacyCharacteristics(
-
+            
             mainframe_systems={
                 "core_banking": {
                     "technology": "COBOL on IBM z/OS",
@@ -2901,7 +2901,7 @@ class LegacyIntegrationQuality:
                     "documentation": "30% coverage, mostly outdated",
                     "tribal_knowledge_dependency": "High - 5 key experts"
                 },
-
+                
                 "payment_processing": {
                     "technology": "COBOL, PL/I",
                     "integrations": "200+ financial institutions",
@@ -2910,7 +2910,7 @@ class LegacyIntegrationQuality:
                     "testing_challenge": "Limited test environments"
                 }
             },
-
+            
             mid_tier_systems={
                 "customer_relationship": {
                     "technology": "Java EE on WebSphere",
@@ -2919,7 +2919,7 @@ class LegacyIntegrationQuality:
                     "database": "Oracle 11g",
                     "integration": "SOAP web services"
                 },
-
+                
                 "risk_management": {
                     "technology": "C++ calculation engine",
                     "performance_critical": "Sub-millisecond latency",
@@ -2927,7 +2927,7 @@ class LegacyIntegrationQuality:
                     "regulatory_scrutiny": "Model validation required"
                 }
             },
-
+            
             data_characteristics={
                 "formats": {
                     "EBCDIC": "Mainframe records",
@@ -2948,10 +2948,10 @@ class LegacyIntegrationQuality:
                 ]
             }
         )
-
+        
         # 統合の複雑性マッピング
         assessment.integration_complexity = IntegrationComplexityMap(
-
+            
             synchronous_integrations=[
                 Integration(
                     name="Real-time balance inquiry",
@@ -2971,7 +2971,7 @@ class LegacyIntegrationQuality:
                         "Audit trail completeness"
                     ]
                 ),
-
+                
                 Integration(
                     name="Payment authorization",
                     complexity="High",
@@ -2980,7 +2980,7 @@ class LegacyIntegrationQuality:
                     sla="50ms response time, 99.999% availability"
                 )
             ],
-
+            
             asynchronous_integrations=[
                 Integration(
                     name="End-of-day batch processing",
@@ -2997,7 +2997,7 @@ class LegacyIntegrationQuality:
                         "Data consistency"
                     ]
                 ),
-
+                
                 Integration(
                     name="Regulatory reporting",
                     frequency="Daily, monthly, quarterly",
@@ -3006,7 +3006,7 @@ class LegacyIntegrationQuality:
                     audit_requirements="Full lineage tracking"
                 )
             ],
-
+            
             event_driven_integrations=[
                 Integration(
                     name="Customer data changes",
@@ -3022,41 +3022,41 @@ class LegacyIntegrationQuality:
                 )
             ]
         )
-
+        
         return assessment
-
+    
     def _define_integration_patterns(self) -> IntegrationPatterns:
         """統合パターンの定義"""
-
+        
         patterns = IntegrationPatterns()
-
+        
         # Anti-Corruption Layer パターン
         patterns.anti_corruption_layer = AntiCorruptionLayer(
-
+            
             purpose="Protect new systems from legacy complexity",
-
+            
             implementation_strategy="""
             class AntiCorruptionLayer:
                 '''レガシーシステムの複雑性を隠蔽するレイヤー'''
-
+                
                 def __init__(self):
                     self.translator = LegacyTranslator()
                     self.validator = DataValidator()
                     self.error_handler = LegacyErrorHandler()
                     self.audit_logger = AuditLogger()
-
+                
                 async def get_customer_data(self, customer_id: str) -> Customer:
                     '''レガシーシステムから顧客データを取得'''
-
+                    
                     # 入力検証
                     validated_id = self.validator.validate_customer_id(customer_id)
-
+                    
                     # レガシー形式への変換
                     legacy_request = self.translator.to_legacy_format({
                         'function': 'CUSTINQ',
                         'customer_id': validated_id
                     })
-
+                    
                     # レガシーシステムコール
                     try:
                         legacy_response = await self.call_legacy_system(
@@ -3067,16 +3067,16 @@ class LegacyIntegrationQuality:
                     except LegacyTimeoutError:
                         # フォールバック戦略
                         return await self.get_cached_customer(customer_id)
-
+                    
                     # レスポンス変換
                     customer = self.translator.from_legacy_format(
                         legacy_response,
                         target_model=Customer
                     )
-
+                    
                     # ビジネスルール適用
                     customer = self.apply_business_rules(customer)
-
+                    
                     # 監査ログ
                     self.audit_logger.log_access(
                         user_id=self.context.user_id,
@@ -3084,10 +3084,10 @@ class LegacyIntegrationQuality:
                         customer_id=customer_id,
                         timestamp=datetime.utcnow()
                     )
-
+                    
                     return customer
             """,
-
+            
             quality_assurance_approach=[
                 "Contract testing between layers",
                 "Comprehensive error scenario testing",
@@ -3095,7 +3095,7 @@ class LegacyIntegrationQuality:
                 "Data consistency validation",
                 "Audit trail verification"
             ],
-
+            
             ai_enhancement_opportunities=[
                 "Automatic mapping rule generation",
                 "Error pattern learning",
@@ -3103,12 +3103,12 @@ class LegacyIntegrationQuality:
                 "Test case generation from specifications"
             ]
         )
-
+        
         # Strangler Fig パターン
         patterns.strangler_fig = StranglerFigPattern(
-
+            
             approach="Gradually replace legacy with new functionality",
-
+            
             implementation_phases=[
                 Phase(
                     name="Identify seam",
@@ -3126,7 +3126,7 @@ class LegacyIntegrationQuality:
                         "Rollback strategy defined"
                     ]
                 ),
-
+                
                 Phase(
                     name="Build parallel functionality",
                     description="Implement new service alongside legacy",
@@ -3137,22 +3137,22 @@ class LegacyIntegrationQuality:
                             self.new_service = ModernPaymentService()
                             self.comparison_engine = ComparisonEngine()
                             self.feature_toggle = FeatureToggle('payment_migration')
-
+                        
                         async def process_payment(self, payment: Payment) -> PaymentResult:
                             if self.feature_toggle.is_enabled_for(payment.customer_id):
                                 # New service path
                                 result = await self.new_service.process(payment)
-
+                                
                                 # Shadow mode comparison
                                 if self.feature_toggle.is_shadow_mode():
                                     legacy_result = await self.legacy_service.process(payment)
                                     discrepancies = self.comparison_engine.compare(
-                                        result,
+                                        result, 
                                         legacy_result
                                     )
                                     if discrepancies:
                                         await self.log_discrepancy(payment, discrepancies)
-
+                                
                                 return result
                             else:
                                 # Legacy path
@@ -3165,7 +3165,7 @@ class LegacyIntegrationQuality:
                         "Shadow mode discrepancy analysis"
                     ]
                 ),
-
+                
                 Phase(
                     name="Gradual migration",
                     description="Progressive traffic shifting",
@@ -3182,7 +3182,7 @@ class LegacyIntegrationQuality:
                         "Customer feedback"
                     ]
                 ),
-
+                
                 Phase(
                     name="Legacy decommission",
                     description="Safe retirement of legacy component",
@@ -3201,12 +3201,12 @@ class LegacyIntegrationQuality:
                 )
             ]
         )
-
+        
         # Event Sourcing での統合
         patterns.event_sourcing_bridge = EventSourcingBridge(
-
+            
             purpose="Maintain consistency between legacy and modern systems",
-
+            
             architecture="""
             Legacy System → Change Data Capture → Event Stream → Modern System
                     ↓                                    ↓
@@ -3214,7 +3214,7 @@ class LegacyIntegrationQuality:
                     ↓                                    ↓
             Reconciliation ← ← ← ← ← ← ← ← ← Projections
             """,
-
+            
             implementation_components=[
                 Component(
                     name="Change Data Capture",
@@ -3227,7 +3227,7 @@ class LegacyIntegrationQuality:
                         "Failure recovery"
                     ]
                 ),
-
+                
                 Component(
                     name="Event Translator",
                     purpose="Convert legacy changes to domain events",
@@ -3235,20 +3235,20 @@ class LegacyIntegrationQuality:
                     class LegacyEventTranslator:
                         def translate_customer_update(self, cdc_record: CDCRecord) -> List[DomainEvent]:
                             events = []
-
+                            
                             # Parse COBOL copybook format
                             customer_data = self.parse_copybook(
                                 cdc_record.data,
                                 schema='CUSTOMER-RECORD'
                             )
-
+                            
                             # Detect what changed
                             if cdc_record.operation == 'UPDATE':
                                 changes = self.detect_changes(
                                     cdc_record.before_image,
                                     cdc_record.after_image
                                 )
-
+                                
                                 # Generate appropriate events
                                 if 'ADDRESS' in changes:
                                     events.append(CustomerAddressChanged(
@@ -3258,7 +3258,7 @@ class LegacyIntegrationQuality:
                                         changed_by='Legacy System',
                                         changed_at=cdc_record.timestamp
                                     ))
-
+                                
                                 if 'CREDIT-LIMIT' in changes:
                                     events.append(CreditLimitUpdated(
                                         customer_id=customer_data['CUST-ID'],
@@ -3266,7 +3266,7 @@ class LegacyIntegrationQuality:
                                         new_limit=changes['CREDIT-LIMIT']['new'],
                                         reason='Legacy batch update'
                                     ))
-
+                            
                             return events
                     """,
                     testing_strategy=[
@@ -3276,7 +3276,7 @@ class LegacyIntegrationQuality:
                         "Completeness verification"
                     ]
                 ),
-
+                
                 Component(
                     name="Reconciliation Engine",
                     purpose="Ensure consistency between systems",
@@ -3295,17 +3295,17 @@ class LegacyIntegrationQuality:
                 )
             ]
         )
-
+        
         return patterns
-
+    
     def _build_quality_framework(self) -> LegacyIntegrationQualityFramework:
         """レガシー統合品質フレームワークの構築"""
-
+        
         framework = LegacyIntegrationQualityFramework()
-
+        
         # データ品質保証
         framework.data_quality = DataQualityAssurance(
-
+            
             validation_layers=[
                 ValidationLayer(
                     name="Format Validation",
@@ -3317,11 +3317,11 @@ class LegacyIntegrationQuality:
                     ],
                     implementation="""
                     class LegacyDataValidator:
-                        def validate_numeric_field(self,
-                                                 legacy_value: bytes,
+                        def validate_numeric_field(self, 
+                                                 legacy_value: bytes, 
                                                  field_spec: FieldSpecification) -> Decimal:
                             '''COBOL数値フィールドの検証と変換'''
-
+                            
                             # COMP-3 (Packed Decimal) の処理
                             if field_spec.type == 'COMP-3':
                                 # バイト列から数値を抽出
@@ -3329,26 +3329,26 @@ class LegacyIntegrationQuality:
                                 for byte in legacy_value[:-1]:
                                     digits.append(byte >> 4)  # 上位4ビット
                                     digits.append(byte & 0x0F)  # 下位4ビット
-
+                                
                                 # 符号の処理
                                 last_byte = legacy_value[-1]
                                 digits.append(last_byte >> 4)
                                 sign = last_byte & 0x0F
-
+                                
                                 # 数値の組み立て
                                 value = int(''.join(str(d) for d in digits))
                                 if sign in [0x0B, 0x0D]:  # 負の符号
                                     value = -value
-
+                                
                                 # 精度の適用
                                 decimal_value = Decimal(value) / Decimal(10 ** field_spec.scale)
-
+                                
                                 # 検証
                                 if not field_spec.min_value <= decimal_value <= field_spec.max_value:
                                     raise ValueError(f"Value {decimal_value} out of range")
-
+                                
                                 return decimal_value
-
+                            
                             # 他の数値形式の処理...
                     """,
                     error_handling=[
@@ -3358,7 +3358,7 @@ class LegacyIntegrationQuality:
                         "Alerting for systematic issues"
                     ]
                 ),
-
+                
                 ValidationLayer(
                     name="Business Rule Validation",
                     checks=[
@@ -3369,7 +3369,7 @@ class LegacyIntegrationQuality:
                     ],
                     ai_enhancement="ML-based anomaly detection for unusual patterns"
                 ),
-
+                
                 ValidationLayer(
                     name="Semantic Validation",
                     purpose="Ensure meaning is preserved across systems",
@@ -3380,7 +3380,7 @@ class LegacyIntegrationQuality:
                     ]
                 )
             ],
-
+            
             reconciliation_strategy=ReconciliationStrategy(
                 approach="Multi-level reconciliation with feedback loops",
                 levels=[
@@ -3392,68 +3392,68 @@ class LegacyIntegrationQuality:
                 automation="AI-powered discrepancy pattern recognition"
             )
         )
-
+        
         # トランザクション整合性
         framework.transaction_integrity = TransactionIntegrityAssurance(
-
+            
             distributed_transaction_handling="""
             class DistributedTransactionManager:
                 '''レガシーとモダンシステム間のトランザクション管理'''
-
+                
                 def __init__(self):
                     self.saga_orchestrator = SagaOrchestrator()
                     self.compensation_manager = CompensationManager()
                     self.audit_trail = AuditTrail()
-
+                
                 async def execute_cross_system_transaction(
                     self,
                     transaction: CrossSystemTransaction
                 ) -> TransactionResult:
-
+                    
                     saga = self.saga_orchestrator.create_saga(transaction)
-
+                    
                     try:
                         # Step 1: Modern system preparation
                         modern_result = await self.execute_modern_step(
                             saga.steps['modern_prep']
                         )
                         saga.record_step_result('modern_prep', modern_result)
-
+                        
                         # Step 2: Legacy system update
                         legacy_result = await self.execute_legacy_step(
                             saga.steps['legacy_update'],
                             timeout=30000  # 30 seconds for mainframe
                         )
                         saga.record_step_result('legacy_update', legacy_result)
-
+                        
                         # Step 3: Modern system commit
                         commit_result = await self.execute_modern_step(
                             saga.steps['modern_commit']
                         )
                         saga.record_step_result('modern_commit', commit_result)
-
+                        
                         # Step 4: Event publication
                         await self.publish_transaction_events(saga)
-
+                        
                         return TransactionResult(status='completed', saga=saga)
-
+                        
                     except Exception as e:
                         # Compensation logic
                         await self.compensation_manager.compensate(saga)
                         return TransactionResult(status='compensated', error=e, saga=saga)
-
+                    
                     finally:
                         # Audit logging
                         self.audit_trail.record(saga)
             """,
-
+            
             consistency_patterns=[
                 "Eventual consistency with reconciliation",
                 "Saga pattern for distributed transactions",
                 "Two-phase commit where possible",
                 "Compensation-based recovery"
             ],
-
+            
             quality_measures=[
                 "Transaction success rate monitoring",
                 "Compensation frequency tracking",
@@ -3461,24 +3461,24 @@ class LegacyIntegrationQuality:
                 "Consistency window measurement"
             ]
         )
-
+        
         # パフォーマンステスト戦略
         framework.performance_testing = LegacyIntegrationPerformanceTesting(
-
+            
             challenges=[
                 "Mainframe capacity constraints",
                 "Batch window limitations",
                 "Network latency variations",
                 "Protocol overhead"
             ],
-
+            
             test_strategy="""
             class LegacyIntegrationPerformanceTest:
                 def __init__(self):
                     self.load_generator = LoadGenerator()
                     self.monitor = PerformanceMonitor()
                     self.analyzer = BottleneckAnalyzer()
-
+                
                 def design_test_scenarios(self) -> List[TestScenario]:
                     return [
                         TestScenario(
@@ -3498,7 +3498,7 @@ class LegacyIntegrationQuality:
                                 "data_consistency": "100%"
                             }
                         ),
-
+                        
                         TestScenario(
                             name="Batch processing overlap",
                             description="Online transactions during batch window",
@@ -3510,7 +3510,7 @@ class LegacyIntegrationQuality:
                             expected_degradation="30% response time increase acceptable",
                             mitigation_test="Circuit breaker activation"
                         ),
-
+                        
                         TestScenario(
                             name="Legacy system degradation",
                             description="Graceful handling of legacy slowdown",
@@ -3526,14 +3526,14 @@ class LegacyIntegrationQuality:
                             ]
                         )
                     ]
-
+                
                 def execute_test(self, scenario: TestScenario) -> TestResult:
                     # AI-powered test execution
                     optimal_ramp_up = self.analyzer.calculate_optimal_ramp(
                         scenario,
                         self.monitor.get_system_state()
                     )
-
+                    
                     # 実行とモニタリング
                     with self.monitor.record(scenario.name):
                         results = self.load_generator.execute(
@@ -3542,7 +3542,7 @@ class LegacyIntegrationQuality:
                             duration="1 hour",
                             real_time_adjustment=True
                         )
-
+                    
                     # 結果分析
                     return self.analyzer.analyze_results(
                         results,
@@ -3550,7 +3550,7 @@ class LegacyIntegrationQuality:
                         suggest_optimizations=True
                     )
             """,
-
+            
             optimization_recommendations=[
                 "Connection pooling optimization",
                 "Caching strategy refinement",
@@ -3558,7 +3558,7 @@ class LegacyIntegrationQuality:
                 "Asynchronous processing where possible"
             ]
         )
-
+        
         return framework
 ```
 
@@ -3571,17 +3571,17 @@ class LegacyIntegrationQuality:
 ```python
 class PhaseModernizationStrategy:
     """段階的モダナイゼーション戦略"""
-
+    
     def __init__(self):
         self.modernization_roadmap = self._create_roadmap()
         self.risk_management = self._design_risk_management()
         self.success_metrics = self._define_success_metrics()
-
+    
     def _create_roadmap(self) -> ModernizationRoadmap:
         """モダナイゼーションロードマップの作成"""
-
+        
         roadmap = ModernizationRoadmap()
-
+        
         # フェーズ1: 基盤構築（6ヶ月）
         roadmap.add_phase(
             Phase(
@@ -3593,7 +3593,7 @@ class PhaseModernizationStrategy:
                     "Quality automation pipeline",
                     "Team skill development"
                 ],
-
+                
                 key_deliverables=[
                     Deliverable(
                         name="Cloud-native development platform",
@@ -3610,7 +3610,7 @@ class PhaseModernizationStrategy:
                             "Full audit trail"
                         ]
                     ),
-
+                    
                     Deliverable(
                         name="AI-assisted development environment",
                         components=[
@@ -3626,7 +3626,7 @@ class PhaseModernizationStrategy:
                             "Security scanning for AI patterns"
                         ]
                     ),
-
+                    
                     Deliverable(
                         name="Legacy bridge infrastructure",
                         purpose="Enable gradual migration",
@@ -3638,7 +3638,7 @@ class PhaseModernizationStrategy:
                         ]
                     )
                 ],
-
+                
                 risks=[
                     Risk(
                         description="Team resistance to new tools",
@@ -3653,14 +3653,14 @@ class PhaseModernizationStrategy:
                 ]
             )
         )
-
+        
         # フェーズ2: エッジサービスのモダナイゼーション（12ヶ月）
         roadmap.add_phase(
             Phase(
                 name="Edge Services Modernization",
                 duration="12 months",
                 strategy="Outside-in transformation",
-
+                
                 target_services=[
                     Service(
                         name="Customer Authentication Service",
@@ -3678,7 +3678,7 @@ class PhaseModernizationStrategy:
                                 self.parallel_run_validator = ParallelRunValidator()
                                 self.security_tester = SecurityTestSuite()
                                 self.performance_benchmarker = PerformanceBenchmark()
-
+                            
                             def validate_migration(self):
                                 # 並行実行での検証
                                 validation_results = self.parallel_run_validator.run(
@@ -3692,14 +3692,14 @@ class PhaseModernizationStrategy:
                                         "Audit logs must capture same events"
                                     ]
                                 )
-
+                                
                                 # セキュリティ検証
                                 security_results = self.security_tester.test(
                                     penetration_testing=True,
                                     owasp_compliance=True,
                                     regulatory_requirements=['PCI-DSS', 'SOX']
                                 )
-
+                                
                                 # パフォーマンス検証
                                 perf_results = self.performance_benchmarker.compare(
                                     baseline=legacy_performance_profile,
@@ -3709,7 +3709,7 @@ class PhaseModernizationStrategy:
                                         'token_validation': '<5ms'
                                     }
                                 )
-
+                                
                                 return MigrationDecision(
                                     validation_results,
                                     security_results,
@@ -3724,21 +3724,21 @@ class PhaseModernizationStrategy:
                             "100% with legacy standby"
                         ]
                     ),
-
+                    
                     Service(
                         name="Notification Service",
                         rationale="Low risk, high visibility improvements",
                         modernization_approach="Complete rewrite with AI assistance",
                         quality_focus="User experience and delivery reliability"
                     ),
-
+                    
                     Service(
                         name="Document Management Service",
                         rationale="Compliance critical but isolated",
                         special_requirements="Audit trail preservation during migration"
                     )
                 ],
-
+                
                 cross_cutting_concerns=[
                     "Centralized logging and monitoring",
                     "Service mesh integration",
@@ -3747,7 +3747,7 @@ class PhaseModernizationStrategy:
                 ]
             )
         )
-
+        
         # フェーズ3: コアビジネスロジック抽出（18ヶ月）
         roadmap.add_phase(
             Phase(
@@ -3755,14 +3755,14 @@ class PhaseModernizationStrategy:
                 duration="18 months",
                 complexity="High",
                 approach="Domain-driven design with bounded contexts",
-
+                
                 domains=[
                     Domain(
                         name="Account Management",
                         subdomain_type="Core",
                         current_implementation="COBOL monolith - 500K LOC",
                         target_architecture="Microservices + Event Sourcing",
-
+                        
                         extraction_strategy="""
                         1. Identify aggregate boundaries through transaction analysis
                         2. Build read models from legacy events
@@ -3770,14 +3770,14 @@ class PhaseModernizationStrategy:
                         4. Gradual event stream adoption
                         5. Legacy decommission after 6-month parallel run
                         """,
-
+                        
                         ai_role=[
                             "COBOL to Java transpilation with human review",
                             "Business rule extraction and documentation",
                             "Test scenario generation from transaction logs",
                             "Performance optimization recommendations"
                         ],
-
+                        
                         quality_gates=[
                             QualityGate(
                                 name="Business Rule Parity",
@@ -3799,7 +3799,7 @@ class PhaseModernizationStrategy:
                             )
                         ]
                     ),
-
+                    
                     Domain(
                         name="Payment Processing",
                         subdomain_type="Core",
@@ -3811,7 +3811,7 @@ class PhaseModernizationStrategy:
                         ],
                         risk_mitigation="Extensive chaos engineering and game days"
                     ),
-
+                    
                     Domain(
                         name="Regulatory Reporting",
                         subdomain_type="Supporting",
@@ -3821,21 +3821,21 @@ class PhaseModernizationStrategy:
                 ]
             )
         )
-
+        
         # フェーズ4: データプラットフォームモダナイゼーション（12ヶ月）
         roadmap.add_phase(
             Phase(
                 name="Data Platform Modernization",
                 duration="12 months",
                 parallel_with="Phase 3 overlap",
-
+                
                 objectives=[
                     "Move from batch to real-time processing",
                     "Implement data mesh architecture",
                     "Enable AI/ML on banking data",
                     "Ensure regulatory compliance"
                 ],
-
+                
                 key_components=[
                     Component(
                         name="Event Streaming Platform",
@@ -3848,7 +3848,7 @@ class PhaseModernizationStrategy:
                             "Complete audit trail"
                         ]
                     ),
-
+                    
                     Component(
                         name="Data Lake Formation",
                         technology="Delta Lake on S3",
@@ -3860,7 +3860,7 @@ class PhaseModernizationStrategy:
                                 self.validator = DataValidator()
                                 self.cleanser = DataCleanser()
                                 self.monitor = QualityMonitor()
-
+                            
                             def ensure_migration_quality(self, source_table, target_table):
                                 # Profile source data
                                 source_profile = self.profiler.profile(
@@ -3868,27 +3868,27 @@ class PhaseModernizationStrategy:
                                     include_distributions=True,
                                     sample_size='adaptive'
                                 )
-
+                                
                                 # Validate migrated data
                                 validation_rules = self.generate_validation_rules(
                                     source_profile,
                                     business_rules,
                                     regulatory_requirements
                                 )
-
+                                
                                 validation_results = self.validator.validate(
                                     target_table,
                                     validation_rules,
                                     fail_fast=False
                                 )
-
+                                
                                 # AI-powered anomaly detection
                                 anomalies = self.monitor.detect_anomalies(
                                     target_table,
                                     baseline=source_profile,
                                     sensitivity='high'
                                 )
-
+                                
                                 # Generate quality report
                                 return QualityReport(
                                     completeness=validation_results.completeness,
@@ -3896,13 +3896,13 @@ class PhaseModernizationStrategy:
                                     consistency=validation_results.consistency,
                                     anomalies=anomalies,
                                     recommendations=self.generate_recommendations(
-                                        validation_results,
+                                        validation_results, 
                                         anomalies
                                     )
                                 )
                         """
                     ),
-
+                    
                     Component(
                         name="ML Platform",
                         purpose="Enable AI on banking data",
@@ -3922,7 +3922,7 @@ class PhaseModernizationStrategy:
                 ]
             )
         )
-
+        
         # フェーズ5: レガシー廃止（6ヶ月）
         roadmap.add_phase(
             Phase(
@@ -3934,7 +3934,7 @@ class PhaseModernizationStrategy:
                     "Regulatory approval received",
                     "Disaster recovery tested"
                 ],
-
+                
                 activities=[
                     Activity(
                         name="Final data migration and archival",
@@ -3945,7 +3945,7 @@ class PhaseModernizationStrategy:
                             "Create read-only archive"
                         ]
                     ),
-
+                    
                     Activity(
                         name="Knowledge preservation",
                         importance="Critical for future reference",
@@ -3956,7 +3956,7 @@ class PhaseModernizationStrategy:
                             "Lessons learned repository"
                         ]
                     ),
-
+                    
                     Activity(
                         name="Infrastructure decommission",
                         approach="Gradual resource reduction",
@@ -3965,14 +3965,14 @@ class PhaseModernizationStrategy:
                 ]
             )
         )
-
+        
         return roadmap
-
+    
     def _design_risk_management(self) -> RiskManagementFramework:
         """リスク管理フレームワークの設計"""
-
+        
         framework = RiskManagementFramework()
-
+        
         # リスクカテゴリと緩和策
         framework.risk_categories = [
             RiskCategory(
@@ -3996,7 +3996,7 @@ class PhaseModernizationStrategy:
                         ],
                         ai_role="Predictive failure analysis and automated response"
                     ),
-
+                    
                     Risk(
                         name="Data inconsistency between systems",
                         probability="High",
@@ -4015,7 +4015,7 @@ class PhaseModernizationStrategy:
                     )
                 ]
             ),
-
+            
             RiskCategory(
                 name="Regulatory Risk",
                 risks=[
@@ -4037,7 +4037,7 @@ class PhaseModernizationStrategy:
                     )
                 ]
             ),
-
+            
             RiskCategory(
                 name="Technical Risk",
                 risks=[
@@ -4057,7 +4057,7 @@ class PhaseModernizationStrategy:
                             "Production incident correlation"
                         ]
                     ),
-
+                    
                     Risk(
                         name="Performance degradation",
                         probability="Medium",
@@ -4072,7 +4072,7 @@ class PhaseModernizationStrategy:
                 ]
             )
         ]
-
+        
         # リスク監視ダッシュボード
         framework.monitoring_dashboard = RiskMonitoringDashboard(
             real_time_metrics=[
@@ -4081,21 +4081,21 @@ class PhaseModernizationStrategy:
                 "Latency percentiles",
                 "Error rates by category"
             ],
-
+            
             risk_indicators=[
                 "Rollback frequency",
                 "Incident severity trend",
                 "Compliance violation count",
                 "Customer satisfaction score"
             ],
-
+            
             ai_powered_features=[
                 "Anomaly detection in risk patterns",
                 "Predictive risk scoring",
                 "Automated alert prioritization",
                 "Root cause analysis assistance"
             ],
-
+            
             executive_view=[
                 "Overall risk score trend",
                 "Top 5 risks by impact",
@@ -4103,17 +4103,17 @@ class PhaseModernizationStrategy:
                 "Phase completion status"
             ]
         )
-
+        
         return framework
-
+    
     def _define_success_metrics(self) -> SuccessMetricsFramework:
         """成功指標フレームワークの定義"""
-
+        
         metrics = SuccessMetricsFramework()
-
+        
         # ビジネス成果メトリクス
         metrics.business_outcomes = BusinessOutcomeMetrics(
-
+            
             financial_metrics=[
                 Metric(
                     name="Operational Cost Reduction",
@@ -4122,7 +4122,7 @@ class PhaseModernizationStrategy:
                     measurement="Infrastructure + personnel + maintenance",
                     current_achievement="12% reduction in phase 1"
                 ),
-
+                
                 Metric(
                     name="Time-to-Market Improvement",
                     baseline="6 months for major features",
@@ -4130,7 +4130,7 @@ class PhaseModernizationStrategy:
                     measurement="Idea to production deployment",
                     ai_contribution="3x faster development with AI tools"
                 ),
-
+                
                 Metric(
                     name="Revenue Growth Enablement",
                     target="$50M new revenue from digital products",
@@ -4142,7 +4142,7 @@ class PhaseModernizationStrategy:
                     ]
                 )
             ],
-
+            
             customer_metrics=[
                 Metric(
                     name="Digital Experience Score",
@@ -4156,7 +4156,7 @@ class PhaseModernizationStrategy:
                         "Omnichannel consistency"
                     ]
                 ),
-
+                
                 Metric(
                     name="Customer Acquisition Cost",
                     baseline="$150 per customer",
@@ -4165,10 +4165,10 @@ class PhaseModernizationStrategy:
                 )
             ]
         )
-
+        
         # 技術的成果メトリクス
         metrics.technical_outcomes = TechnicalOutcomeMetrics(
-
+            
             quality_metrics=[
                 Metric(
                     name="Production Incident Rate",
@@ -4181,7 +4181,7 @@ class PhaseModernizationStrategy:
                         "Improved architecture": "30%"
                     }
                 ),
-
+                
                 Metric(
                     name="Mean Time to Recovery (MTTR)",
                     baseline="4 hours",
@@ -4193,7 +4193,7 @@ class PhaseModernizationStrategy:
                         "Self-healing capabilities"
                     ]
                 ),
-
+                
                 Metric(
                     name="Test Automation Coverage",
                     baseline="15% automated tests",
@@ -4207,7 +4207,7 @@ class PhaseModernizationStrategy:
                     }
                 )
             ],
-
+            
             velocity_metrics=[
                 Metric(
                     name="Deployment Frequency",
@@ -4220,7 +4220,7 @@ class PhaseModernizationStrategy:
                         "Real-time monitoring"
                     ]
                 ),
-
+                
                 Metric(
                     name="Lead Time for Changes",
                     baseline="3 weeks",
@@ -4234,10 +4234,10 @@ class PhaseModernizationStrategy:
                 )
             ]
         )
-
+        
         # 組織的成果メトリクス
         metrics.organizational_outcomes = OrganizationalOutcomeMetrics(
-
+            
             capability_metrics=[
                 Metric(
                     name="AI Tool Adoption",
@@ -4250,7 +4250,7 @@ class PhaseModernizationStrategy:
                         "Advanced": "25%"
                     }
                 ),
-
+                
                 Metric(
                     name="Cross-functional Collaboration",
                     measurement="Team interaction frequency",
@@ -4261,7 +4261,7 @@ class PhaseModernizationStrategy:
                         "Common tooling"
                     ]
                 ),
-
+                
                 Metric(
                     name="Innovation Index",
                     components=[
@@ -4273,7 +4273,7 @@ class PhaseModernizationStrategy:
                     improvement="250% increase year-over-year"
                 )
             ],
-
+            
             talent_metrics=[
                 Metric(
                     name="Developer Satisfaction",
@@ -4287,7 +4287,7 @@ class PhaseModernizationStrategy:
                         "Learning opportunities"
                     ]
                 ),
-
+                
                 Metric(
                     name="Talent Attraction",
                     measurement="Quality of applicants",
@@ -4300,7 +4300,7 @@ class PhaseModernizationStrategy:
                 )
             ]
         )
-
+        
         return metrics
 ```
 
@@ -4352,6 +4352,8 @@ GlobalBank社のエンタープライズモダナイゼーションの取り組�
    - 継続的な改善と適応
 
 これらの教訓を自組織のコンテキストに適用することで、読者は独自の成功への道筋を見出すことができるだろう。次章では、これらの学びを踏まえて、より高度なトピックについて探求する。
+
+---
 
 ## この章のまとめとチェックリスト
 

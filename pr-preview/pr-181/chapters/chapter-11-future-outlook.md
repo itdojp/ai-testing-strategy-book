@@ -22,6 +22,9 @@ title: "第11章 将来展望"
 
 現在のLLMベースの生成AIは始まりに過ぎない。今後登場する技術は、さらに複雑な品質課題をもたらす。
 
+> **注記（陳腐化しやすい記述の扱い）**  
+> 本節は、特定のモデル名・ツール名の網羅や「ある年の最新トレンド」の断定を目的としない。必要に応じて各社の公式情報や年次レポートを参照し、組織内の前提（利用環境・制約・リスク）に合わせて読み替えること。具体例を扱う場合は、付録Cに集約し、参照日/更新日を明示する。
+
 1. **マルチモーダルAI**
    - テキスト、画像、音声の統合処理
    - クロスモーダルな一貫性の検証
@@ -45,22 +48,22 @@ title: "第11章 将来展望"
 # 次世代品質保証フレームワークの概念
 class AdaptiveQualityAssurance:
     """動的に進化する品質保証システム"""
-
+    
     def __init__(self):
         self.quality_models = []
         self.learning_engine = ContinuousLearning()
-
+        
     def assess_quality(self, ai_system):
         """AIシステムの品質を動的に評価"""
         # 静的評価
         static_metrics = self.evaluate_static_properties(ai_system)
-
+        
         # 動的評価（実行時の振る舞い）
         runtime_metrics = self.monitor_runtime_behavior(ai_system)
-
+        
         # 予測的評価（将来の品質リスク）
         predictive_metrics = self.predict_quality_degradation(ai_system)
-
+        
         return self.synthesize_quality_score(
             static_metrics, runtime_metrics, predictive_metrics
         )
@@ -121,23 +124,23 @@ class AdaptiveQualityAssurance:
 ```python
 class PredictiveQualitySystem:
     """予測的品質管理システム"""
-
+    
     def predict_quality_issues(self, system_state, historical_data):
         """将来の品質問題を予測"""
         # パターン認識による異常予兆検出
         anomaly_signals = self.detect_early_warnings(system_state)
-
+        
         # 機械学習による故障予測
         failure_probability = self.ml_model.predict_failure(
             current_metrics=system_state,
             historical_patterns=historical_data
         )
-
+        
         # リスクベースの予防措置推奨
         recommendations = self.generate_preventive_actions(
             anomaly_signals, failure_probability
         )
-
+        
         return recommendations
 ```
 
@@ -274,6 +277,8 @@ class PredictiveQualitySystem:
 品質保証エンジニアの未来は明るい。しかし、それは受動的に訪れるものではなく、能動的に創造するものである。本書が、読者の品質保証の旅における羅針盤となることを願っている。
 
 技術は手段であり、目的は人々により良いソフトウェアを届けることである。この原点を忘れずに、新しい時代の品質保証を共に創造していこう。
+
+---
 
 ## この章のまとめとチェックリスト
 
