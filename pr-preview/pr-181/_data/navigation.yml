@@ -41,3 +41,6 @@ appendices:
   path: /appendices/figure-index/
 - title: AI生成コードとテスト失敗の安全な切り分け
   path: /appendices/troubleshooting/
+afterword:
+- title: あとがき
+  path: /afterword/
