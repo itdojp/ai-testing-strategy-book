@@ -23,7 +23,7 @@
 
     lastTheme = theme;
     try {
-      window.mermaid.initialize({ startOnLoad: false, theme: theme });
+      window.mermaid.initialize({ startOnLoad: false, theme: theme, securityLevel: 'strict' });
       initialized = true;
     } catch (e) {
       // ignore init failures and try rendering anyway
