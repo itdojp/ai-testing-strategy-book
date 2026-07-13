@@ -5,7 +5,7 @@ title: "第6章 テスト自動化とAIの協調"
 
 # 第6章 テスト自動化とAIの協調
 
-> **注記**  
+> **注記**
 > 本章中のコードブロックは、概念説明のために一部を省略した擬似コード（Pseudo code）を含む。動作する最小サンプルは `examples/` を参照してほしい。
 
 ## はじめに：なぜAIとテスト自動化の協調が革新的なのか
@@ -17,6 +17,13 @@ title: "第6章 テスト自動化とAIの協調"
 この協調により、テストの量と質の両方を飛躍的に向上させ、同時に人間のテスターがより創造的で価値の高い作業に集中できる環境を作り出す。それは、ソフトウェア品質保証の新しいパラダイムの始まりである。
 
 ## 6.1 AI 活用テスト生成
+<a id="figure-ai-test-workflow-architecture"></a>
+<figure class="reader-figure">
+  <img src="{{ '/assets/images/diagrams/ai-test-workflow-architecture.svg' | relative_url }}" alt="AI生成、人間レビュー、自動テスト、品質評価をつなぎ、テスト戦略レイヤーと協働ポイントを示すワークフロー図">
+  <figcaption>図6-1 AI生成から人間レビュー、自動テスト、品質評価までを分離し、各段階で責任を明確にする。</figcaption>
+</figure>
+
+**文章による代替**: AIがコードを生成し、人間が要件・ロジック・品質をレビューする。ユニット、統合、性能、セキュリティのテスト戦略を実行し、カバレッジ、性能、信頼性を評価する。結果はプロンプト、テスト戦略、プロセス改善へ戻す。
 
 ### 6.1.1 テストケース生成プロンプト設計
 
@@ -1739,6 +1746,13 @@ class CoverageGapFiller:
 ```
 
 ## 6.3 CI/CD パイプラインへの統合
+<a id="figure-mlops-pipeline"></a>
+<figure class="reader-figure">
+  <img src="{{ '/assets/images/diagrams/mlops-pipeline.svg' | relative_url }}" alt="データ、モデル、デプロイ、監視の各ステージをCI/CDと継続的改善のフィードバックでつなぐMLOpsパイプライン図">
+  <figcaption>図6-2 MLOpsパイプラインでは、データ・モデル・デプロイ・監視の品質ゲートをCI/CDと接続する。</figcaption>
+</figure>
+
+**文章による代替**: データ収集・検証・前処理・バージョニング、モデル開発・学習評価・検証・登録、モデルサービング・段階的デプロイ、性能・データドリフト・モデル劣化の監視をつなぐ。監視結果は継続的改善としてデータとモデルの段階へ戻し、各段階でCI/CDのテストと承認を行う。
 
 ### 6.3.1 段階的品質ゲート設計
 
@@ -2877,6 +2891,19 @@ class PracticalFeedbackLoopExamples:
 
 ---
 
+## チェックリスト（最小運用）
+
+- [ ] 生成テストは「提案」であり、採用前に人間がレビューする運用（責任分界）が定義されている。
+- [ ] CIで最低限の品質ゲート（lint/unit/重要テスト）が動く状態になっている。
+- [ ] 失敗時の切り分け（テスト不備/実装不備/環境不備）の手順が共有されている。
+- [ ] 品質ゲートやレビュー観点はテンプレート化されている（例：[付録A テンプレート集]({{ '/appendices/appendix-a-templates/' | relative_url }}) の A.4、[付録B チェックリスト]({{ '/appendices/appendix-b-checklists/' | relative_url }}) を参照）。
+
+## ミニ演習（手を動かす）
+
+- [ ] 自分のプロジェクトを想定し、「CIの最小品質ゲート」を3項目で定義する（例：lint、unit、重要系の統合テスト）。
+- [ ] その3項目について、PR説明で確認できるチェックリスト（箇条書き）を作成する。
+- [ ] 生成テストをPRに含める前提で、レビュー観点（オラクル妥当性/フレーク/過剰モック）を [付録B チェックリスト]({{ '/appendices/appendix-b-checklists/' | relative_url }}) から抽出して適用する。
+
 ## この章のまとめとチェックリスト
 
 ### この章のまとめ
@@ -2893,6 +2920,6 @@ class PracticalFeedbackLoopExamples:
 
 ### 関連する付録・テンプレート
 
-- 自動化対象の整理や品質ゲート設計には、[付録A テンプレート集](../appendices/appendix-a-templates/) のテスト計画書・リソース計画のセクションが参考になる。
-- 自動テストの品質や安定性を評価する観点は、[付録B チェックリスト](../appendices/appendix-b-checklists/) を基に、自動化特有の項目を追加して設計してほしい。
-- テスト自動化ツールや AI 駆動型テストプラットフォームの比較には、[付録C ツール比較表](../appendices/appendix-c-tool-comparison/) を活用するとよい。
+- 自動化対象の整理や品質ゲート設計には、[付録A テンプレート集]({{ '/appendices/appendix-a-templates/' | relative_url }}) のテスト計画書・リソース計画のセクションが参考になる。
+- 自動テストの品質や安定性を評価する観点は、[付録B チェックリスト]({{ '/appendices/appendix-b-checklists/' | relative_url }}) を基に、自動化特有の項目を追加して設計してほしい。
+- テスト自動化ツールや AI 駆動型テストプラットフォームの比較には、[付録C ツール比較表]({{ '/appendices/appendix-c-tool-comparison/' | relative_url }}) を活用するとよい。

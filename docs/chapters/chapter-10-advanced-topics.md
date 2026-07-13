@@ -5,7 +5,7 @@ title: "第10章 高度なトピック"
 
 # 第10章 高度なトピック
 
-> **注記**  
+> **注記**
 > 本章中のコードブロックは、概念説明のために一部を省略した擬似コード（Pseudo code）を含む。動作する最小サンプルは `examples/` を参照してほしい。
 
 ## はじめに：品質保証の新たなフロンティア
@@ -261,6 +261,104 @@ class ComplianceTracker:
         return self.format_report(results)
 ```
 
+## 10.4 LLM内包機能のテスト戦略（非決定性への対応）
+
+ここまでの章は「AIを使って開発する」状況を主に扱ってきた。一方で、プロダクトそのものがLLMを内包する場合、品質保証の対象は「生成物（応答）」になり、テスト設計が大きく変わる。
+
+### 10.4.1 なぜ一致比較テストが破綻しやすいのか
+
+LLM内包機能では、次の要因により「同じ入力でも同じ出力になる」とは限らない。
+
+- **非決定性**: 生成結果が揺れる（再現性が低い）
+- **コンテキスト依存**: 前後の会話や追加情報により出力が変わる
+- **モデル更新**: モデルやプロンプトの改善で、同じ入力でも挙動が変わる
+
+このため、従来の「文字列一致」の回帰テストだけでは、誤検知（本質的にはOKだが落ちる）と見逃し（本質的にはNGだが通る）の両方が増えやすい。
+
+### 10.4.2 生成物テストの分類（厳密／許容範囲／逸脱検知）
+
+テスト対象を分類し、分類ごとに判定方法を分けることが重要である。
+
+| 分類 | 例 | 判定方法（例） | 注意点 |
+|---|---|---|---|
+| 厳密一致が可能 | 構造化出力（JSON等）、固定フォーマット、ID/数値の計算 | 構文チェック + 厳密比較 | 仕様の曖昧さを残すと破綻する |
+| 許容範囲が必要 | 要約、自然言語説明、提案文 | スコアリング/ルーブリック/正規化して比較 | 合格基準を事前に定義する |
+| 逸脱・安全性 | 禁止表現、個人情報、ポリシー違反 | NG条件の明文化 + 検知（ルール/分類器/レビュー） | 「漏れ」を前提に運用設計が必要 |
+
+### 10.4.3 回帰セット（golden set）と更新手順
+
+LLM内包機能では、回帰セット（golden set）を「テストデータ資産」として扱う。
+
+- **入力の集合**: 代表的なユースケース、境界ケース、事故が起きやすいケース
+- **期待の表現**: 文字列ではなく「ルーブリック」「チェック項目」「禁止事項」などで持つ
+- **更新手順**: 改善により挙動が変わることを前提に、更新の責任者・承認手順・差分の根拠を残す
+
+#### 回帰セット（golden set）の最小構成例（実装の雛形）
+
+ここでは、golden set を `JSONL`（1行1ケース）で管理し、ルールベースで「合否」と「失敗理由」を返す最小構成例を示す。実運用では、要件に合わせて評価軸（ルーブリック）やレビュー手順（誰が、どの根拠で更新するか）を拡張してほしい。
+
+```jsonl
+{"id":"case-001","prompt":"（例）障害対応の手順を、前提→切り分け→暫定対応→恒久対応 の順で説明してください。","must_include":["前提","切り分け","暫定","恒久"],"min_chars":200,"max_chars":600}
+```
+
+```python
+import json
+from pathlib import Path
+from typing import Callable
+
+
+def load_golden_set(path: Path) -> list[dict]:
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+
+
+def evaluate_output(output: str, spec: dict) -> tuple[bool, list[str]]:
+    errors: list[str] = []
+
+    for keyword in spec.get("must_include", []):
+        if keyword not in output:
+            errors.append(f"must_include: {keyword}")
+
+    min_chars = int(spec.get("min_chars", 0))
+    max_chars = int(spec.get("max_chars", 10**9))
+    if not (min_chars <= len(output) <= max_chars):
+        errors.append(f"length: {len(output)} (expected {min_chars}..{max_chars})")
+
+    return (len(errors) == 0), errors
+
+
+def eval_run(cases: list[dict], run: Callable[[str], str]) -> dict[str, dict]:
+    results: dict[str, dict] = {}
+    for case in cases:
+        output = run(case["prompt"])
+        ok, errors = evaluate_output(output, case)
+        results[case["id"]] = {"ok": ok, "errors": errors}
+    return results
+```
+
+### 10.4.4 “LLM-as-judge” を使う場合の注意点
+
+評価を自動化するために「LLMでLLMの出力を採点する」方式が検討されることがある。ただし以下のリスクがあるため、運用では注意が必要である。
+
+- **バイアス**: 採点者（judge）が特定の表現を過大評価/過小評価する
+- **再現性**: judge 側も非決定的で、採点が揺れる
+- **監査性**: いつ・どの基準で・誰がOKとしたかを説明しにくい
+
+本書では、採用可否や具体的な方式の優劣は断定しない（要件に依存するため）。導入する場合は「どこまでを自動判定し、どこから人手か」を明確にし、監査ログ（入力/出力/判定根拠）を残すことを推奨する。
+
+### 10.4.5 コスト／レイテンシ／品質の同時最適
+
+LLM内包機能では、品質だけでなくコストやレイテンシも品質特性として扱う必要がある。
+
+- **品質**: スコア分布、失敗カテゴリ、逸脱率、重要ケースの合格率
+- **コスト**: 1リクエストあたりの推定コスト、評価回数、回帰セットの規模
+- **レイテンシ**: P50/P95 などの応答時間、タイムアウト率
+
+「テストが緑＝安心」ではなく、メトリクスと運用ルール（どの閾値で止めるか）をセットで設計する。
+
 ## まとめ：高度な品質保証への道
 
 本章で扱った高度なトピックは、技術的な品質保証を超えた、社会的責任を伴う品質保証への進化を示している。説明可能性、倫理的配慮、規制対応は、今後のAIシステム開発において避けて通れない要件となる。
@@ -287,5 +385,5 @@ class ComplianceTracker:
 
 ### 関連する付録・テンプレート
 
-- 説明可能性や倫理的配慮をテスト計画に反映する際には、[付録A テンプレート集](../appendices/appendix-a-templates/) のリスク分析・品質基準のセクションを拡張して活用するとよい。
-- 関連する用語や概念の整理には、[付録D 用語集](../appendices/appendix-d-glossary/) が役立つ。
+- 説明可能性や倫理的配慮をテスト計画に反映する際には、[付録A テンプレート集]({{ '/appendices/appendix-a-templates/' | relative_url }}) のリスク分析・品質基準のセクションを拡張して活用するとよい。
+- 関連する用語や概念の整理には、[付録D 用語集]({{ '/appendices/appendix-d-glossary/' | relative_url }}) が役立つ。
