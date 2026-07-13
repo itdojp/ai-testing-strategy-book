@@ -9,8 +9,8 @@ title: "付録C ツール比較表"
 
 AI主導開発において、適切なツールの選択は成功の鍵となる。各ツールには固有の強みと制限があり、プロジェクトの特性に応じた選定が必要である。本付録では、主要なツールを体系的に比較し、選定の判断材料を提供する。
 
-> **注記（更新対象の情報について）**  
-> 本付録に含まれるツール名・機能・価格・提供形態は変化が速い。特に価格は改定頻度が高いため、ここでは「無料/有料/要問い合わせ」程度の粒度に留める。最新情報は各ツールの公式サイトで確認すること。  
+> **注記（更新対象の情報について）**
+> 本付録に含まれるツール名・機能・価格・提供形態は変化が速い。特に価格は改定頻度が高いため、ここでは「無料/有料/要問い合わせ」程度の粒度に留める。最新情報は各ツールの公式サイトで確認すること。
 > **最終更新日**: 2026-05-23（Asia/Tokyo）
 
 ## C.1 AIコーディング支援ツール
@@ -32,21 +32,25 @@ AIコーディング支援ツールは急速に進化しており、それぞれ
 ### 選定基準のフレームワーク
 
 #### 1. 技術要件
+
 - **言語サポート**: プロジェクトで使用する言語の対応状況
 - **統合環境**: 既存の開発環境との互換性
 - **オフライン対応**: ネットワーク制約下での使用可否
 
 #### 2. セキュリティ・コンプライアンス
+
 - **データ保護**: コードの送信・保存方法
 - **ライセンス管理**: 生成コードの著作権処理
 - **監査対応**: 使用履歴の追跡可能性
 
 #### 3. チーム・組織要件
+
 - **ライセンス体系**: ユーザー数に応じたコスト
 - **管理機能**: 使用状況の可視化
 - **カスタマイズ**: 組織固有の要件対応
 
 #### 4. 品質・生産性
+
 - **生成品質**: コードの正確性と保守性
 - **応答速度**: 開発フローへの影響
 - **学習能力**: プロジェクト固有パターンの学習
@@ -56,114 +60,6 @@ AIコーディング支援ツールは急速に進化しており、それぞれ
 ### AI時代のテスト自動化の進化
 
 従来のテスト自動化ツールに加え、AI機能を組み込んだ新世代のツールが登場している。これらは、テストケース生成、自己修復、視覚的検証などの高度な機能を提供する。
-
-### テストフレームワーク選定基準マトリクス
-
-| ツール名 | AI機能 | テスト種別 | 学習曲線 | コスト | 保守性 | 総合評価 | 推奨用途 |
-|----------|--------|------------|----------|--------|--------|----------|----------|
-| **pytest** | 外部統合 | 単体・統合 | 低 | 無料 | 高 | ★★★★☆ | Python開発全般 |
-| **Jest** | 外部統合 | 単体・統合 | 低 | 無料 | 高 | ★★★★☆ | JavaScript/TypeScript |
-| **TestRigor** | 内蔵 | E2E・回帰 | 中 | 高 | 高 | ★★★★☆ | 非技術者も含むチーム |
-| **Playwright** | 部分的 | E2E・視覚 | 中 | 無料 | 中 | ★★★★☆ | モダンWeb開発 |
-| **Cypress** | 外部統合 | E2E | 中 | 無料/有料 | 中 | ★★★☆☆ | フロントエンド重視 |
-| **Selenium** | 外部統合 | E2E | 高 | 無料 | 低 | ★★☆☆☆ | レガシーサポート |
-
-### フレームワーク選定決定木
-
-```mermaid
-graph TD
-    A[テストフレームワーク選定開始] --> B{AI機能が必要?}
-    
-    B -->|Yes| C{予算制約は?}
-    B -->|No| D{テスト種別は?}
-    
-    C -->|高予算| E[TestRigor<br/>Mabl<br/>Applitools]
-    C -->|低予算| F[pytest + AI拡張<br/>Jest + AI プラグイン]
-    
-    D -->|単体テスト| G{言語は?}
-    D -->|E2E テスト| H{技術スキルは?}
-    
-    G -->|Python| I[pytest]
-    G -->|JavaScript| J[Jest]
-    G -->|Java| K[JUnit 5]
-    G -->|その他| L[言語固有フレームワーク]
-    
-    H -->|高| M[Playwright<br/>Cypress]
-    H -->|低| N[TestRigor<br/>低コード/ノーコード]
-    
-    style A fill:#e1f5fe
-    style E fill:#fff3e0
-    style F fill:#f3e5f5
-    style I fill:#e8f5e8
-```
-
-### 選定基準の重み付け評価
-
-```python
-class TestFrameworkSelector:
-    """テストフレームワーク選定支援ツール"""
-    
-    def __init__(self):
-        self.criteria_weights = {
-            'ai_support': 0.25,      # AI機能サポート
-            'learning_curve': 0.20,  # 学習コスト
-            'maintenance': 0.20,     # 保守性
-            'cost': 0.15,           # コスト効率
-            'ecosystem': 0.10,       # エコシステム
-            'performance': 0.10      # パフォーマンス
-        }
-    
-    def evaluate_framework(self, framework_scores: dict) -> float:
-        """フレームワークの総合評価スコア計算"""
-        total_score = sum(
-            framework_scores.get(criterion, 0) * weight
-            for criterion, weight in self.criteria_weights.items()
-        )
-        return round(total_score, 2)
-    
-    def recommend_framework(self, project_requirements: dict) -> str:
-        """プロジェクト要件に基づく推奨フレームワーク"""
-        
-        # プロジェクト特性の分析
-        language = project_requirements.get('language', '')
-        team_size = project_requirements.get('team_size', 1)
-        ai_requirement = project_requirements.get('ai_features', False)
-        budget = project_requirements.get('budget', 'low')
-        
-        # 推奨ロジック
-        if ai_requirement and budget == 'high':
-            return "TestRigor: AI機能豊富、高予算プロジェクト向け"
-        elif language == 'python':
-            return "pytest + AI拡張: Python開発者にとって最適"
-        elif language == 'javascript':
-            return "Jest + AI プラグイン: JS/TS開発に最適化"
-        elif team_size > 10:
-            return "Playwright: 大規模チーム、クロスブラウザ対応"
-        else:
-            return "プロジェクト要件を再評価してください"
-
-# 使用例
-selector = TestFrameworkSelector()
-
-project = {
-    'language': 'python',
-    'team_size': 5,
-    'ai_features': True,
-    'budget': 'medium'
-}
-
-recommendation = selector.recommend_framework(project)
-print(f"推奨フレームワーク: {recommendation}")
-```
-
-### 実行環境別推奨事項
-
-| 環境 | 推奨フレームワーク | 理由 | 注意点 |
-|------|-------------------|------|--------|
-| **ローカル開発** | pytest, Jest | 高速フィードバック | AI機能は外部サービス依存 |
-| **CI/CD** | Playwright, Cypress | 並列実行対応 | リソース消費に注意 |
-| **本番監視** | TestRigor, Mabl | 継続的監視機能 | コスト対効果を慎重に評価 |
-| **レガシー統合** | Selenium Grid | 既存インフラ活用 | 保守コストが高い |
 
 ### テスト自動化ツール比較表
 
@@ -180,16 +76,19 @@ print(f"推奨フレームワーク: {recommendation}")
 ### カテゴリ別の特徴
 
 #### 従来型ツール
+
 - **利点**: 成熟度、柔軟性、コミュニティ
 - **欠点**: メンテナンス負荷、AI機能不足
 - **適用**: 複雑なカスタマイズが必要な場合
 
 #### 現代型ツール
+
 - **利点**: 開発者体験、高速実行、モダンアーキテクチャ
 - **欠点**: エコシステム発展途上、機能制限
 - **適用**: 新規プロジェクト、DevOps文化
 
 #### AI 駆動ツール
+
 - **利点**: 自動化度、保守性、非技術者対応
 - **欠点**: コスト、ブラックボックス、依存性
 - **適用**: ROI重視、人的リソース制約
@@ -214,16 +113,19 @@ print(f"推奨フレームワーク: {recommendation}")
 ### 分析ツール選定の観点
 
 #### 1. 分析の深さと広さ
+
 - **深さ**: 問題の根本原因まで追跡可能か
 - **広さ**: 開発ライフサイクル全体をカバーするか
 - **統合**: 他ツールとのデータ連携は容易か
 
 #### 2. 実用性とROI
+
 - **実装速度**: 導入から価値実現までの期間
 - **学習曲線**: チームが使いこなすまでの時間
 - **コスト対効果**: 投資に見合う改善が期待できるか
 
 #### 3. スケーラビリティ
+
 - **データ量**: 成長に伴うデータ増大への対応
 - **チーム規模**: ユーザー数増加時のライセンス
 - **技術進化**: 新技術への適応能力
@@ -231,16 +133,19 @@ print(f"推奨フレームワーク: {recommendation}")
 ### ツール組み合わせのベストプラクティス
 
 #### 小規模チーム（〜10名）
+
 - **AIコーディング**: GitHub Copilot（標準的）
 - **テスト自動化**: Cypress（Web）/ Jest（単体）
 - **品質分析**: SonarQube Community + Sentry
 
 #### 中規模チーム（10〜50名）
+
 - **AIコーディング**: Copilot + Tabnine（カスタム）
 - **テスト自動化**: Playwright + TestRigor（重要フロー）
 - **品質分析**: SonarQube Developer + Datadog
 
 #### 大規模組織（50名以上）
+
 - **AIコーディング**: CodeWhisperer/Tabnine Enterprise
 - **テスト自動化**: 従来型 + AI 駆動型の組み合わせ
 - **品質分析**: 統合プラットフォーム（Coverity + New Relic等）
