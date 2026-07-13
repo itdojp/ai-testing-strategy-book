@@ -156,7 +156,14 @@
     <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/sidebar.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/code-copy.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/code-copy-lightweight.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    {% if site.mermaid and site.mermaid.enabled %}
+    <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"
+            integrity="sha384-+NGfjU8KzpDLXRHduEqW+ZiJr2rIg+cidUVk7B51R5xK7cHwMKQfrdFwGdrq1Bcz"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+    <script defer src="{{ '/assets/js/mermaid-init.js' | relative_url }}"></script>
+    {% endif %}
 </body>
 </html>

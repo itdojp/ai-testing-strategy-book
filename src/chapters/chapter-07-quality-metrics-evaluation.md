@@ -1,5 +1,9 @@
 # 第7章 品質メトリクスと評価
 
+> **注記**
+> 本章に登場する数値やしきい値は、議論を具体化するための例示である。実運用では、対象システムの特性とリスク許容度に合わせて、計測定義と基準値を定めてほしい。
+> また、本章中のコードブロックは概念説明のための擬似コード（Pseudo code）であり、動作保証はしない。動作する最小サンプルは `examples/` を参照してほしい。
+
 ## はじめに：なぜAI時代に新しい品質メトリクスが必要なのか
 
 「測定できないものは管理できない」という古典的な格言は、AI時代においてより一層の意味を持つ。しかし、何を測定すべきかが根本的に変わりつつある。従来のメトリクスは人間が書いたコードを前提としており、AIが生成するコードの特性を十分に評価しきれない。
@@ -8,21 +12,14 @@
 
 重要なのは、メトリクスは目的ではなく手段であることを忘れないことだ。最終的な目標は、ユーザーに価値を提供する高品質なソフトウェアを、持続可能な方法で開発することである。
 
-### 7.0.1 AI testing / eval 指標の最小分類
-
-AI testing のメトリクスは、通常の品質指標に加えて、評価条件と証跡の再現性を測る必要がある。最低限、次の分類で dashboard と PR evidence を分ける。
-
-| 分類 | 指標例 | 見るべき問い | 注意点 |
-|---|---|---|---|
-| Correctness | eval pass rate、golden dataset pass rate、metamorphic property violation count | 期待される振る舞いを満たしているか | model/runtime profile が変わった結果を同一系列として扱わない |
-| Regression | regression escape rate、flaky eval rate、benchmark drift | 既存品質を壊していないか | golden dataset の更新は改善ではなく評価条件変更として記録する |
-| Review Quality | review completion rate、unresolved review threads、human spot-check coverage | 自動判定の外側を人間が確認したか | comment への返信だけでなく thread resolve まで追跡する |
-| Reproducibility | current-run command coverage、dataset version coverage、seed / trace availability | 後から同じ条件を再現できるか | trace や log に秘密情報が含まれる場合は redaction を先に行う |
-| External Boundary | external-input exception count、redaction defect count、provider-term confirmation age | AI / 外部サービス投入の境界を守れているか | tool や provider の仕様変更時は確認日を更新する |
-
-これらは「数字がよければ安全」という指標ではない。数値は review と改善の入口であり、しきい値の背景、対象 dataset、評価条件、例外承認を一緒に読む必要がある。特に eval pass rate は、model、prompt、SDK、tool、runner、approval policy が揃っている場合にだけ過去値と比較できる。
-
 ## 7.1 AI時代の品質指標
+<a id="figure-quality-evaluation-framework"></a>
+<figure class="reader-figure">
+  <img src="{{ '/assets/images/diagrams/quality-evaluation-framework.svg' | relative_url }}" alt="従来テストとAI支援テストを効率性、精度、速度、カバレッジ、コストで比較し、品質メトリクスとリスク対策を結ぶ評価フレームワーク図">
+  <figcaption>図7-1 品質評価では、従来・AI支援の手法比較を出発点に、メトリクス、リスク対策、継続的改善を一緒に確認する。</figcaption>
+</figure>
+
+**文章による代替**: 従来テストとAI支援テストを効率性、精度、速度、カバレッジ、コストで比較する。品質スコア、複雑度、保守性、可読性をリアルタイムに確認し、ハルシネーションや脆弱性などのリスクへ多段階検証、自動スキャン、人間の最終承認を結び付ける。
 
 ### 7.1.1 従来メトリクスの再評価
 
@@ -2125,3 +2122,25 @@ class AdvancedPDCACycle:
    - 厳密な効果測定と高速PDCAサイクル
 
 これらの手法により、AI時代の複雑な品質状況を適切に把握し、継続的な改善を実現できる。次章では、これらの概念を実際の組織でどのように導入し、変革を推進するかを探求する。
+
+---
+
+## この章のまとめとチェックリスト
+
+### この章のまとめ
+
+- AI主導開発における品質メトリクスの考え方を整理し、従来指標と AI 特有の指標（例: モデル品質、ドリフト、AI起因インシデントなど）の両方を扱った。
+- メトリクスを「測ること自体が目的」にならないよう、改善サイクル（PDCA）と結びつけて設計する重要性を示した。
+- ダッシュボードやレポーティングを通じて、ステークホルダーと品質状況を共有し、合意形成に活用するための視点を提示した。
+
+### この章を読み終えたら確認したいこと
+
+- [ ] 自プロジェクト／組織で既に計測している品質指標と、本章で紹介された指標の対応関係を整理できるか。
+- [ ] 「このプロジェクトで最も重視すべき 3〜5 個の指標は何か」、その理由とともに説明できるか。
+- [ ] メトリクスを改善アクションに結びつけるための具体的な場（例: 定例レビュー、リリース判定会議）を想定できているか。
+
+### 関連する付録・テンプレート
+
+- 品質メトリクスをテスト計画や戦略に組み込むには、[付録A テンプレート集]({{ '/appendices/appendix-a-templates/' | relative_url }}) の品質基準・メトリクス関連のセクションが参考になる。
+- メトリクスの観点抜けを防ぐためには、[付録B チェックリスト]({{ '/appendices/appendix-b-checklists/' | relative_url }}) を基に、プロジェクト固有の指標を追加して整理してほしい。
+- メトリクス収集に関連するツール（監視、ログ分析、データ基盤など）の比較には、[付録C ツール比較表]({{ '/appendices/appendix-c-tool-comparison/' | relative_url }}) を参照するとよい。

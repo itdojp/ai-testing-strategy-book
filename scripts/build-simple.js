@@ -382,13 +382,22 @@ Built with [Book Publishing Template v3.0](https://github.com/itdojp/book-publis
   }
 
   async copyJekyllConfig(publicDir) {
-    const configPath = path.join(process.cwd(), '_config.yml');
+    const sourceConfigPath = path.join(process.cwd(), 'src', '_config.yml');
+    const legacyConfigPath = path.join(process.cwd(), '_config.yml');
     const destPath = path.join(publicDir, '_config.yml');
     
+    let configPath = sourceConfigPath;
+    let configLabel = 'source正本';
     try {
-      await fs.access(configPath);
+      await fs.access(sourceConfigPath);
+    } catch {
+      configPath = legacyConfigPath;
+      configLabel = 'legacy root';
+    }
+
+    try {
       await fs.copyFile(configPath, destPath);
-      this.log('Jekyll設定をコピーしました');
+      this.log(`${configLabel}のJekyll設定をコピーしました`);
     } catch {
       // Generate v3.0 Jekyll config with custom layout
       // Extract repository info from package.json or git if available
@@ -513,6 +522,20 @@ exclude:
   }
 
   async generateNavigationData(srcDir, publicDir) {
+    // A checked-in source navigation file is the canonical contract when present.
+    // It keeps reader order stable across destructive docs/ rebuilds.
+    const canonicalNavigationPath = path.join(srcDir, 'navigation.yml');
+    try {
+      await fs.access(canonicalNavigationPath);
+      const dataDir = path.join(publicDir, '_data');
+      await fs.mkdir(dataDir, { recursive: true });
+      await fs.copyFile(canonicalNavigationPath, path.join(dataDir, 'navigation.yml'));
+      this.log('source正本のナビゲーションデータをコピーしました');
+      return;
+    } catch {
+      // Keep the historical generated navigation fallback for repositories without a source contract.
+    }
+
     const navigationData = {
       introduction: [],
       chapters: [],
@@ -739,7 +762,7 @@ exclude:
     this.log('CSSファイルをコピーしました');
     
     // Copy JavaScript files
-    const jsFiles = ['theme.js', 'sidebar.js', 'code-copy.js'];
+    const jsFiles = ['theme.js', 'sidebar.js', 'code-copy-lightweight.js', 'search.js', 'main.js', 'mermaid-init.js'];
     for (const jsFile of jsFiles) {
       try {
         const jsPath = path.join(templatesDir, 'js', jsFile);

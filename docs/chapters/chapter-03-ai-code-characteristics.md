@@ -5,7 +5,7 @@ title: "第3章 AIコードの特性理解"
 
 # 第3章 AIコードの特性理解
 
-> **注記**  
+> **注記**
 > 本章中のコードブロックは、概念説明のために一部を省略した擬似コード（Pseudo code）を含む。動作する最小サンプルは `examples/` を参照してほしい。
 
 ## はじめに：なぜAIコードの特性を深く理解する必要があるのか
@@ -1380,5 +1380,5 @@ processor.register_strategy("bank_transfer", BankTransferPayment(bank_config))
 
 ### 関連する付録・テンプレート
 
-- AIコード特有のリスクをテスト計画に落とし込む際は、[付録A テンプレート集](../appendices/appendix-a-templates/) のリスク分析セクションを参考に、自プロジェクト向けのリスク一覧を作成するとよい。
-- コードレビューや静的解析の観点を整理するには、[付録B チェックリスト](../appendices/appendix-b-checklists/) に含まれる AI生成コード向けチェックリストを土台としてカスタマイズすることを検討してほしい。
+- AIコード特有のリスクをテスト計画に落とし込む際は、[付録A テンプレート集]({{ '/appendices/appendix-a-templates/' | relative_url }}) のリスク分析セクションを参考に、自プロジェクト向けのリスク一覧を作成するとよい。
+- コードレビューや静的解析の観点を整理するには、[付録B チェックリスト]({{ '/appendices/appendix-b-checklists/' | relative_url }}) に含まれる AI生成コード向けチェックリストを土台としてカスタマイズすることを検討してほしい。

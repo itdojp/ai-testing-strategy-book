@@ -76,6 +76,27 @@ jobs:
           name: layout-risk-report
           path: ${{ runner.temp }}/layout-risk-report.json
           if-no-files-found: ignore
+
+      - name: Build committed docs (GitHub Pages source)
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./${{ steps.scan.outputs.dir }}
+          destination: ./_site-committed
+
+      - name: Smoke check committed Pages assets
+        shell: bash
+        run: |
+          test -s "_site-committed/assets/js/code-copy-lightweight.js"
+          test -s "_site-committed/assets/js/mermaid-init.js"
+
+      - name: Reader UX contract (source/docs/assets/navigation)
+        run: npm run check:reader-ux
+
+      - name: Rebuild public tree from canonical source
+        run: |
+          npm run build
+          npm run check:reader-ux
+
       - name: Build (Jekyll; GitHub Pages compatible)
         uses: actions/jekyll-build-pages@v1
         with:
@@ -193,8 +214,11 @@ jobs:
             "assets/css/main.css",
             "assets/css/syntax-highlighting.css",
             "assets/js/theme.js",
+            "assets/js/sidebar.js",
             "assets/js/search.js",
             "assets/js/code-copy-lightweight.js",
+            "assets/js/main.js",
+            "assets/js/mermaid-init.js",
           ]
           missing_assets = [a for a in required_assets if not (site_dir / a).exists()]
 

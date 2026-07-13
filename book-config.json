@@ -70,9 +70,9 @@
       "quickStart": true,
       "readingGuide": true,
       "checklistPack": true,
-      "troubleshootingFlow": false,
+      "troubleshootingFlow": true,
       "conceptMap": false,
-      "figureIndex": false,
+      "figureIndex": true,
       "legalNotice": true,
       "glossary": true
     }

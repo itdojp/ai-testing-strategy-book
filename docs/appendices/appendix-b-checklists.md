@@ -360,6 +360,40 @@ AI統合システムでは、従来のシステムとは異なるパフォーマ
 4. **効果測定**: 改善効果の定量化
 5. **継続的モニタリング**: 劣化の早期発見
 
+## B.6 PR / CI / eval evidence チェックリスト
+
+AI 由来の変更を merge する前に、次を PR body または evidence bundle で確認する。
+
+### 1. Current-run verification
+
+- [ ] 実行した command が PR body に列挙されている
+- [ ] pass / fail、実行日時、環境差分が記録されている
+- [ ] 失敗した command を省略する場合、理由と follow-up Issue がある
+- [ ] build が生成物を変更する場合、commit 対象か検証専用かを明示している
+
+### 2. Eval / benchmark / golden dataset
+
+- [ ] eval ID または benchmark 名が記録されている
+- [ ] golden dataset version、作成根拠、更新理由が記録されている
+- [ ] model/runtime profile（model、API、SDK、runner、tool set、approval policy、確認日）が記録されている
+- [ ] 過去結果と比較する場合、同一条件か差分評価かを明示している
+- [ ] metamorphic testing を使う場合、保持すべき property と反例を記録している
+
+### 3. Review completion gate
+
+- [ ] GitHub Copilot review または指定 reviewer の review を受けている
+- [ ] review 本文、inline comment、suggestion を全件確認している
+- [ ] 必要な修正、または対応不要理由を PR に返信している
+- [ ] 未解決 review thread が 0 件である
+- [ ] CI が green である
+
+### 4. AI / 外部サービス投入境界
+
+- [ ] issue、PR、log、eval case、trace、golden dataset の機密区分を確認している
+- [ ] 秘密情報、個人情報、未公開仕様、脆弱性詳細を redaction している
+- [ ] provider の retention / training use / logging 条件を確認している
+- [ ] 外部投入が不要な場合、その判断を記録している
+
 ### チェックリスト使用のベストプラクティス
 
 これらのチェックリストは、プロジェクトの特性に応じて調整して使用すべきである。重要なのは：
