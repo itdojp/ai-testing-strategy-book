@@ -24,41 +24,100 @@ graph TD
     subgraph "AI時代のテスト戦略全体像"
         subgraph "従来のテスト戦略"
             TraditionalStrategy["従来戦略の課題"]
-            TraditionalRisk["リスク評価<br/>・機能複雑さ<br/>・ビジネス影響<br/>・技術的負債"]
-            TraditionalApproach["テストアプローチ<br/>・手動テスト<br/>・静的解析<br/>・定型パターン"]
-            TraditionalLimits["限界<br/>・スケールしない<br/>・AI生成コード対応不可<br/>・品質保証の遅延"]
+            TraditionalRisk["`リスク評価
+・機能複雑さ
+・ビジネス影響
+・技術的負債`"]
+            TraditionalApproach["`テストアプローチ
+・手動テスト
+・静的解析
+・定型パターン`"]
+            TraditionalLimits["`限界
+・スケールしない
+・AI生成コード対応不可
+・品質保証の遅延`"]
         end
 
         subgraph "AI時代の新戦略"
             AIStrategy["AI協調型戦略"]
 
             subgraph "多次元リスク評価"
-                BusinessImpact["ビジネス影響度<br/>・売上への影響<br/>・ユーザー体験<br/>・法的リスク"]
-                TechnicalComplexity["技術的複雑度<br/>・アルゴリズム複雑さ<br/>・依存関係<br/>・統合難易度"]
-                AIUnderstanding["AI理解度<br/>・生成精度<br/>・モデル信頼性<br/>・出力一貫性"]
-                DataSensitivity["データ機密性<br/>・個人情報<br/>・企業秘密<br/>・規制対象データ"]
-                ComplianceRisk["規制準拠<br/>・GDPR<br/>・SOX法<br/>・APPI（個人情報保護法）<br/>・ISO/IEC 27001<br/>・業界標準"]
+                BusinessImpact["`ビジネス影響度
+・売上への影響
+・ユーザー体験
+・法的リスク`"]
+                TechnicalComplexity["`技術的複雑度
+・アルゴリズム複雑さ
+・依存関係
+・統合難易度`"]
+                AIUnderstanding["`AI理解度
+・生成精度
+・モデル信頼性
+・出力一貫性`"]
+                DataSensitivity["`データ機密性
+・個人情報
+・企業秘密
+・規制対象データ`"]
+                ComplianceRisk["`規制準拠
+・GDPR
+・SOX法
+・APPI（個人情報保護法）
+・ISO/IEC 27001
+・業界標準`"]
             end
 
             subgraph "AI協調テスト手法"
-                AIGenerated["AI生成テスト<br/>・自動テストケース<br/>・境界値テスト<br/>・パフォーマンステスト"]
-                AIAssisted["AI 支援テスト<br/>・テスト設計<br/>・データ生成<br/>・結果解析"]
-                HumanVerification["人間検証<br/>・AI出力レビュー<br/>・品質判定<br/>・戦略的判断"]
-                ContinuousAdaptation["継続的適応<br/>・フィードバック学習<br/>・戦略調整<br/>・プロセス改善"]
+                AIGenerated["`AI生成テスト
+・自動テストケース
+・境界値テスト
+・パフォーマンステスト`"]
+                AIAssisted["`AI 支援テスト
+・テスト設計
+・データ生成
+・結果解析`"]
+                HumanVerification["`人間検証
+・AI出力レビュー
+・品質判定
+・戦略的判断`"]
+                ContinuousAdaptation["`継続的適応
+・フィードバック学習
+・戦略調整
+・プロセス改善`"]
             end
 
             subgraph "品質ゲートとガバナンス"
-                QualityGates["品質ゲート<br/>・コード品質<br/>・セキュリティ<br/>・性能"]
-                RiskMonitoring["リスク監視<br/>・継続的評価<br/>・メトリクス追跡<br/>・アラート"]
-                GovernanceFramework["ガバナンス<br/>・責任分担<br/>・承認プロセス<br/>・監査証跡"]
+                QualityGates["`品質ゲート
+・コード品質
+・セキュリティ
+・性能`"]
+                RiskMonitoring["`リスク監視
+・継続的評価
+・メトリクス追跡
+・アラート`"]
+                GovernanceFramework["`ガバナンス
+・責任分担
+・承認プロセス
+・監査証跡`"]
             end
         end
 
         subgraph "テスト戦略の実装プロセス"
-            StrategyPlanning["戦略立案<br/>・リスク評価<br/>・優先度付け<br/>・リソース計画"]
-            TestDesign["テスト設計<br/>・AI協調設計<br/>・自動化計画<br/>・検証ポイント"]
-            Execution["実行フェーズ<br/>・AI生成実行<br/>・人間レビュー<br/>・結果検証"]
-            FeedbackLoop["フィードバックループ<br/>・結果分析<br/>・戦略調整<br/>・学習記録"]
+            StrategyPlanning["`戦略立案
+・リスク評価
+・優先度付け
+・リソース計画`"]
+            TestDesign["`テスト設計
+・AI協調設計
+・自動化計画
+・検証ポイント`"]
+            Execution["`実行フェーズ
+・AI生成実行
+・人間レビュー
+・結果検証`"]
+            FeedbackLoop["`フィードバックループ
+・結果分析
+・戦略調整
+・学習記録`"]
 
             StrategyPlanning --> TestDesign
             TestDesign --> Execution
@@ -67,9 +126,18 @@ graph TD
         end
 
         subgraph "成果と効果測定"
-            Efficiency["効率性向上<br/>・テスト自動化率<br/>・実行時間短縮<br/>・コスト削減"]
-            Quality["品質向上<br/>・バグ検出率<br/>・本番障害削減<br/>・顧客満足度"]
-            Innovation["イノベーション<br/>・新手法開発<br/>・プロセス革新<br/>・組織学習"]
+            Efficiency["`効率性向上
+・テスト自動化率
+・実行時間短縮
+・コスト削減`"]
+            Quality["`品質向上
+・バグ検出率
+・本番障害削減
+・顧客満足度`"]
+            Innovation["`イノベーション
+・新手法開発
+・プロセス革新
+・組織学習`"]
         end
 
         TraditionalStrategy --> AIStrategy
