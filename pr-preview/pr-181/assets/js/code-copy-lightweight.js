@@ -29,6 +29,7 @@
 
         // Create copy button
         const copyButton = document.createElement('button');
+        copyButton.type = 'button';
         copyButton.className = 'copy-button';
         copyButton.innerHTML = 'Copy';
         copyButton.setAttribute('aria-label', 'Copy code to clipboard');
