@@ -2,7 +2,11 @@ name: Deploy Preview
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
+  # Unlike pull_request, this event also runs when a conflicted PR is closed.
+  # Cleanup uses only the trusted default-branch workflow and never PR code.
+  pull_request_target:
+    types: [closed]
 
 env:
   # Keep JavaScript actions on the Node 24 runtime while the ecosystem transition is active.
@@ -23,7 +27,7 @@ concurrency:
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
     
     steps:
       - uses: actions/checkout@v6
@@ -106,10 +110,13 @@ jobs:
 
   cleanup-preview:
     runs-on: ubuntu-latest
-    if: github.event.action == 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
 
       - name: Prepare empty preview directory
         env:
