@@ -42,7 +42,7 @@ kramdown:
 
 # GitHub Pages設定
 url: "https://itdojp.github.io"
-baseurl: "/pr-preview/pr-184"
+baseurl: "/ai-testing-strategy-book/pr-preview/pr-184"
 repository: "itdojp/ai-testing-strategy-book"
 
 # Use custom book layout as default
