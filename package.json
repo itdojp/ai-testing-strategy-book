@@ -40,10 +40,6 @@
     "http-server": "^14.1.1",
     "markdownlint-cli": "^0.49.0"
   },
-  "optionalDependencies": {
-    "puppeteer": "^25.3.0",
-    "sharp": "^0.34.5"
-  },
   "keywords": [
     "book",
     "publishing",
