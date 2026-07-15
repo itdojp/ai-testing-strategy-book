@@ -6,6 +6,8 @@
 - 目次（リポジトリ内）: `docs/index.md`
 - シリーズ: https://github.com/itdojp/it-engineer-knowledge-architecture
 
+PR previewは、GitHub Pagesの公開元（`main:/docs`）と配置先が一致せず、読者向けURLの成功を保証できないため廃止しています。公開確認はmainのPages URLを使用してください。
+
 ## こんな方におすすめ
 
 - QAエンジニア・テストエンジニア（AI生成コードの品質保証に課題がある方）
