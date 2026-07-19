@@ -10,6 +10,7 @@ clustering, distribution, and repeated-measure structure.
 from __future__ import annotations
 
 import argparse
+import ast
 import copy
 import json
 import math
@@ -30,6 +31,31 @@ DECISIONS = (
     "inconclusive",
     "practical_improvement",
 )
+MAX_EXACT_FLOAT_INTEGER = 2**53
+SELF_TEST_CASE_IDS = (
+    "no-effect",
+    "small-but-statistically-significant",
+    "threshold-crossing-interval",
+    "large-effect",
+)
+EXPECTED_DECISION_GATE = '''def decide_practical_effect(
+    *,
+    n_baseline,
+    n_candidate,
+    raw_effect,
+    confidence_interval,
+    practical_threshold,
+    minimum_sample_per_group
+):
+    """p-valueをrelease decisionへ使わないeffect-first gate。"""
+    if min(n_baseline, n_candidate) < minimum_sample_per_group:
+        return "insufficient_sample"
+    if raw_effect < practical_threshold:
+        return "no_practical_improvement"
+    if confidence_interval["lower"] < practical_threshold:
+        return "inconclusive"
+    return "practical_improvement"
+'''
 
 
 class ContractViolation(ValueError):
@@ -275,6 +301,11 @@ def validate_contract(document: dict[str, Any]) -> None:
             n = group.get("n")
             if not isinstance(n, int) or isinstance(n, bool) or n < 2:
                 errors.append(f"{prefix} {group_name}.n must be an integer >= 2")
+            elif n > MAX_EXACT_FLOAT_INTEGER:
+                errors.append(
+                    f"{prefix} {group_name}.n must be <= {MAX_EXACT_FLOAT_INTEGER} "
+                    "for exact floating-point evaluation"
+                )
             for field in ("mean", "sd"):
                 if not _finite_number(group.get(field)):
                     errors.append(f"{prefix} {group_name}.{field} must be finite")
@@ -484,6 +515,32 @@ def _published_payload(path: Path) -> str:
     return text[end + len("\n---\n") :].lstrip("\n")
 
 
+def _validate_canonical_decision_gate(markdown: str) -> None:
+    functions: list[ast.FunctionDef | ast.AsyncFunctionDef] = []
+    for block in re.findall(r"```python\s*\n(.*?)\n```", markdown, flags=re.DOTALL):
+        try:
+            tree = ast.parse(block)
+        except SyntaxError:
+            continue
+        functions.extend(
+            node
+            for node in tree.body
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            and node.name == "decide_practical_effect"
+        )
+    if len(functions) != 1:
+        raise ContractViolation(
+            "Chapter 7 must contain exactly one parseable decide_practical_effect gate"
+        )
+    expected = ast.parse(EXPECTED_DECISION_GATE).body[0]
+    if ast.dump(functions[0], include_attributes=False) != ast.dump(
+        expected, include_attributes=False
+    ):
+        raise ContractViolation(
+            "Chapter 7 canonical effect-size-first decision gate drifted"
+        )
+
+
 def validate_repository_contract() -> None:
     """Keep the canonical manuscript, published mirror, and p-value gate aligned."""
 
@@ -519,6 +576,7 @@ def validate_repository_contract() -> None:
     missing = [marker for marker in required_chapter_markers if marker not in chapter]
     if missing:
         raise ContractViolation("Chapter 7 missing marker(s): " + ", ".join(missing))
+    _validate_canonical_decision_gate(chapter)
     forbidden = re.compile(r"p_value\s*(?:<=|>=|<|>)")
     if forbidden.search(chapter):
         raise ContractViolation("Chapter 7 contains a p-value-only decision gate")
@@ -542,11 +600,62 @@ def _expect_contract_failure(
     raise AssertionError(f"{name}: invalid contract was accepted")
 
 
+def _validate_self_test_fixture(document: dict[str, Any]) -> None:
+    observed_ids = tuple(case["id"] for case in document["cases"])
+    if observed_ids != SELF_TEST_CASE_IDS:
+        raise ContractViolation(
+            "--self-test requires the bundled synthetic case IDs in canonical order: "
+            + ", ".join(SELF_TEST_CASE_IDS)
+        )
+
+
 def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
     validate_repository_contract()
     report = run_contract(document)
+    _validate_self_test_fixture(document)
     results = {result["id"]: result for result in report["results"]}
     cases: list[dict[str, str]] = []
+
+    renamed_fixture = copy.deepcopy(document)
+    renamed_fixture["cases"][0]["id"] = "custom-no-effect"
+    try:
+        _validate_self_test_fixture(renamed_fixture)
+    except ContractViolation as error:
+        if "bundled synthetic case IDs" not in str(error):
+            raise AssertionError(
+                "custom fixture failed without an actionable --self-test reason"
+            ) from error
+    else:
+        raise AssertionError("--self-test accepted an incompatible custom fixture")
+    cases.append(
+        {
+            "name": "self_test_fixture_shape_is_explicit",
+            "status": "pass",
+            "observed": "fail_closed",
+        }
+    )
+
+    unsafe_gate = EXPECTED_DECISION_GATE.replace(
+        '    return "practical_improvement"',
+        '    if p < 0.05:\n        return "practical_improvement"\n'
+        '    return "practical_improvement"',
+    )
+    try:
+        _validate_canonical_decision_gate(f"```python\n{unsafe_gate}```")
+    except ContractViolation as error:
+        if "decision gate drifted" not in str(error):
+            raise AssertionError(
+                "unsafe p-value gate failed without an actionable reason"
+            ) from error
+    else:
+        raise AssertionError("canonical decision gate accepted a p-value-only branch")
+    cases.append(
+        {
+            "name": "canonical_gate_rejects_p_value_branch",
+            "status": "pass",
+            "observed": "fail_closed",
+        }
+    )
 
     small = results["small-but-statistically-significant"]
     if not small["p_value_auxiliary"] < document["policy"]["alpha"]:
@@ -724,6 +833,16 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
             "standard_error_representation_contract",
             unrepresentable_error,
             "standard error must be positive and representable",
+        )
+    )
+
+    unrepresentable_count = copy.deepcopy(document)
+    unrepresentable_count["cases"][0]["baseline"]["n"] = 10**1000
+    cases.append(
+        _expect_contract_failure(
+            "sample_count_must_be_exactly_representable",
+            unrepresentable_count,
+            "for exact floating-point evaluation",
         )
     )
 

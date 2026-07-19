@@ -22,6 +22,8 @@ python3 examples/statistical-decision/checker.py
 python3 examples/statistical-decision/checker.py --self-test
 ```
 
+`--dataset PATH`は同じschemaのcustom contractを通常実行できます。`--self-test`は下記4 scenarioのbranchと負例を検査するfixture専用modeであり、canonicalなcase IDと順序を必要とします。互換性のないcustom datasetとの組み合わせはtracebackではなくcontract errorとしてfail-closedにします。
+
 positive fixtureは次を証明します。
 
 - no-effect: `no_practical_improvement`
@@ -33,6 +35,6 @@ positive fixtureは次を証明します。
 
 repeated looksは、positive fixtureではfixed horizonの1回に限定し、self-testで「fixed horizonのまま2回見る」policyと未実装の`alpha_spending` / `always_valid`指定を拒否します。sequential計算は実装していません。途中判定が必要な実務分析では、検証済み統計libraryと事前reviewを使用します。
 
-`--self-test`は、p-value単独gate、analysis unit欠落、practical threshold欠落、multiple-testing計画欠落、不正なrepeated look、観測後のthreshold固定、minimum sample不足をfail-closedにします。NISTのStudent-t表にある7つのcritical valueと計算結果を小数第3位で照合し、Chapter 7 / Appendix Bのcanonical `src`と公開`docs`の同期、p-value単独判定の再混入も検査します。
+`--self-test`は、canonical decision code blockへのp-value branch再混入、analysis unit欠落、practical threshold欠落、multiple-testing計画欠落、不正なrepeated look、観測後のthreshold固定、minimum sample不足、表現不能な数値入力をfail-closedにします。NISTのStudent-t表にある7つのcritical valueと計算結果を小数第3位で照合し、Chapter 7 / Appendix Bのcanonical `src`と公開`docs`の同期も検査します。
 
 decisionはsample gate、raw effect、confidence interval、practical thresholdだけで決まり、p-valueを参照しません。p-valueはdiagnosticと監査用の補助出力です。
