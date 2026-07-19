@@ -330,30 +330,52 @@ def evaluate_case(case: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any
     effect = _signed_improvement(
         baseline["mean"], candidate["mean"], policy["direction"]
     )
+    if not math.isfinite(effect):
+        raise ContractViolation(f"case {case['id']!r} raw effect must be finite")
 
     pooled_degrees = n_baseline + n_candidate - 2
-    pooled_variance = (
-        (n_baseline - 1) * baseline["sd"] ** 2
-        + (n_candidate - 1) * candidate["sd"] ** 2
-    ) / pooled_degrees
-    pooled_sd = math.sqrt(pooled_variance)
+    pooled_sd = math.hypot(
+        baseline["sd"] * math.sqrt((n_baseline - 1) / pooled_degrees),
+        candidate["sd"] * math.sqrt((n_candidate - 1) / pooled_degrees),
+    )
+    if pooled_sd <= 0.0 or not math.isfinite(pooled_sd):
+        raise ContractViolation(
+            f"case {case['id']!r} pooled standard deviation must be positive and representable"
+        )
     cohen_d = effect / pooled_sd
     correction = 1.0 - 3.0 / (4.0 * pooled_degrees - 1.0)
     hedges_g = correction * cohen_d
+    if not math.isfinite(hedges_g):
+        raise ContractViolation(f"case {case['id']!r} Hedges' g must be finite")
 
-    baseline_variance_term = baseline["sd"] ** 2 / n_baseline
-    candidate_variance_term = candidate["sd"] ** 2 / n_candidate
-    standard_error = math.sqrt(baseline_variance_term + candidate_variance_term)
-    welch_df = (baseline_variance_term + candidate_variance_term) ** 2 / (
-        baseline_variance_term**2 / (n_baseline - 1)
-        + candidate_variance_term**2 / (n_candidate - 1)
+    baseline_error = baseline["sd"] / math.sqrt(n_baseline)
+    candidate_error = candidate["sd"] / math.sqrt(n_candidate)
+    standard_error = math.hypot(baseline_error, candidate_error)
+    if standard_error <= 0.0 or not math.isfinite(standard_error):
+        raise ContractViolation(
+            f"case {case['id']!r} standard error must be positive and representable"
+        )
+    baseline_weight = baseline_error / standard_error
+    candidate_weight = candidate_error / standard_error
+    welch_denominator = (
+        baseline_weight**4 / (n_baseline - 1)
+        + candidate_weight**4 / (n_candidate - 1)
     )
+    if welch_denominator <= 0.0 or not math.isfinite(welch_denominator):
+        raise ContractViolation(
+            f"case {case['id']!r} Welch denominator must be positive and representable"
+        )
+    welch_df = 1.0 / welch_denominator
     t_statistic = effect / standard_error
     p_value = _student_t_two_sided_p(t_statistic, welch_df)
     critical = _student_t_critical(policy["confidence_level"], welch_df)
     margin = critical * standard_error
     lower = effect - margin
     upper = effect + margin
+    if not all(math.isfinite(value) for value in (margin, lower, upper)):
+        raise ContractViolation(
+            f"case {case['id']!r} confidence interval must be finite"
+        )
 
     minimum_sample = policy["minimum_sample_per_group"]
     threshold = policy["practical_threshold"]
@@ -670,6 +692,23 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
             "status": "pass",
             "observed": "nan_rejected_infinity_limited",
         }
+    )
+
+    stable_small_sd = copy.deepcopy(document)
+    stable_small_case = stable_small_sd["cases"][0]
+    stable_small_case["baseline"]["sd"] = 1.0e-200
+    stable_small_case["candidate"]["sd"] = 1.0e-200
+    run_contract(stable_small_sd)
+    unrepresentable_error = copy.deepcopy(document)
+    unrepresentable_case = unrepresentable_error["cases"][0]
+    unrepresentable_case["baseline"]["sd"] = 5.0e-324
+    unrepresentable_case["candidate"]["sd"] = 5.0e-324
+    cases.append(
+        _expect_contract_failure(
+            "standard_error_representation_contract",
+            unrepresentable_error,
+            "standard error must be positive and representable",
+        )
     )
 
     insufficient = copy.deepcopy(document)
