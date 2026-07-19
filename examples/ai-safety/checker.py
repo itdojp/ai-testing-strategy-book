@@ -179,6 +179,8 @@ def validate_dataset(dataset: dict[str, Any]) -> None:
         if _non_empty_string(row.get("approved_at")) and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", row["approved_at"]):
             errors.append(f"{prefix} approved_at must use YYYY-MM-DD")
 
+        if not _non_empty_string(row.get("prompt")):
+            errors.append(f"{prefix} missing prompt")
         if not _non_empty_string(row.get("input_name")) or not _non_empty_string(row.get("input_content")):
             errors.append(f"{prefix} missing hostile input content")
 
@@ -365,6 +367,10 @@ def run_self_tests(dataset: dict[str, Any]) -> dict[str, Any]:
     dangerous_row["approval"] = {"required": False, "present": False}
     dangerous_row["expected"] = {"decision": ALLOW, "side_effects": False, "reason": "unsafe_bypass"}
     cases.append(_expect_contract_failure("dangerous_side_effect_requires_approval", approval_case, "must require approval"))
+
+    prompt_case = copy.deepcopy(dataset)
+    prompt_case["rows"][0].pop("prompt", None)
+    cases.append(_expect_contract_failure("missing_prompt", prompt_case, "missing prompt"))
 
     return {"status": "pass", "self_tests": cases, "in_memory_only": True}
 

@@ -15,8 +15,8 @@ Issue #193 の最小実行可能な参照contractです。`hostile-inputs.json` 
 依存パッケージはありません。Python 3.11 以降でリポジトリルートから実行します。
 
 ```bash
-python examples/ai-safety/checker.py
-python examples/ai-safety/checker.py --self-test
+python3 examples/ai-safety/checker.py
+python3 examples/ai-safety/checker.py --self-test
 ```
 
 通常実行はfixtureの期待値との一致を確認します。`--self-test` は次の失敗閉鎖（fail-closed）条件をファイル変更なし・メモリ内で確認します。
@@ -29,6 +29,7 @@ python examples/ai-safety/checker.py --self-test
 - `sealed_holdout`本文を公開fixtureへ混入させない
 - hostile contentを`benign_control`へ付け替えてgateを迂回させない
 - dangerous side effectの`approval.required`を外して`allow`へ迂回させない
+- test caseの`prompt`欠落を受け入れない
 
 公開CIが証明するのは、checked-in row間の分離とholdout本文の非収録までです。実際のsealed holdoutとの重複照合は、行やhashを公開しない分離された評価管理面で実施します。この参照checkerは汎用prompt-injection detectorではありません。実システムでは`安全性判定`のadapterを対象workflowの観測結果へ置換し、同じdataset/provenance/hard-gate契約を適用してください。
 
@@ -38,7 +39,7 @@ python examples/ai-safety/checker.py --self-test
 
 ```text
 positive: status=pass, checked_rows=5, decisions=hard_block/reroute/confirm/allow, side_effects=[]
-self-test: status=pass, cases=9, in_memory_only=true
+self-test: status=pass, cases=10, in_memory_only=true
 ```
 
 checkerは入力内容を実行せず分類のみを行うため、fixtureのhostile contentがコマンドやファイル操作になることはありません。

@@ -19,8 +19,8 @@ npm run test:examples
 AI safety fixture だけを確認する場合:
 
 ```bash
-python examples/ai-safety/checker.py
-python examples/ai-safety/checker.py --self-test
+python3 examples/ai-safety/checker.py
+python3 examples/ai-safety/checker.py --self-test
 ```
 
 ## 個別に実行
