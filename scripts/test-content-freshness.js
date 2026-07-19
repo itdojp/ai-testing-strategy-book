@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 const test = require('node:test');
-const { currentDateInTokyo, fetchSafeUrl, validateRepository } = require('./check-content-freshness');
+const { currentDateInTokyo, fetchSafeUrl, parseArgs, validateRepository } = require('./check-content-freshness');
 
 const root = path.resolve(__dirname, '..');
 const tempParent = path.join(root, '.codex-local', 'tmp');
@@ -64,6 +64,13 @@ test('rejects source/docs marker drift', () => withFixture((fixture) => {
   assert(errors.some((error) => error.includes('must contain marker exactly once')), errors.join('\n'));
 }));
 
+test('rejects an unregistered volatile assertion added only to published docs', () => withFixture((fixture) => {
+  const target = path.join(fixture, 'docs/appendices/appendix-c-tool-comparison.md');
+  fs.appendFileSync(target, '\n最新モデルを公開時の標準として採用する。\n');
+  const errors = validateRepository(fixture, { asOf: '2026-07-19' });
+  assert(errors.some((error) => error.includes('tracked source/docs reader content differs')), errors.join('\n'));
+}));
+
 test('rejects an unregistered volatile assertion', () => withFixture((fixture) => {
   const target = path.join(fixture, 'src/chapters/chapter-01-ai-driven-development.md');
   fs.appendFileSync(target, '\n## Regression fixture\n最新モデルを現在の標準として採用する。\n');
@@ -78,6 +85,15 @@ test('rejects repository paths that escape the root', () => withFixture((fixture
   fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
   const errors = validateRepository(fixture, { asOf: '2026-07-19' });
   assert(errors.some((error) => error.includes('escapes the repository root')), errors.join('\n'));
+}));
+
+test('rejects a missing tracked path instead of skipping it', () => withFixture((fixture) => {
+  const configPath = path.join(fixture, 'content-freshness.json');
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  config.policy.trackedPaths.push('src/appendices/missing.md');
+  fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
+  const errors = validateRepository(fixture, { asOf: '2026-07-19' });
+  assert(errors.some((error) => error.includes('policy.trackedPaths entry is missing')), errors.join('\n'));
 }));
 
 test('manifest cannot extend the code-owned remote host allowlist', () => withFixture((fixture) => {
@@ -105,4 +121,9 @@ test('remote checker rejects a redirect to an unallowlisted host before requesti
     /host is not allowlisted/
   );
   assert.deepEqual(requested, ['https://docs.github.com/copilot']);
+});
+
+test('CLI value flags fail closed when their value is missing', () => {
+  assert.throws(() => parseArgs(['--root']), /--root requires a value/);
+  assert.throws(() => parseArgs(['--as-of', '--check-remote']), /--as-of requires a value/);
 });

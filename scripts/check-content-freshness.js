@@ -99,6 +99,10 @@ function stripNonProse(line) {
     .replace(/https?:\/\/\S+/g, '');
 }
 
+function stripFrontMatter(content) {
+  return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n\r?\n/, '');
+}
+
 function scanVolatileClaims(root, config, errors) {
   const patterns = (config.policy.volatilePatterns || []).map((pattern) => {
     try {
@@ -119,7 +123,10 @@ function scanVolatileClaims(root, config, errors) {
   for (const relative of config.policy.trackedPaths || []) {
     const full = resolveRepositoryPath(root, relative, 'policy.trackedPaths entry', errors);
     if (!full) continue;
-    if (!fs.existsSync(full)) continue;
+    if (!fs.existsSync(full)) {
+      errors.push(`policy.trackedPaths entry is missing: ${relative}`);
+      continue;
+    }
     const lines = fs.readFileSync(full, 'utf8').split(/\r?\n/);
     let inFence = false;
     for (let index = 0; index < lines.length; index += 1) {
@@ -139,6 +146,30 @@ function scanVolatileClaims(root, config, errors) {
         errors.push(`${relative}:${index + 1} volatile expression (${matched.join(', ')}) lacks a nearby registered claim marker`);
       }
     }
+  }
+}
+
+function validateTrackedParity(root, config, errors) {
+  for (const sourcePath of config.policy.trackedPaths || []) {
+    const docsPath = docsPathFor(sourcePath);
+    if (!docsPath) {
+      errors.push(`policy.trackedPaths entry must be under src/: ${sourcePath}`);
+      continue;
+    }
+    const sourceFile = resolveRepositoryPath(root, sourcePath, 'tracked source path', errors);
+    const docsFile = resolveRepositoryPath(root, docsPath, 'tracked docs path', errors);
+    if (!sourceFile || !docsFile) continue;
+    if (!fs.existsSync(sourceFile)) {
+      errors.push(`tracked source file is missing: ${sourcePath}`);
+      continue;
+    }
+    if (!fs.existsSync(docsFile)) {
+      errors.push(`tracked published file is missing: ${docsPath}`);
+      continue;
+    }
+    const source = fs.readFileSync(sourceFile, 'utf8');
+    const published = stripFrontMatter(fs.readFileSync(docsFile, 'utf8'));
+    if (source !== published) errors.push(`tracked source/docs reader content differs: ${sourcePath} != ${docsPath}`);
   }
 }
 
@@ -213,6 +244,7 @@ function validateRepository(root, options = {}) {
     for (const source of claim.primarySources || []) validatePrimarySourceUrl(source, label, errors);
   }
 
+  validateTrackedParity(root, config, errors);
   scanVolatileClaims(root, config, errors);
   return errors;
 }
@@ -267,10 +299,20 @@ async function checkRemoteSources(root, options = {}) {
 
 function parseArgs(argv) {
   const options = { root: process.cwd(), checkRemote: false };
+  const valueAfter = (index, flag) => {
+    const value = argv[index + 1];
+    if (!value || value.startsWith('--')) throw new Error(`${flag} requires a value`);
+    return value;
+  };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
-    if (arg === '--root') options.root = path.resolve(argv[++index]);
-    else if (arg === '--as-of') options.asOf = argv[++index];
+    if (arg === '--root') {
+      options.root = path.resolve(valueAfter(index, arg));
+      index += 1;
+    } else if (arg === '--as-of') {
+      options.asOf = valueAfter(index, arg);
+      index += 1;
+    }
     else if (arg === '--check-remote') options.checkRemote = true;
     else if (arg === '--help') options.help = true;
     else throw new Error(`unknown argument: ${arg}`);
@@ -309,6 +351,7 @@ module.exports = {
   checkRemoteSources,
   currentDateInTokyo,
   fetchSafeUrl,
+  parseArgs,
   resolveRepositoryPath,
   stripNonProse,
   validateRepository
