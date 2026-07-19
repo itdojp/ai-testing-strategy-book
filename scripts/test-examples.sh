@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+echo "[examples/ai-safety] positive execution + fail-closed self-test"
+python examples/ai-safety/checker.py
+python examples/ai-safety/checker.py --self-test
+
 echo "[examples/python] install + test"
 if [ -n "${VIRTUAL_ENV-}" ] || [ -n "${CI-}" ]; then
   python -m pip install -r examples/python/requirements.txt
