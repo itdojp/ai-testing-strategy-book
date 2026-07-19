@@ -31,7 +31,7 @@ DECISIONS = (
     "inconclusive",
     "practical_improvement",
 )
-MAX_EXACT_FLOAT_INTEGER = 2**53
+MAX_SAMPLE_PER_GROUP = 1_000_000_000
 SELF_TEST_CASE_IDS = (
     "no-effect",
     "small-but-statistically-significant",
@@ -301,10 +301,10 @@ def validate_contract(document: dict[str, Any]) -> None:
             n = group.get("n")
             if not isinstance(n, int) or isinstance(n, bool) or n < 2:
                 errors.append(f"{prefix} {group_name}.n must be an integer >= 2")
-            elif n > MAX_EXACT_FLOAT_INTEGER:
+            elif n > MAX_SAMPLE_PER_GROUP:
                 errors.append(
-                    f"{prefix} {group_name}.n must be <= {MAX_EXACT_FLOAT_INTEGER} "
-                    "for exact floating-point evaluation"
+                    f"{prefix} {group_name}.n must be <= {MAX_SAMPLE_PER_GROUP} "
+                    "for reliable Student-t evaluation"
                 )
             for field in ("mean", "sd"):
                 if not _finite_number(group.get(field)):
@@ -836,13 +836,18 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
         )
     )
 
-    unrepresentable_count = copy.deepcopy(document)
-    unrepresentable_count["cases"][0]["baseline"]["n"] = 10**1000
+    out_of_range_count = copy.deepcopy(document)
+    out_of_range_count["cases"][0]["baseline"]["n"] = 10**15
+    maximum_df = float(2 * MAX_SAMPLE_PER_GROUP - 2)
+    maximum_critical = _student_t_critical(0.95, maximum_df)
+    normal_limit = NormalDist().inv_cdf(0.975)
+    if not math.isclose(maximum_critical, normal_limit, rel_tol=0.0, abs_tol=1.0e-5):
+        raise AssertionError("maximum supported sample count has an unstable t critical")
     cases.append(
         _expect_contract_failure(
-            "sample_count_must_be_exactly_representable",
-            unrepresentable_count,
-            "for exact floating-point evaluation",
+            "sample_count_numeric_range_contract",
+            out_of_range_count,
+            "for reliable Student-t evaluation",
         )
     )
 
