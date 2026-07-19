@@ -22,6 +22,10 @@ jobs:
         run: |
           python3 examples/ai-safety/checker.py
           python3 examples/ai-safety/checker.py --self-test
+      - name: Run statistical decision fixture
+        run: |
+          python3 examples/statistical-decision/checker.py
+          python3 examples/statistical-decision/checker.py --self-test
       - name: Install dependencies
         run: python3 -m pip install -r examples/python/requirements.txt
       - name: Run tests

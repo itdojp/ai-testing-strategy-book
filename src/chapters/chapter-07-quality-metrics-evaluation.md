@@ -1679,12 +1679,30 @@ class ComprehensiveDataCollection:
                 outcome
             )
             
+            policy = self.effect_policies[outcome]
+            decision = decide_practical_effect(
+                n_baseline=ate.n_baseline,
+                n_candidate=ate.n_candidate,
+                raw_effect=ate.effect,
+                confidence_interval=ate.confidence_interval,
+                practical_threshold=policy.practical_threshold,
+                minimum_sample_per_group=policy.minimum_sample_per_group
+            )
+
             insights.add_effect(
                 treatment=treatment,
                 outcome=outcome,
-                effect_size=ate.effect,
+                analysis_unit=policy.analysis_unit,
+                sample_count={
+                    "baseline": ate.n_baseline,
+                    "candidate": ate.n_candidate
+                },
+                raw_effect=ate.effect,
+                standardized_effect=ate.hedges_g,
                 confidence_interval=ate.confidence_interval,
-                significance=ate.p_value < 0.05
+                practical_threshold=policy.practical_threshold,
+                p_value_auxiliary=ate.p_value,
+                decision=decision
             )
         
         # 媒介分析
@@ -1909,7 +1927,77 @@ class ImprovementPlanningFramework:
 
 **継続的改善の実現**
 
-PDCAサイクルは古典的な改善手法だが、AI時代においては、このサイクルをより高速に、よりデータ駆動で回す必要がある。効果測定は推測ではなく、厳密なデータ分析に基づくべきである。
+PDCAサイクルは古典的な改善手法だが、AI時代においては、このサイクルをより高速に、よりデータ駆動で回す必要がある。効果測定は推測ではなく、厳密なデータ分析に基づくべきである。ただし、`p < 0.05`だけを改善の合格条件にしてはならない。大きなsampleでは実務上無視できる差でも小さなp-valueになり、小さなsampleでは実務上重要な差でも区間が広くなるためである。
+
+#### Effect-size-first decision contract
+
+改善施策を開始する前に、次のpolicyをversion管理する。
+
+| 項目 | 事前に固定する内容 | release reviewでの主要出力 |
+|---|---|---|
+| analysis unit / design | pull request、repository-week、user session等の独立単位と、paired / independent / cluster構造 | unit名、group別sample count、欠測・除外数 |
+| minimum sample | 最小検出効果、baseline variance、power、alpha、欠測率から設計した下限 | 実測数と下限の比較 |
+| effect | 改善方向とraw scale、必要に応じてHedges' g等のstandardized scale | raw effectとstandardized effect |
+| uncertainty | designに適したconfidence intervalとconfidence level | effectの区間推定 |
+| practical threshold | SLO、費用、risk appetite等から決めたdomain-specific最小改善幅 | thresholdとeffect / intervalの位置関係 |
+| multiplicity | 同じrelease判断で見るmetric familyとHolm等の補正、途中判定回数と停止規則 | family、方法、look回数 |
+| p-value | 使用する場合も補助指標に限定 | `p_value_auxiliary`。単独passは禁止 |
+
+minimum sampleに普遍的な固定値はない。たとえば「各group 30」は特定fixtureのpolicyにはできるが、一般推奨値ではない。analysis unitの依存関係を無視して、同じrepository内の多数のeventを独立sampleとして数えてもならない。repositoryごとのcluster、同一対象のbefore/after pairing、時系列の自己相関がある場合は、それを扱える設計へ変更する。
+
+判定順は次のように固定する。
+
+1. group別sample countが事前下限未満なら`insufficient_sample`。
+2. 改善方向へ符号をそろえたraw effectがpractical threshold未満なら`no_practical_improvement`。
+3. effectがthreshold以上でもconfidence intervalの改善側下限がthreshold未満なら`inconclusive`。
+4. sample gateを満たし、confidence intervalの下限もthreshold以上なら`practical_improvement`。security、reliability等のguardrail regressionは別のhard gateで判定する。
+
+```python
+def decide_practical_effect(
+    *,
+    n_baseline,
+    n_candidate,
+    raw_effect,
+    confidence_interval,
+    practical_threshold,
+    minimum_sample_per_group
+):
+    """p-valueをrelease decisionへ使わないeffect-first gate。"""
+    if min(n_baseline, n_candidate) < minimum_sample_per_group:
+        return "insufficient_sample"
+    if raw_effect < practical_threshold:
+        return "no_practical_improvement"
+    if confidence_interval.lower < practical_threshold:
+        return "inconclusive"
+    return "practical_improvement"
+```
+
+#### p-value、multiple testing、repeated looks
+
+p-valueは、指定したnull modelの下で観測値以上に極端な結果を得る確率を表す補助診断であり、効果の大きさ、重要性、仮説が正しい確率を表さない。複数metricを同時に試す場合はmetric familyを先に定め、Holm / Bonferroni等でfamily-wise errorを管理する。dashboardを毎日見て「p-valueが閾値を下回った日に停止する」と、事前に固定した1回の解析よりfalse positiveが増える。途中判定を行うなら、最大look回数、alpha-spendingまたはalways-validな手法、停止規則を開始前に固定する。
+
+用語の最小定義は次のとおりである。
+
+- **Welch comparison**: 独立2群の分散が等しいと仮定せず、平均差のstandard errorと自由度を推定する方法。
+- **Hedges' g**: 平均差をpooled standard deviationで標準化し、小sample biasを補正したeffect size。
+- **Holm method**: 小さいp-valueから順に係数を変えるstep-down型のfamily-wise error管理。
+- **alpha-spending**: 複数の予定lookへ全体alphaを配分するsequential designの一群。
+- **always-valid method**: 仮定したsequential designの下で、予定外の時点でも妥当性を保つよう構成した推論手法。通常の固定horizon p-valueを読み替えるだけでは実現できない。
+
+#### 実行可能な参照contract
+
+実行可能なsummary-statistics参照contractは`examples/statistical-decision/`に置く。no-effect、small-but-statistically-significant、threshold-crossing interval、large-effectのsynthetic caseを使い、sample count、raw effect、Hedges' g、95% confidence interval、practical threshold、補助p-value、decisionをCIで確認する。別のworked exampleで、3 metricへHolm法を適用したadjusted p-valueも確認するが、adjusted p-valueもrelease decisionには使用しない。
+
+repeated looksについて、この参照contractが実行するのはfixed horizonの1回だけである。2回以上のlookや`alpha_spending` / `always_valid`指定は、数値実装がない状態ではfail-closedにする。途中判定を採用する実務分析では、検証済み統計library、spending / stopping rule、独立reviewを別途必要とする。summary statisticsだけではraw dataの分布、外れ値、欠測、cluster、pairingを監査できないため、実運用ではdesignに適した手法を使う。
+
+#### 一次情報（2026-07-19確認）
+
+- [NIST/SEMATECH: Sample sizes required](https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm): alpha、beta、検出したい差、ばらつきを用いたsample-size設計。
+- [NIST/SEMATECH: What are confidence intervals?](https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm): 点推定の不確実性を区間で扱う目的。
+- [NIST/SEMATECH: Critical Values of the Student's t Distribution](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm): 両側t区間・検定で使うcritical value。
+- [NIST/SEMATECH: How can we make multiple comparisons?](https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm): 複数比較で全体の信頼水準を管理する手続き。
+- [American Statistical Association: Statement on Statistical Significance and P-Values](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf): p-valueは効果量や重要性を測らず、閾値単独で意思決定しない原則。
+- [FDA: Use of Data Monitoring Committees in Clinical Trials](https://www.fda.gov/media/176107/download): 臨床試験領域におけるrepeated interim analysisとType I error管理の一次資料。software experimentへは誤検出管理の原則だけを適用する。
 
 **高度なPDCAサイクルの実装**
 
@@ -2001,21 +2089,41 @@ class AdvancedPDCACycle:
             period=measurement_period
         )
         
-        # 統計的有意性の検証
+        # 事前登録したeffect-size-first policyで判定する
         for metric, value in direct_effects.items():
-            significance_test = self._test_statistical_significance(
+            policy = initiative.effect_policies[metric]
+            effect = self._estimate_effect(
                 metric=metric,
                 observed_value=value,
                 baseline=initiative.baseline_values[metric],
-                sample_size=self._get_sample_size(metric, measurement_period)
+                analysis_unit=policy.analysis_unit,
+                design=policy.design,
+                period=measurement_period
             )
-            
+            decision = decide_practical_effect(
+                n_baseline=effect.n_baseline,
+                n_candidate=effect.n_candidate,
+                raw_effect=effect.raw_effect,
+                confidence_interval=effect.confidence_interval,
+                practical_threshold=policy.practical_threshold,
+                minimum_sample_per_group=policy.minimum_sample_per_group
+            )
+
             measurement.add_direct_effect(
                 metric=metric,
-                effect_size=value - initiative.baseline_values[metric],
-                confidence_interval=significance_test.confidence_interval,
-                p_value=significance_test.p_value,
-                is_significant=significance_test.p_value < 0.05
+                analysis_unit=policy.analysis_unit,
+                sample_count={
+                    "baseline": effect.n_baseline,
+                    "candidate": effect.n_candidate
+                },
+                raw_effect=effect.raw_effect,
+                standardized_effect=effect.hedges_g,
+                confidence_interval=effect.confidence_interval,
+                practical_threshold=policy.practical_threshold,
+                p_value_auxiliary=effect.p_value,
+                multiple_testing_method=policy.multiple_testing_method,
+                repeated_looks_method=policy.repeated_looks_method,
+                decision=decision
             )
         
         # 間接的な効果測定
@@ -2131,12 +2239,14 @@ class AdvancedPDCACycle:
 
 - AI主導開発における品質メトリクスの考え方を整理し、従来指標と AI 特有の指標（例: モデル品質、ドリフト、AI起因インシデントなど）の両方を扱った。
 - メトリクスを「測ること自体が目的」にならないよう、改善サイクル（PDCA）と結びつけて設計する重要性を示した。
+- 改善効果はanalysis unit、minimum sample、effect size、confidence interval、practical thresholdを事前定義し、p-valueを単独gateにしないdecision contractで評価する。
 - ダッシュボードやレポーティングを通じて、ステークホルダーと品質状況を共有し、合意形成に活用するための視点を提示した。
 
 ### この章を読み終えたら確認したいこと
 
 - [ ] 自プロジェクト／組織で既に計測している品質指標と、本章で紹介された指標の対応関係を整理できるか。
 - [ ] 「このプロジェクトで最も重視すべき 3〜5 個の指標は何か」、その理由とともに説明できるか。
+- [ ] 改善施策のanalysis unit、minimum sample、practical threshold、multiple-testing / repeated-look policyを観測前に固定できているか。
 - [ ] メトリクスを改善アクションに結びつけるための具体的な場（例: 定例レビュー、リリース判定会議）を想定できているか。
 
 ### 関連する付録・テンプレート

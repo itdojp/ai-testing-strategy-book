@@ -402,6 +402,18 @@ AI 由来の変更を merge する前に、次を PR body または evidence bun
 - [ ] fixture未実行・runner障害をpassではなく`not evaluated`としてrelease停止にしている
 - [ ] red-team failureを追加する際にprovenance、dataset version、独立reviewを更新している
 
+### 6. Statistical decision gate
+
+概念と判定順は[第7章 7.3.3 Effect-size-first decision contract]({{ '/chapters/chapter-07-quality-metrics-evaluation/' | relative_url }}#effect-size-first-decision-contract)を参照する。
+
+- [ ] analysis unitとpaired / independent / cluster等のdesignを事前定義している
+- [ ] minimum sampleを最小検出効果、variance、power、alpha、欠測率から事前設計している
+- [ ] group別sample count、raw effect、standardized effect、confidence intervalを主要出力にしている
+- [ ] domain-specific practical thresholdを観測前にversion管理している
+- [ ] `p < 0.05`だけでpassするlogicがなく、p-valueを補助指標として明示している
+- [ ] metric family、multiple-testing補正、途中判定回数、停止規則を事前定義している
+- [ ] sample不足はpassではなく`insufficient_sample`、threshold到達でも区間が跨ぐ場合は`inconclusive`としている
+
 ### チェックリスト使用のベストプラクティス
 
 これらのチェックリストは、プロジェクトの特性に応じて調整して使用すべきである。重要なのは：
