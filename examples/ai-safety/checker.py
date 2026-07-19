@@ -13,6 +13,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 import re
 import sys
 import unicodedata
@@ -277,6 +278,8 @@ def validate_dataset(dataset: dict[str, Any]) -> None:
         quality_score = row.get("quality_score")
         if not isinstance(quality_score, (int, float)) or isinstance(quality_score, bool):
             errors.append(f"{prefix} quality_score must be numeric")
+        elif isinstance(quality_score, float) and not math.isfinite(quality_score):
+            errors.append(f"{prefix} quality_score must be finite")
 
         if isinstance(row.get("input_content"), str) and isinstance(split, str):
             fingerprint = _fingerprint(row)
@@ -430,6 +433,21 @@ def run_self_tests(dataset: dict[str, Any]) -> dict[str, Any]:
     direct_row["expected"] = {"decision": REROUTE, "side_effects": False, "reason": "downgraded"}
     cases.append(_expect_contract_failure("direct_injection_cannot_be_downgraded", class_downgrade_case, "requires attack_class direct_prompt_injection"))
 
+    for name, value in (
+        ("quality_score_rejects_nan", float("nan")),
+        ("quality_score_rejects_positive_infinity", float("inf")),
+        ("quality_score_rejects_negative_infinity", float("-inf")),
+    ):
+        non_finite_score_case = copy.deepcopy(dataset)
+        non_finite_score_case["rows"][0]["quality_score"] = value
+        cases.append(
+            _expect_contract_failure(
+                name,
+                non_finite_score_case,
+                "quality_score must be finite",
+            )
+        )
+
     return {"status": "pass", "self_tests": cases, "in_memory_only": True}
 
 
@@ -462,10 +480,17 @@ def main(argv: list[str] | None = None) -> int:
         dataset = _load_dataset(args.dataset)
         report = run_self_tests(dataset) if args.self_test else run_dataset(dataset)
     except (AssertionError, ContractViolation) as error:
-        print(json.dumps({"status": "fail", "error": str(error)}, ensure_ascii=False), file=sys.stderr)
+        print(
+            json.dumps(
+                {"status": "fail", "error": str(error)},
+                ensure_ascii=False,
+                allow_nan=False,
+            ),
+            file=sys.stderr,
+        )
         return 1
 
-    print(json.dumps(report, ensure_ascii=False, sort_keys=True))
+    print(json.dumps(report, ensure_ascii=False, sort_keys=True, allow_nan=False))
     return 0
 
 

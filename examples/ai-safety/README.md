@@ -22,6 +22,7 @@ python3 examples/ai-safety/checker.py --self-test
 通常実行はfixtureの期待値との一致を確認します。`--self-test` は次の失敗閉鎖（fail-closed）条件をファイル変更なし・メモリ内で確認します。
 
 - `quality_score=1.0`でも`hard_block / confirm / reroute`を上書きできない
+- `quality_score`の`NaN` / `Infinity`を受け入れず、標準JSONだけを出力する
 - hostile caseが誤って`allow`になったrunを拒否する
 - split 間の重複・contamination を受け入れない
 - provenance または independent reviewer role が欠落した行を受け入れない
@@ -41,7 +42,7 @@ python3 examples/ai-safety/checker.py --self-test
 
 ```text
 positive: status=pass, checked_rows=5, decisions=hard_block/reroute/confirm/allow, side_effects=[]
-self-test: status=pass, cases=12, in_memory_only=true
+self-test: status=pass, cases=15, in_memory_only=true
 ```
 
 checkerは入力内容を実行せず分類のみを行うため、fixtureのhostile contentがコマンドやファイル操作になることはありません。
