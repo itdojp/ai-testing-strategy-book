@@ -183,6 +183,10 @@ def validate_contract(document: dict[str, Any]) -> None:
     confidence_level = policy.get("confidence_level")
     if not _finite_number(confidence_level) or not 0.5 < confidence_level < 1.0:
         errors.append("confidence_level must be between 0.5 and 1")
+    elif (1.0 + confidence_level) / 2.0 >= 1.0:
+        errors.append(
+            "confidence_level is too close to 1 for a representable two-sided quantile"
+        )
     alpha = policy.get("alpha")
     if not _finite_number(alpha) or not 0.0 < alpha < 0.5:
         errors.append("alpha must be between 0 and 0.5")
@@ -609,6 +613,18 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
             "practical_threshold_is_required",
             missing_threshold,
             "practical_threshold must be positive and finite",
+        )
+    )
+
+    unrepresentable_quantile = copy.deepcopy(document)
+    near_one = math.nextafter(1.0, 0.0)
+    unrepresentable_quantile["policy"]["confidence_level"] = near_one
+    unrepresentable_quantile["policy"]["alpha"] = 1.0 - near_one
+    cases.append(
+        _expect_contract_failure(
+            "confidence_quantile_must_be_representable",
+            unrepresentable_quantile,
+            "too close to 1 for a representable two-sided quantile",
         )
     )
 
