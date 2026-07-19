@@ -29,7 +29,7 @@ positive fixtureは次を証明します。
 - threshold-crossing-interval: raw effectはthreshold以上でも95% CIがthresholdを跨ぐため`inconclusive`
 - large-effect: 95% CIの下限がpractical threshold以上のため`practical_improvement`
 
-4つのsynthetic caseは同じ実験の4 metricではなく、decision branchを示す別scenarioです。別のworked exampleでは、事前登録した3 metricのraw p-value `0.01 / 0.03 / 0.04`へHolm法を適用し、adjusted p-value `0.03 / 0.06 / 0.06`を確認します。adjusted p-valueもrelease decisionには使いません。
+4つのsynthetic caseは同じ実験の4 metricではなく、decision branchを示す別scenarioです。別のworked exampleでは、事前登録した3 metricのraw p-value `0.01 / 0.03 / 0.04`へHolm法を適用し、adjusted p-value `0.03 / 0.06 / 0.06`を確認します。adjusted p-valueもrelease decisionには使いません。このreference fixtureが数値計算する補正方法はHolmだけであり、`bonferroni`等の未実装method指定はfail-closedにします。
 
 repeated looksは、positive fixtureではfixed horizonの1回に限定し、self-testで「fixed horizonのまま2回見る」policyと未実装の`alpha_spending` / `always_valid`指定を拒否します。sequential計算は実装していません。途中判定が必要な実務分析では、検証済み統計libraryと事前reviewを使用します。
 

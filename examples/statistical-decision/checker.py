@@ -201,8 +201,8 @@ def validate_contract(document: dict[str, Any]) -> None:
     if not isinstance(multiple_testing, dict):
         errors.append("missing multiple_testing policy")
     else:
-        if multiple_testing.get("method") not in ("holm", "bonferroni"):
-            errors.append("multiple_testing method must control the planned metric family")
+        if multiple_testing.get("method") != "holm":
+            errors.append("reference fixture only supports holm multiple testing")
         if not _non_empty_string(multiple_testing.get("family_id")):
             errors.append("multiple_testing family_id is required")
         planned = multiple_testing.get("planned_comparisons")
@@ -585,7 +585,17 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
         _expect_contract_failure(
             "multiple_testing_plan_is_required",
             no_multiple_testing,
-            "multiple_testing method must control",
+            "reference fixture only supports holm",
+        )
+    )
+
+    unimplemented_multiple_method = copy.deepcopy(document)
+    unimplemented_multiple_method["policy"]["multiple_testing"]["method"] = "bonferroni"
+    cases.append(
+        _expect_contract_failure(
+            "unimplemented_multiple_method_fails_closed",
+            unimplemented_multiple_method,
+            "reference fixture only supports holm",
         )
     )
 

@@ -1986,7 +1986,7 @@ p-valueは、指定したnull modelの下で観測値以上に極端な結果を
 
 #### 実行可能な参照contract
 
-実行可能なsummary-statistics参照contractは`examples/statistical-decision/`に置く。no-effect、small-but-statistically-significant、threshold-crossing interval、large-effectのsynthetic caseを使い、sample count、raw effect、Hedges' g、95% confidence interval、practical threshold、補助p-value、decisionをCIで確認する。別のworked exampleで、3 metricへHolm法を適用したadjusted p-valueも確認するが、adjusted p-valueもrelease decisionには使用しない。
+実行可能なsummary-statistics参照contractは`examples/statistical-decision/`に置く。no-effect、small-but-statistically-significant、threshold-crossing interval、large-effectのsynthetic caseを使い、sample count、raw effect、Hedges' g、95% confidence interval、practical threshold、補助p-value、decisionをCIで確認する。別のworked exampleで、3 metricへHolm法を適用したadjusted p-valueも確認するが、adjusted p-valueもrelease decisionには使用しない。この参照実装が数値計算する補正方法はHolmだけであり、Bonferroni等の未実装method指定はfail-closedにする。
 
 repeated looksについて、この参照contractが実行するのはfixed horizonの1回だけである。2回以上のlookや`alpha_spending` / `always_valid`指定は、数値実装がない状態ではfail-closedにする。途中判定を採用する実務分析では、検証済み統計library、spending / stopping rule、独立reviewを別途必要とする。summary statisticsだけではraw dataの分布、外れ値、欠測、cluster、pairingを監査できないため、実運用ではdesignに適した手法を使う。
 
