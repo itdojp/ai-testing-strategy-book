@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "checkedOn": "2026-07-19",
+    "currentMaximumAgeDays": 183,
+    "claimWindowLines": 8,
+    "trackedPaths": [
+      "src/chapters/chapter-01-ai-driven-development.md",
+      "src/appendices/appendix-c-tool-comparison.md"
+    ],
+    "volatilePatterns": [
+      "最新",
+      "現時点",
+      "現行",
+      "\\bcurrent\\b",
+      "\\blatest\\b"
+    ]
+  },
+  "claims": [
+    {
+      "id": "chapter1-ai-adoption-2024-snapshot",
+      "kind": "historical_snapshot",
+      "sourcePath": "src/chapters/chapter-01-ai-driven-development.md",
+      "marker": "<!-- freshness-claim: chapter1-ai-adoption-2024-snapshot -->",
+      "checkedOn": "2026-07-19",
+      "profile": "Stack Overflow Developer Survey 2024（historical snapshot）",
+      "primarySources": [
+        "https://survey.stackoverflow.co/2024/"
+      ]
+    },
+    {
+      "id": "appendix-tool-candidate-catalog",
+      "kind": "current_recommendation",
+      "sourcePath": "src/appendices/appendix-c-tool-comparison.md",
+      "marker": "<!-- freshness-claim: appendix-tool-candidate-catalog -->",
+      "checkedOn": "2026-07-19",
+      "profile": "Tool candidate catalog（official product documentation）",
+      "primarySources": [
+        "https://docs.github.com/copilot",
+        "https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html",
+        "https://docs.cursor.com/",
+        "https://docs.tabnine.com/",
+        "https://docs.windsurf.com/",
+        "https://www.selenium.dev/documentation/",
+        "https://docs.cypress.io/",
+        "https://playwright.dev/docs/intro",
+        "https://appium.io/docs/en/latest/",
+        "https://docs.sonarsource.com/sonarqube-server/",
+        "https://docs.sentry.io/",
+        "https://opentelemetry.io/docs/"
+      ]
+    },
+    {
+      "id": "appendix-node-runtime-profile",
+      "kind": "current_recommendation",
+      "sourcePath": "src/appendices/appendix-c-tool-comparison.md",
+      "marker": "<!-- freshness-claim: appendix-node-runtime-profile -->",
+      "checkedOn": "2026-07-19",
+      "profile": "Node.js 24.x（book CI baseline）",
+      "primarySources": [
+        "https://nodejs.org/en/about/previous-releases"
+      ]
+    },
+    {
+      "id": "appendix-playwright-profile",
+      "kind": "current_recommendation",
+      "sourcePath": "src/appendices/appendix-c-tool-comparison.md",
+      "marker": "<!-- freshness-claim: appendix-playwright-profile -->",
+      "checkedOn": "2026-07-19",
+      "profile": "Playwright official documentation（versionless live documentation）",
+      "primarySources": [
+        "https://playwright.dev/docs/intro",
+        "https://playwright.dev/docs/best-practices"
+      ]
+    },
+    {
+      "id": "appendix-github-actions-profile",
+      "kind": "current_recommendation",
+      "sourcePath": "src/appendices/appendix-c-tool-comparison.md",
+      "marker": "<!-- freshness-claim: appendix-github-actions-profile -->",
+      "checkedOn": "2026-07-19",
+      "profile": "GitHub Actions workflow syntax（versionless hosted-service documentation）",
+      "primarySources": [
+        "https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions"
+      ]
+    },
+    {
+      "id": "appendix-openai-evals-profile",
+      "kind": "current_recommendation",
+      "sourcePath": "src/appendices/appendix-c-tool-comparison.md",
+      "marker": "<!-- freshness-claim: appendix-openai-evals-profile -->",
+      "checkedOn": "2026-07-19",
+      "profile": "OpenAI Evals API guides（versionless live documentation）",
+      "primarySources": [
+        "https://developers.openai.com/api/docs/guides/evals",
+        "https://developers.openai.com/api/docs/guides/evaluation-best-practices"
+      ]
+    }
+  ]
+}
