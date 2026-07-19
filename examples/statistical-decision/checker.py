@@ -127,7 +127,9 @@ def _regularized_beta(x: float, a: float, b: float) -> float:
 def _student_t_two_sided_p(t_statistic: float, degrees_of_freedom: float) -> float:
     if degrees_of_freedom <= 0 or not math.isfinite(degrees_of_freedom):
         raise ContractViolation("degrees of freedom must be positive and finite")
-    if not math.isfinite(t_statistic):
+    if math.isnan(t_statistic):
+        raise ContractViolation("t statistic must not be NaN")
+    if math.isinf(t_statistic):
         return 0.0
     x = degrees_of_freedom / (degrees_of_freedom + t_statistic * t_statistic)
     return min(1.0, max(0.0, _regularized_beta(x, degrees_of_freedom / 2.0, 0.5)))
@@ -258,7 +260,7 @@ def validate_contract(document: dict[str, Any]) -> None:
         try:
             observed_at = _parse_date(case.get("observed_at"), f"{prefix} observed_at")
             if policy_locked_at is not None and observed_at <= policy_locked_at:
-                errors.append(f"{prefix} was observed before the policy was locked")
+                errors.append(f"{prefix} was observed on or before the policy lock date")
         except ContractViolation as error:
             errors.append(str(error))
         for group_name in ("baseline", "candidate"):
@@ -628,8 +630,25 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
         _expect_contract_failure(
             "threshold_must_be_locked_before_observation",
             post_hoc_threshold,
-            "observed before the policy was locked",
+            "observed on or before the policy lock date",
         )
+    )
+
+    try:
+        _student_t_two_sided_p(float("nan"), 30.0)
+    except ContractViolation as error:
+        if "must not be NaN" not in str(error):
+            raise AssertionError("NaN t-statistic failed without an actionable reason") from error
+    else:
+        raise AssertionError("NaN t-statistic was accepted")
+    if _student_t_two_sided_p(float("inf"), 30.0) != 0.0:
+        raise AssertionError("infinite t-statistic did not use the p=0 limiting value")
+    cases.append(
+        {
+            "name": "non_finite_t_statistic_contract",
+            "status": "pass",
+            "observed": "nan_rejected_infinity_limited",
+        }
     )
 
     insufficient = copy.deepcopy(document)
