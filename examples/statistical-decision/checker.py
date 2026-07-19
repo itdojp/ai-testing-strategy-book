@@ -298,8 +298,17 @@ def validate_contract(document: dict[str, Any]) -> None:
                     errors.append(f"{prefix} {field} must be between 0 and 1")
         if isinstance(multiple_testing, dict):
             planned_metrics = multiple_testing.get("planned_metrics")
-            if isinstance(planned_metrics, list) and set(example_metrics) != set(planned_metrics):
-                errors.append("multiple_testing_example must cover the planned metric family")
+            if isinstance(planned_metrics, list):
+                if len(example_metrics) != len(planned_metrics):
+                    errors.append(
+                        "multiple_testing_example must contain exactly one row per planned metric"
+                    )
+                elif len(set(example_metrics)) != len(example_metrics):
+                    errors.append("multiple_testing_example metrics must be unique")
+                elif set(example_metrics) != set(planned_metrics):
+                    errors.append(
+                        "multiple_testing_example must cover the planned metric family"
+                    )
 
     if errors:
         raise ContractViolation("; ".join(errors))
@@ -601,6 +610,18 @@ def run_self_tests(document: dict[str, Any]) -> dict[str, Any]:
         )
     )
 
+    duplicate_multiple_metric = copy.deepcopy(document)
+    duplicate_multiple_metric["multiple_testing_example"].append(
+        copy.deepcopy(duplicate_multiple_metric["multiple_testing_example"][0])
+    )
+    cases.append(
+        _expect_contract_failure(
+            "multiple_testing_example_requires_one_row_per_metric",
+            duplicate_multiple_metric,
+            "exactly one row per planned metric",
+        )
+    )
+
     invalid_repeated_looks = copy.deepcopy(document)
     invalid_repeated_looks["policy"]["repeated_looks"]["maximum_looks"] = 2
     cases.append(
@@ -755,8 +776,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         document = _load_document(args.dataset)
-        validate_repository_contract()
-        report = run_self_tests(document) if args.self_test else run_contract(document)
+        if args.self_test:
+            report = run_self_tests(document)
+        else:
+            validate_repository_contract()
+            report = run_contract(document)
     except (AssertionError, ContractViolation) as error:
         print(
             json.dumps(

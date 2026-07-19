@@ -1972,7 +1972,7 @@ def decide_practical_effect(
         return "insufficient_sample"
     if raw_effect < practical_threshold:
         return "no_practical_improvement"
-    if confidence_interval.lower < practical_threshold:
+    if confidence_interval["lower"] < practical_threshold:
         return "inconclusive"
     return "practical_improvement"
 ```
