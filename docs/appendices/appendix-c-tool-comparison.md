@@ -5,191 +5,135 @@ title: "付録C ツール比較表"
 
 # 付録C ツール比較表
 
-## ツール選定の重要性
+## ツール選定の目的
 
-AI主導開発において、適切なツールの選択は成功の鍵となる。各ツールには固有の強みと制限があり、プロジェクトの特性に応じた選定が必要である。本付録では、主要なツールを体系的に比較し、選定の判断材料を提供する。
+AI 支援開発では、製品名を先に決めるのではなく、品質リスクと検証可能性から選定条件を定義する。機能、対応言語、提供形態、価格、データ処理条件は変化するため、本付録は固定的な機能ランキングを提供しない。公式情報を再確認するための候補一覧と、比較結果を再現できる評価契約を示す。
 
-> **注記（更新対象の情報について）**
-> 本付録に含まれるツール名・機能・価格・提供形態は変化が速い。特に価格は改定頻度が高いため、ここでは「無料/有料/要問い合わせ」程度の粒度に留める。最新情報は各ツールの公式サイトで確認すること。
-> **最終更新日**: 2026-05-23（Asia/Tokyo）
+<!-- freshness-claim: appendix-tool-candidate-catalog -->
+> **候補一覧の確認記録**
+>
+> 確認日: 2026-07-19（Asia/Tokyo）
+>
+> 対象 profile: `Tool candidate catalog（official product documentation）`
+>
+> 区分: 確認日時点の候補 snapshot。製品の存続、機能、価格、利用条件を保証するものではない。導入判断では、各行の公式情報を再確認する。
 
-## C.1 AIコーディング支援ツール
+## C.1 AI コーディング支援
 
-### なぜ複数のツールを比較検討すべきか
+### 候補と比較観点
 
-AIコーディング支援ツールは急速に進化しており、それぞれが異なるアプローチと特徴を持つ。単一のツールに依存するのではなく、プロジェクトの要件に最適なツールを選択することが、生産性と品質の両立につながる。
+| 候補（公式情報） | 比較時に確認する項目 | 最小の実証 |
+|---|---|---|
+| [GitHub Copilot](https://docs.github.com/copilot) | 対応環境、データ利用、組織ポリシー、監査、契約プラン | 同じ repository・task・quality gate で支援あり／なしを比較する |
+| [Amazon Q Developer](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html) | AWS 連携の必要性、対応環境、security scan、データ境界 | 実際の IAM・network 制約下で代表 task を実行する |
+| [Cursor](https://docs.cursor.com/) | editor 移行、repository context、privacy mode、組織管理 | 機密区分別に送信される context と保持設定を確認する |
+| [Tabnine](https://docs.tabnine.com/) | deployment 方式、対応環境、model/data policy、管理機能 | 採用予定の deployment profile で応答と監査証跡を確認する |
+| [Windsurf](https://docs.windsurf.com/) | editor/extension、context 取得範囲、組織ポリシー、契約条件 | sandbox repository で権限と context boundary を確認する |
 
-### 主要ツール比較表
+ここで比較するのは marketing 上の機能数ではない。次の証跡を同じ条件で残せるかを確認する。
 
-| ツール名 | 提供元 | 主な特徴 | 対応言語 | 価格帯 | 統合環境 | 強み | 制限事項 |
-|----------|--------|----------|----------|---------|----------|------|----------|
-| **GitHub Copilot** | GitHub/OpenAI | ・コンテキスト認識<br>・インライン提案<br>・関数全体生成 | 主要言語全般 | 有料（個人/法人）<br>価格は公式で要確認 | VS Code, JetBrains, Neovim | ・豊富な学習データ<br>・スムーズな統合<br>・多言語対応 | ・オフライン使用不可<br>・企業データの扱い<br>・生成品質のばらつき |
-| **Amazon CodeWhisperer** | AWS | ・AWS統合<br>・セキュリティスキャン<br>・参照追跡 | Python, Java, JS, TS, C# | 無料枠あり<br>有料プランあり<br>価格は公式で要確認 | VS Code, JetBrains, AWS Cloud9 | ・AWSサービス統合<br>・セキュリティ重視<br>・ライセンス追跡 | ・AWS以外では制限<br>・言語サポート限定<br>・学習曲線 |
-| **Cursor** | Cursor | ・AI優先エディタ<br>・チャット統合<br>・コードベース理解 | 主要言語全般 | 有料<br>価格は公式で要確認 | 独自エディタ | ・高度なコンテキスト理解<br>・対話的開発<br>・リファクタリング支援 | ・独自環境への移行<br>・拡張機能制限<br>・チーム機能制限 |
-| **Tabnine** | Tabnine | ・ローカル/クラウド選択<br>・チーム学習<br>・プライベートモデル | 主要言語全般 | 無料/有料<br>Enterprise:要相談<br>価格は公式で要確認 | VS Code, JetBrains, Sublime等 | ・プライバシー保護<br>・カスタムモデル<br>・オンプレミス対応 | ・生成能力の制限<br>・設定の複雑さ<br>・リソース消費 |
-| **Codeium** | Codeium | ・無料提供<br>・高速応答<br>・多機能 | 70+言語 | 無料プランあり<br>Team:要相談<br>価格は公式で要確認 | VS Code, JetBrains, Vim等 | ・コスト効率<br>・幅広い言語対応<br>・高速レスポンス | ・企業サポート制限<br>・高度機能の不足<br>・品質の一貫性 |
+1. 入力した task、許可した context、使用した model/runtime profile
+2. 生成差分、test 結果、review 指摘、再作業時間
+3. 外部送信、保持、学習利用、管理者設定の確認結果
+4. 障害時の停止、fallback、監査ログ、契約終了時のデータ処理
 
-### 選定基準のフレームワーク
+## C.2 テスト自動化
 
-#### 1. 技術要件
+### 候補と比較観点
 
-- **言語サポート**: プロジェクトで使用する言語の対応状況
-- **統合環境**: 既存の開発環境との互換性
-- **オフライン対応**: ネットワーク制約下での使用可否
+| 候補（公式情報） | 主な評価対象 | 比較時に固定する条件 |
+|---|---|---|
+| [Selenium](https://www.selenium.dev/documentation/) | WebDriver を用いる browser automation | browser/driver、language binding、grid、timeout、retry |
+| [Cypress](https://docs.cypress.io/) | Web application の end-to-end / component test | runtime、browser、test isolation、CI resource、artifact |
+| [Playwright](https://playwright.dev/docs/intro) | Chromium / Firefox / WebKit を対象にする end-to-end test | package version、browser binary、OS image、project、trace policy |
+| [Appium](https://appium.io/docs/en/latest/) | mobile application automation | server/driver/plugin、device/OS、app build、capability |
 
-#### 2. セキュリティ・コンプライアンス
+### 選定ルール
 
-- **データ保護**: コードの送信・保存方法
-- **ライセンス管理**: 生成コードの著作権処理
-- **監査対応**: 使用履歴の追跡可能性
+- **再現性**: package lock、browser/device、OS image、locale、timezone を固定できるか。
+- **観測性**: failure 時に log、trace、screenshot、network evidence を残せるか。
+- **機密性**: artifact に token、個人情報、画面入力が含まれる前提で redaction と保持期限を設定できるか。
+- **保守性**: selector や fixture の責任範囲を分離し、flaky test を成功扱いにしないか。
+- **CI 適合性**: retry や並列度を増やす前に、failure classification と resource 上限を定義できるか。
 
-#### 3. チーム・組織要件
+## C.3 品質分析・運用観測
 
-- **ライセンス体系**: ユーザー数に応じたコスト
-- **管理機能**: 使用状況の可視化
-- **カスタマイズ**: 組織固有の要件対応
+### 候補と比較観点
 
-#### 4. 品質・生産性
+| 候補（公式情報） | 主な評価対象 | 導入前に確認する境界 |
+|---|---|---|
+| [SonarQube Server](https://docs.sonarsource.com/sonarqube-server/) | 静的解析と quality gate | 対象言語、rule profile、false positive、edition、CI integration |
+| [Sentry](https://docs.sentry.io/) | application error と performance evidence | event filtering、PII、source map、sampling、retention |
+| [OpenTelemetry](https://opentelemetry.io/docs/) | vendor-neutral な telemetry 生成・伝送 | signal、semantic convention、collector、exporter、sampling |
 
-- **生成品質**: コードの正確性と保守性
-- **応答速度**: 開発フローへの影響
-- **学習能力**: プロジェクト固有パターンの学習
+ツールが示す数値は、そのまま品質目標にしない。収集対象、除外条件、sampling、集計期間、owner、意思決定との対応を先に定義する。導入前後の比較では同じ定義を使い、定義変更時は時系列を分離する。
 
-## C.2 テスト自動化ツール
-
-### AI時代のテスト自動化の進化
-
-従来のテスト自動化ツールに加え、AI機能を組み込んだ新世代のツールが登場している。これらは、テストケース生成、自己修復、視覚的検証などの高度な機能を提供する。
-
-### テスト自動化ツール比較表
-
-| ツール名 | カテゴリ | AI機能 | 対応範囲 | 価格帯 | 主な特徴 | 適用場面 | 注意点 |
-|----------|----------|---------|----------|---------|----------|----------|---------|
-| **Selenium** | 従来型 | 限定的 | Web | オープンソース | ・業界標準<br>・豊富なエコシステム<br>・多言語対応 | ・大規模Webアプリ<br>・クロスブラウザテスト<br>・既存資産活用 | ・メンテナンスコスト<br>・AI機能は外部連携<br>・学習曲線 |
-| **Cypress** | 現代型 | 限定的 | Web | オープンソース<br>+有料Dashboard | ・高速実行<br>・デバッグ容易<br>・時間遡行 | ・モダンWebアプリ<br>・開発者テスト<br>・CI/CD統合 | ・ブラウザ制限<br>・非同期処理<br>・マルチタブ非対応 |
-| **Playwright** | 現代型 | 基本的 | Web | オープンソース | ・Chromium / Firefox / WebKit 対応<br>・並列実行<br>・auto-waiting / trace viewer | ・E2Eテスト<br>・API統合テスト<br>・視覚的テスト<br>・CI失敗時の trace 調査 | ・ブラウザ差分の管理<br>・テスト設計と fixture 管理<br>・trace / screenshot の機密情報 redaction |
-| **Appium** | モバイル | 限定的 | モバイル | オープンソース | ・クロスプラットフォーム<br>・実機対応<br>・標準プロトコル | ・モバイルアプリ<br>・ハイブリッドアプリ<br>・マルチデバイス | ・設定複雑<br>・実行速度<br>・デバイス依存 |
-| **TestRigor** | AI 駆動 | 高度 | Web/モバイル | 有料（要問い合わせ）<br>価格は公式で要確認 | ・自然言語テスト<br>・自己修復<br>・要件からテスト生成 | ・非技術者参加<br>・保守コスト削減<br>・迅速な開始 | ・コスト<br>・カスタマイズ制限<br>・ベンダーロックイン |
-| **Mabl** | AI 駆動 | 高度 | Web/API | 有料（要問い合わせ）<br>価格は公式で要確認 | ・自動修復<br>・視覚的変更検出<br>・インサイト提供 | ・継続的テスト<br>・回帰テスト<br>・品質分析 | ・価格<br>・学習期間<br>・複雑シナリオ |
-| **Testim** | AI 駆動 | 高度 | Web/モバイル | 有料（要問い合わせ）<br>価格は公式で要確認 | ・スマートロケーター<br>・根本原因分析<br>・カスタムアクション | ・アジャイル開発<br>・頻繁な変更<br>・チーム協調 | ・初期設定<br>・統合作業<br>・ライセンスコスト |
-
-### カテゴリ別の特徴
-
-#### 従来型ツール
-
-- **利点**: 成熟度、柔軟性、コミュニティ
-- **欠点**: メンテナンス負荷、AI機能不足
-- **適用**: 複雑なカスタマイズが必要な場合
-
-#### 現代型ツール
-
-- **利点**: 開発者体験、高速実行、モダンアーキテクチャ
-- **欠点**: エコシステム発展途上、機能制限
-- **適用**: 新規プロジェクト、DevOps文化
-
-#### AI 駆動ツール
-
-- **利点**: 自動化度、保守性、非技術者対応
-- **欠点**: コスト、ブラックボックス、依存性
-- **適用**: ROI重視、人的リソース制約
-
-## C.3 品質分析ツール
-
-### データ駆動の品質改善
-
-品質分析ツールは、開発プロセス全体から品質に関するデータを収集・分析し、改善の機会を特定する。AI時代では、より高度な分析と予測が可能になっている。
-
-### 品質分析ツール比較表
-
-| ツール名 | 分析領域 | AI 活用度 | 統合範囲 | 価格帯 | 主要機能 | 強み | 考慮事項 |
-|----------|----------|-----------|----------|---------|----------|------|----------|
-| **SonarQube** | 静的解析 | 基本 | コード品質 | Community:無料枠あり<br>有料プランあり<br>価格は公式で要確認 | ・技術的負債<br>・セキュリティ脆弱性<br>・品質ゲート | ・包括的分析<br>・多言語対応<br>・CI/CD統合 | ・設定複雑性<br>・誤検知調整<br>・パフォーマンス |
-| **Coverity** | 静的解析 | 中級 | セキュリティ重視 | 要相談 | ・深層解析<br>・誤検知低減<br>・修正提案 | ・高精度<br>・エンタープライズ<br>・コンプライアンス | ・高コスト<br>・学習曲線<br>・実行時間 |
-| **New Relic** | APM | 高度 | 運用品質 | 有料（従量/プラン）<br>価格は公式で要確認 | ・リアルタイム監視<br>・AI異常検出<br>・分散トレーシング | ・包括的可視化<br>・予測分析<br>・自動アラート | ・データ量<br>・コスト増大<br>・プライバシー |
-| **Datadog** | 統合監視 | 高度 | インフラ+APM | 有料（従量/プラン）<br>価格は公式で要確認 | ・メトリクス相関<br>・ログ分析<br>・AI予測 | ・統合プラットフォーム<br>・スケーラビリティ<br>・豊富な統合 | ・価格体系<br>・データ保持<br>・カスタマイズ |
-| **LinearB** | 開発分析 | 高度 | SDLC全体 | 有料（プラン）<br>価格は公式で要確認 | ・開発速度<br>・品質指標<br>・チーム分析 | ・開発者生産性<br>・予測精度<br>・改善提案 | ・文化適合<br>・メトリクス誤用<br>・プライバシー |
-| **Sentry** | エラー追跡 | 中級 | 実行時エラー | 無料枠あり/有料<br>価格は公式で要確認 | ・エラー集約<br>・パフォーマンス<br>・リリース追跡 | ・開発者向け<br>・詳細コンテキスト<br>・統合容易 | ・データ量制限<br>・ノイズ管理<br>・設定作業 |
-
-### 分析ツール選定の観点
-
-#### 1. 分析の深さと広さ
-
-- **深さ**: 問題の根本原因まで追跡可能か
-- **広さ**: 開発ライフサイクル全体をカバーするか
-- **統合**: 他ツールとのデータ連携は容易か
-
-#### 2. 実用性とROI
-
-- **実装速度**: 導入から価値実現までの期間
-- **学習曲線**: チームが使いこなすまでの時間
-- **コスト対効果**: 投資に見合う改善が期待できるか
-
-#### 3. スケーラビリティ
-
-- **データ量**: 成長に伴うデータ増大への対応
-- **チーム規模**: ユーザー数増加時のライセンス
-- **技術進化**: 新技術への適応能力
-
-### ツール組み合わせのベストプラクティス
-
-#### 小規模チーム（〜10名）
-
-- **AIコーディング**: GitHub Copilot（標準的）
-- **テスト自動化**: Cypress（Web）/ Jest（単体）
-- **品質分析**: SonarQube Community + Sentry
-
-#### 中規模チーム（10〜50名）
-
-- **AIコーディング**: Copilot + Tabnine（カスタム）
-- **テスト自動化**: Playwright + TestRigor（重要フロー）
-- **品質分析**: SonarQube Developer + Datadog
-
-#### 大規模組織（50名以上）
-
-- **AIコーディング**: CodeWhisperer/Tabnine Enterprise
-- **テスト自動化**: 従来型 + AI 駆動型の組み合わせ
-- **品質分析**: 統合プラットフォーム（Coverity + New Relic等）
-
-### ツール導入の段階的アプローチ
-
-1. **評価フェーズ（1〜2週間）**
-   - 無料試用版での検証
-   - パイロットプロジェクトでの適用
-   - ROI初期評価
-
-2. **導入フェーズ（1〜3ヶ月）**
-   - 段階的展開
-   - トレーニング実施
-   - プロセス調整
-
-3. **定着フェーズ（3〜6ヶ月）**
-   - 使用状況モニタリング
-   - フィードバック収集
-   - 最適化実施
-
-4. **拡大フェーズ（6ヶ月以降）**
-   - 他チームへの展開
-   - ベストプラクティス共有
-   - 継続的改善
-
-### まとめ
-
-ツール選定は技術的判断だけでなく、組織的・経済的要因も考慮する必要がある。重要なのは次のとおりである。
-
-- **目的の明確化**: なぜそのツールが必要か
-- **段階的導入**: 小さく始めて大きく育てる
-- **継続的評価**: 効果測定と見直し
-- **人材投資**: ツールを使いこなす人材育成
-
-最適なツールの組み合わせは、プロジェクトの特性、チームの成熟度、予算制約などによって異なる。本比較表を参考に、自組織に最適な選択を行うことが重要である。
+## C.4 再現可能な実行・評価 profile
 
 ### 公式情報確認メモ
 
-2026-05-23（Asia/Tokyo）時点で、次の公式情報を確認した。ツール採用時は、この日付ではなく導入時点の公式情報で再確認する。
+次の4項目は、本書の例を再現するときに変化しやすい前提である。snapshot と運用時の推奨を混同しないよう、確認日と対象 profile を記録する。
 
-- Node.js: 本番・CI では Active LTS または Maintenance LTS の release line を使う。v20 は EOL であるため、本書の CI 例は v24 LTS を基準にする。
-- Playwright: Test runner は auto-waiting、assertions、tracing、parallelism を備え、Chromium / Firefox / WebKit を対象にできる。CI 失敗調査では trace を evidence として残せるが、trace には画面・入力・ネットワーク情報が含まれ得るため redaction 方針を決める。
-- GitHub Actions: workflow は `.github/workflows` の YAML で定義し、`GITHUB_TOKEN` permissions は最小権限を明示する。
-- OpenAI Evals: eval は testing criteria と data source を持つ評価構造として管理できる。外部 API に eval case を渡す場合は、external input boundary を通す。
+<!-- freshness-claim: appendix-node-runtime-profile -->
+### Node.js
 
-確認先: Node.js Releases / End-Of-Life、Playwright Assertions / Auto-waiting / Trace viewer、GitHub Actions workflow syntax / `GITHUB_TOKEN`、OpenAI Evals API / evaluation best practices。
+- **確認日**: 2026-07-19（Asia/Tokyo）
+- **対象 profile**: `Node.js 24.x（book CI baseline）`
+- **本書での扱い**: 本 repository の active CI 例は Node.js 24 を基準にする。Node.js の Current / LTS / EOL 状態は固定値として転記せず、実行時に公式一覧で確認する。
+- **一次 source**: [Node.js — Previous Releases](https://nodejs.org/en/about/previous-releases)
+- **更新契約**: CI runtime を変える場合は、package engine、lockfile、example test、Pages build を同じ PR で検証する。
+
+<!-- freshness-claim: appendix-playwright-profile -->
+### Playwright
+
+- **確認日**: 2026-07-19（Asia/Tokyo）
+- **対象 profile**: `Playwright official documentation（versionless live documentation）`
+- **本書での扱い**: Chromium / Firefox / WebKit、auto-waiting、test isolation、trace の設計原則を参照する。実プロジェクトでは package と browser binary を lockfile / install command で固定し、versionless な文書だけでは再現条件を満たしたことにしない。
+- **一次 source**: [Installation](https://playwright.dev/docs/intro)、[Best Practices](https://playwright.dev/docs/best-practices)
+- **更新契約**: version 更新時は browser matrix、trace の機密情報、retry、CI image を再検証する。
+
+<!-- freshness-claim: appendix-github-actions-profile -->
+### GitHub Actions
+
+- **確認日**: 2026-07-19（Asia/Tokyo）
+- **対象 profile**: `GitHub Actions workflow syntax（versionless hosted-service documentation）`
+- **本書での扱い**: workflow は `.github/workflows` 配下の YAML で管理し、trigger、permissions、job、step を明示する。hosted service の event や syntax の全一覧を本文へ固定せず、実装時の公式 reference を正本とする。
+- **一次 source**: [Workflow syntax for GitHub Actions](https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions)
+- **更新契約**: action version、runner image、token permissions、artifact retention を PR ごとに確認する。
+
+<!-- freshness-claim: appendix-openai-evals-profile -->
+### OpenAI evaluations
+
+- **確認日**: 2026-07-19（Asia/Tokyo）
+- **対象 profile**: `OpenAI Evals API guides（versionless live documentation）`
+- **本書での扱い**: evaluation objective、dataset、grader、継続評価という設計原則を参照する。API、endpoint、product lifecycle は時間依存であるため、本文へ永続的な固定値として転記しない。
+- **一次 source**: [Working with evals](https://developers.openai.com/api/docs/guides/evals)、[Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices)
+- **更新契約**: 実装前に lifecycle notice と API reference を確認し、model、API、SDK、dataset、grader、確認日を `model/runtime profile` に記録する。
+
+## C.5 比較結果の記録 template
+
+ツールごとに、少なくとも次を1行で記録する。確認できない項目は推測せず `未確認` とする。
+
+| 項目 | 記録内容 |
+|---|---|
+| 目的 | 解決する品質リスクと、採用しない場合の代替策 |
+| 確認日 | `YYYY-MM-DD` と timezone |
+| 対象 version/profile | package、service plan、runtime、runner、browser/device |
+| 一次 source | vendor の documentation / release / security / pricing page |
+| 実証条件 | repository、task、dataset、quality gate、比較期間 |
+| 結果 | pass/fail、効果量、再作業、false positive、未解決事項 |
+| データ境界 | 送信、保存、学習利用、redaction、retention、削除 |
+| owner / 再確認条件 | 更新担当、期限、version・契約・仕様変更 trigger |
+
+## C.6 publication freshness gate
+
+本Issueで監査対象とした Chapter 1 と Appendix C では、`content-freshness.json` を volatile claim の registry とし、`npm run check:freshness` を公開前 gate とする。対象 path は registry の `trackedPaths` に明示し、repository 全体を監視しているとは扱わない。別の章へ対象を広げる場合は、その章に残る一般用法と外部状態の claim を分類してから `trackedPaths` へ追加する。
+
+1. `最新`、`現時点`、`current`、`latest` 等を使って外部状態を述べる場合は、claim marker、確認日、対象 version/profile、一次 source を registry と本文へ追加する。
+2. historical snapshot は、対象年と「過去の観測であり運用時の値ではない」ことを明記する。
+3. versionless な live documentation は、その旨を profile に書き、実装 version の代替にしない。
+4. 運用時の推奨に分類した claim の確認期限超過、全 claim の未来日、非HTTPS source、source/docs marker drift は build failure とする。historical snapshot は過去の観測として保持し、確認期限では失効させない。
+5. 価格、release status、対応範囲など公式ページが正本の値は、本文へ複製する必要がない限り durable link を示す。
+6. `npm run check:freshness:remote` は公式 URL の到達確認を行う公開前の手動監査であり、外部サイト障害で通常 CI を不安定化させないため Book QA とは分離する。remote host と redirect 先は checker 内の固定 allowlist で制限する。
+
+最適な組み合わせは、project、team、risk、budget によって異なる。比較表の候補数ではなく、同じ条件で再実行できる証跡と、運用中に撤退できる契約を選定基準にする。

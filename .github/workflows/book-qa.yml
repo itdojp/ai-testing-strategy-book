@@ -92,6 +92,11 @@ jobs:
       - name: Reader UX contract (source/docs/assets/navigation)
         run: npm run check:reader-ux
 
+      - name: Content freshness contract
+        run: |
+          npm run check:freshness
+          npm run check:freshness:regression
+
       - name: Rebuild public tree from canonical source
         run: |
           npm run build
