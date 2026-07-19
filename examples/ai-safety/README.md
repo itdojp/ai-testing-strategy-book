@@ -31,6 +31,7 @@ python3 examples/ai-safety/checker.py --self-test
 - dangerous side effectの`approval.required`を外して`allow`へ迂回させない
 - test caseの`prompt`欠落を受け入れない
 - regexに一致しないhostile文を未承認の`benign_control` hashとして追加できない
+- 監査済みcontent hashを別attack class・source kind・decision・approval契約へ付け替えられない
 
 公開CIが証明するのは、checked-in row間の分離とholdout本文の非収録までです。実際のsealed holdoutとの重複照合は、行やhashを公開しない分離された評価管理面で実施します。この参照checkerは汎用prompt-injection detectorではありません。実システムでは`安全性判定`のadapterを対象workflowの観測結果へ置換し、同じdataset/provenance/hard-gate契約を適用してください。
 
@@ -40,7 +41,7 @@ python3 examples/ai-safety/checker.py --self-test
 
 ```text
 positive: status=pass, checked_rows=5, decisions=hard_block/reroute/confirm/allow, side_effects=[]
-self-test: status=pass, cases=11, in_memory_only=true
+self-test: status=pass, cases=12, in_memory_only=true
 ```
 
 checkerは入力内容を実行せず分類のみを行うため、fixtureのhostile contentがコマンドやファイル操作になることはありません。
