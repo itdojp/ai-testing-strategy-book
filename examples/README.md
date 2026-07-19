@@ -7,6 +7,7 @@
 - `python/`: Python の最小サンプル（`pytest`）
 - `node/`: Node.js の最小サンプル（`node:test`）
 - `ai-safety/`: direct/indirect prompt injection、jailbreak、dangerous side effectのfail-closed fixture（依存なし、Python 3.11+）
+- `statistical-decision/`: effect size、confidence interval、practical thresholdを使うrelease decision fixture（依存なし、Python 3.11+）
 
 ## まとめて実行（推奨）
 
@@ -21,6 +22,13 @@ AI safety fixture だけを確認する場合:
 ```bash
 python3 examples/ai-safety/checker.py
 python3 examples/ai-safety/checker.py --self-test
+```
+
+統計的decision contractだけを確認する場合:
+
+```bash
+python3 examples/statistical-decision/checker.py
+python3 examples/statistical-decision/checker.py --self-test
 ```
 
 ## 個別に実行

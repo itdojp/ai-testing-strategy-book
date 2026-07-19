@@ -5,6 +5,10 @@ echo "[examples/ai-safety] positive execution + fail-closed self-test"
 python3 examples/ai-safety/checker.py
 python3 examples/ai-safety/checker.py --self-test
 
+echo "[examples/statistical-decision] effect-size-first decision + fail-closed self-test"
+python3 examples/statistical-decision/checker.py
+python3 examples/statistical-decision/checker.py --self-test
+
 echo "[examples/python] install + test"
 if [ -n "${VIRTUAL_ENV-}" ] || [ -n "${CI-}" ]; then
   python3 -m pip install -r examples/python/requirements.txt
