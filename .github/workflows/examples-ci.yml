@@ -18,12 +18,16 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - name: Run AI safety hostile fixture
+        run: |
+          python3 examples/ai-safety/checker.py
+          python3 examples/ai-safety/checker.py --self-test
       - name: Install dependencies
-        run: python -m pip install -r examples/python/requirements.txt
+        run: python3 -m pip install -r examples/python/requirements.txt
       - name: Run tests
         run: |
           cd examples/python
-          python -m pytest -q --cov=discount --cov-report=term-missing --cov-fail-under=100
+          python3 -m pytest -q --cov=discount --cov-report=term-missing --cov-fail-under=100
 
   node:
     runs-on: ubuntu-latest

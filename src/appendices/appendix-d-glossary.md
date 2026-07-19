@@ -28,6 +28,11 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 実務での意味：モデル性能劣化の主要因、再学習の必要性指標
 - 関連：Concept Drift、Model Decay、Distribution Shift
 
+**Eval Dataset Contamination（評価データ汚染）**
+- 定義：evaluation / holdout caseまたは実質的な複製がtraining、prompt例、検索index、debug transcriptへ混入すること
+- 実務での意味：評価値を実運用能力より高く見せるため、split前のaugmentation禁止、provenance、ID/hash重複検査が必要
+- 関連：Data Leakage、Holdout Set、Golden Dataset、Provenance
+
 **Embeddings（埋め込み）**
 - 定義：高次元データを低次元の密ベクトル空間に変換した表現
 - 実務での意味：意味的類似性の計算基盤、検索システムの要
@@ -70,10 +75,20 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 実務での意味：信頼性の問題、ファクトチェックの必要性
 - 関連：Factuality、Grounding、Truthfulness
 
+**Holdout Set（ホールドアウトセット）**
+- 定義：trainingや日常的なprompt tuningから隔離し、最終評価のcontrol groupとして保持するdata split
+- 実務での意味：内容を封印し、消費・昇格時はreview evidenceと代替caseを補充する
+- 関連：Eval、Dataset Split、Contamination、Regression Testing
+
 **Inference（推論）**
 - 定義：学習済みモデルを使用して新しい入力に対する予測を行うプロセス
 - 実務での意味：本番環境での実行、レスポンスタイムの考慮
 - 関連：Prediction、Deployment、Serving
+
+**Jailbreak（ジェイルブレイク）**
+- 定義：言い換え、符号化、分割、多段対話などにより、modelやworkflowの安全制約を回避しようとする攻撃
+- 実務での意味：単一pattern検出に依存せず、policy判定、tool approval、least privilege、継続red teamを組み合わせる
+- 関連：Prompt Injection、Guardrail、Red Teaming、Safety Hard Gate
 
 **LLM（Large Language Model）**
 - 定義：大規模なテキストデータで学習された言語理解・生成モデル
@@ -92,6 +107,11 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 実務での意味：生成品質の制御、タスク特化の最適化
 - 関連：Few-shot Learning、In-context Learning、Chain of Thought
 
+**Prompt Injection（プロンプトインジェクション）**
+- 定義：user inputまたは外部contentに埋め込まれた命令によって、上位指示やtool approval boundaryを迂回させようとする攻撃
+- 実務での意味：direct/indirectを分け、untrusted dataの構造化、least privilege、明示approval、hostile fixtureで検証する
+- 関連：Jailbreak、External Input Boundary、Red Teaming、Tool Approval
+
 **RAG（Retrieval-Augmented Generation）**
 - 定義：外部知識を検索して参照しながら生成を行う手法
 - 実務での意味：最新情報の反映、幻覚の抑制、知識の更新
@@ -102,7 +122,17 @@ AI主導開発時代において、技術用語は急速に増加し、既存用
 - 実務での意味：品質向上、ユーザー期待との整合性確保
 - 関連：Preference Learning、Reward Model、Alignment
 
+**Red Teaming（レッドチーミング）**
+- 定義：misuse、security、policy violationを発見するため、敵対的な入力・経路・side effectを意図的に試す評価活動
+- 実務での意味：通常evalを補完し、公開前と継続運用の両方で失敗caseをfixture化する
+- 関連：Adversarial Testing、Prompt Injection、Jailbreak、Safety Hard Gate
+
 ### S-Z
+
+**Safety Hard Gate（安全性ハードゲート）**
+- 定義：safety-critical caseが1件でも禁止decisionまたは禁止side effectへ到達した場合、集計quality scoreにかかわらずreleaseを拒否する判定
+- 実務での意味：平均点による相殺を禁止し、未実行も`not evaluated`として停止する
+- 関連：Red Teaming、Fail Closed、Approval、Release Gate
 
 **Temperature（温度パラメータ）**
 - 定義：生成AIの出力の多様性を制御するパラメータ

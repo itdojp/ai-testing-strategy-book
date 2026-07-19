@@ -7,6 +7,6 @@
 ## 実行
 
 ```bash
-python -m pip install -r requirements.txt
-python -m pytest -q --cov=discount --cov-report=term-missing --cov-fail-under=100
+python3 -m pip install -r requirements.txt
+python3 -m pytest -q --cov=discount --cov-report=term-missing --cov-fail-under=100
 ```

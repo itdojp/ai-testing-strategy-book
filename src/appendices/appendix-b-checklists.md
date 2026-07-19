@@ -370,6 +370,10 @@ AI 由来の変更を merge する前に、次を PR body または evidence bun
 
 - [ ] eval ID または benchmark 名が記録されている
 - [ ] golden dataset version、作成根拠、更新理由が記録されている
+- [ ] 各rowのsource record、収集条件、機密区分、content hashを追跡できる
+- [ ] 作成者roleと独立reviewer role、approval日時が記録されている
+- [ ] training / development / evaluation / holdoutのID・hash重複が0件である
+- [ ] holdoutはprompt tuning・few-shot例・日常debugから隔離され、消費時の補充手順がある
 - [ ] model/runtime profile（model、API、SDK、runner、tool set、approval policy、確認日）が記録されている
 - [ ] 過去結果と比較する場合、同一条件か差分評価かを明示している
 - [ ] metamorphic testing を使う場合、保持すべき property と反例を記録している
@@ -388,6 +392,15 @@ AI 由来の変更を merge する前に、次を PR body または evidence bun
 - [ ] 秘密情報、個人情報、未公開仕様、脆弱性詳細を redaction している
 - [ ] provider の retention / training use / logging 条件を確認している
 - [ ] 外部投入が不要な場合、その判断を記録している
+
+### 5. AI safety hard gate
+
+- [ ] direct / indirect prompt injection、jailbreak、hostile external contentのfixtureがある
+- [ ] 各fixtureにexternal input boundary、期待するblock / confirm / reroute、禁止side effectがある
+- [ ] secret disclosure、第三者送信、権限変更、destructive tool callに明示approvalが必要である
+- [ ] safety-critical failureを通常quality scoreやretry成功で相殺していない
+- [ ] fixture未実行・runner障害をpassではなく`not evaluated`としてrelease停止にしている
+- [ ] red-team failureを追加する際にprovenance、dataset version、独立reviewを更新している
 
 ### チェックリスト使用のベストプラクティス
 

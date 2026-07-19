@@ -309,6 +309,32 @@ class AdvancedPromptTechniques:
         return prompt
 ```
 
+#### 敵対的テストを「壊れやすい入力」と「命令の乗っ取り」に分ける
+
+上の `use_adversarial_prompting` は、型、境界値、特殊文字、resource exhaustion、SQL / command injection など、対象関数を壊し得る入力の生成に有効である。ただし、LLMを内包するworkflowでは、これだけをred teamingと呼ぶと試験範囲が不足する。外部文書やtool resultに埋め込まれた命令が、上位の指示や承認境界を乗っ取る経路を別に扱う。
+
+| test class | hostile surface | 期待する判定 | 代表的な失敗 |
+|---|---|---|---|
+| invalid / edge input | API引数、form、file | validateしてrejectまたは正規化 | crash、resource exhaustion、従来型injection |
+| direct prompt injection | user message | block、safe response、または人へ確認 | system / developer instructionの無視 |
+| indirect prompt injection | Web、document、issue、tool result等のexternal content | untrusted dataとして隔離し、命令として実行しない | 外部文中の「秘密を送信せよ」に従う |
+| jailbreak | 対話履歴、符号化・分割された指示 | policy違反をblockまたはreroute | 禁止操作を別表現で実行する |
+| dangerous side effect | tool call、第三者送信、権限変更 | 明示approvalがなければ実行しない | silent tool execution、secret disclosure |
+
+このtaxonomyをtest contractへ落とすときは、次を固定する。
+
+1. 入力ごとに `origin`、`trust=untrusted`、external input boundary、許可するdata fieldを記録する。
+2. 未信頼の自由文をdeveloper instructionへ連結せず、構造化して必要な値だけを渡す。
+3. 各hostile fixtureに期待する `block / confirm / reroute`、禁止するtool / data side effect、evidenceを定義する。
+4. jailbreak detectorだけに依存せず、tool approval、least privilege、output validationを重ねる。
+5. 公開前red teamと継続evalを分け、事故・新しい攻撃をfixtureへ追加する。ただし、評価用holdoutをprompt調整へ流用しない。
+
+安全性caseは通常の生成品質scoreへ平均しない。1件でもsafety-critical caseが禁止side effectへ到達した場合、そのrunはquality scoreにかかわらずfailとする。実行可能な最小例は `examples/ai-safety/` に置き、Chapter 10でdataset更新契約と合わせて扱う。
+
+**一次情報（2026-07-19確認、tool-independent design profile）**:
+[Agent workflow safety](https://developers.openai.com/api/docs/guides/agent-builder-safety)、
+[Red teaming](https://developers.openai.com/api/docs/guides/red-teaming)。これらのproduct名、UI、API lifecycleは変化し得るため、本節はuntrusted input、structured handoff、approval、adversarial evaluationという設計原則だけを採用する。
+
 ### 6.1.2 Property-based Testingの活用
 
 **プロパティベーステストの本質と威力**
@@ -2874,6 +2900,7 @@ class PracticalFeedbackLoopExamples:
 
 1. **AI 活用テスト生成の革新性**
    - 効果的なプロンプト設計による高品質なテスト生成
+   - prompt injection / jailbreak / hostile external contentを区別する敵対的taxonomy
    - プロパティベーステストとの組み合わせによる網羅性
    - ミューテーションテストによる堅牢性の確保
 
@@ -2897,6 +2924,8 @@ class PracticalFeedbackLoopExamples:
 - [ ] CIで最低限の品質ゲート（lint/unit/重要テスト）が動く状態になっている。
 - [ ] 失敗時の切り分け（テスト不備/実装不備/環境不備）の手順が共有されている。
 - [ ] 品質ゲートやレビュー観点はテンプレート化されている（例：[付録A テンプレート集]({{ '/appendices/appendix-a-templates/' | relative_url }}) の A.4、[付録B チェックリスト]({{ '/appendices/appendix-b-checklists/' | relative_url }}) を参照）。
+- [ ] hostile fixtureにexternal input boundary、期待decision、禁止side effectが定義されている。
+- [ ] safety-critical failureを通常quality scoreで相殺しないhard gateがある。
 
 ## ミニ演習（手を動かす）
 
@@ -2909,6 +2938,7 @@ class PracticalFeedbackLoopExamples:
 ### この章のまとめ
 
 - 既存のテスト自動化基盤と AI 技術をどのように協調させるか、アーキテクチャとプロセスの両面からパターンを整理した。
+- 通常のedge inputとprompt injection / jailbreak / hostile external contentを分離し、tool side effectまで検証する契約を示した。
 - 段階的品質ゲート、自己修復テスト、AI を用いたテストケース生成・ログ分析など、CI/CD パイプラインにおける具体的な適用例を示した。
 - 「どこまで自動化し、どこに人手を残すか」という自動化境界の設計が、AI時代のテスト自動化において重要であることを強調した。
 
@@ -2917,6 +2947,7 @@ class PracticalFeedbackLoopExamples:
 - [ ] 自分たちの CI/CD パイプラインの流れを簡単な図にし、どのステップに AI を組み込めそうかイメージできているか。
 - [ ] テスト自動化の対象とする領域／人手に残す領域を、品質リスクやコストの観点から説明できるか。
 - [ ] 本章で紹介されたパターンのうち、自組織の現状で現実的に取り入れられそうなものを 1〜2 つ選び、導入の第一歩を言語化できるか。
+- [ ] hostile external contentがdeveloper instructionやtool executionへ到達しないことを、fixtureで説明できるか。
 
 ### 関連する付録・テンプレート
 

@@ -6,6 +6,7 @@
 
 - `python/`: Python の最小サンプル（`pytest`）
 - `node/`: Node.js の最小サンプル（`node:test`）
+- `ai-safety/`: direct/indirect prompt injection、jailbreak、dangerous side effectのfail-closed fixture（依存なし、Python 3.11+）
 
 ## まとめて実行（推奨）
 
@@ -15,14 +16,21 @@
 npm run test:examples
 ```
 
+AI safety fixture だけを確認する場合:
+
+```bash
+python3 examples/ai-safety/checker.py
+python3 examples/ai-safety/checker.py --self-test
+```
+
 ## 個別に実行
 
 ### Python
 
 ```bash
 cd examples/python
-python -m pip install -r requirements.txt
-python -m pytest -q --cov=discount --cov-report=term-missing --cov-fail-under=100
+python3 -m pip install -r requirements.txt
+python3 -m pytest -q --cov=discount --cov-report=term-missing --cov-fail-under=100
 ```
 
 ### Node.js
