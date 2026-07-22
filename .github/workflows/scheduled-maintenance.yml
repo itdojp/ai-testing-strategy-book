@@ -169,6 +169,7 @@ jobs:
             links-attempt-*.json
             links-attempt-*.stderr
             links-attempts.json
+            links-exceptions.json
           if-no-files-found: ignore
           retention-days: 14
 

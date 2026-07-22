@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "exceptions": [
+    {
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/use-data-monitoring-committees-clinical-trials",
+      "reason": "The official FDA page returns a false HTTP 404 only from GitHub-hosted runners; local and public-page checks returned HTTP 200.",
+      "verifiedAt": "2026-07-22",
+      "recheckAfter": "2026-08-15"
+    }
+  ]
+}
