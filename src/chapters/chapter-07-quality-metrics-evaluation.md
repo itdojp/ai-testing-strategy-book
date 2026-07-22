@@ -1997,7 +1997,7 @@ repeated looksについて、この参照contractが実行するのはfixed hori
 - [NIST/SEMATECH: Critical Values of the Student's t Distribution](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm): 両側t区間・検定で使うcritical value。
 - [NIST/SEMATECH: How can we make multiple comparisons?](https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm): 複数比較で全体の信頼水準を管理する手続き。
 - [American Statistical Association: Statement on Statistical Significance and P-Values](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf): p-valueは効果量や重要性を測らず、閾値単独で意思決定しない原則。
-- [FDA: Use of Data Monitoring Committees in Clinical Trials](https://www.fda.gov/media/176107/download): 臨床試験領域におけるrepeated interim analysisとType I error管理の一次資料。software experimentへは誤検出管理の原則だけを適用する。
+- [FDA: Use of Data Monitoring Committees in Clinical Trials](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/use-data-monitoring-committees-clinical-trials): 臨床試験領域におけるrepeated interim analysisとType I error管理の一次資料。software experimentへは誤検出管理の原則だけを適用する。
 
 **高度なPDCAサイクルの実装**
 
