@@ -3,7 +3,14 @@
 const assert = require('node:assert/strict');
 const { spawnSync } = require('node:child_process');
 const path = require('node:path');
-const { combineDiagnostics, runWithRetries } = require('./run-public-link-check');
+const {
+  combineDiagnostics,
+  escapeRegExp,
+  loadExceptions,
+  parseExceptions,
+  requirePublishedReferences,
+  runWithRetries,
+} = require('./run-public-link-check');
 const {
   classifyCommandOutput,
   classifyMaintenanceState,
@@ -121,5 +128,68 @@ const persistentLinkScan = runWithRetries(
 assert.deepEqual(persistentLinkScan.attempts.map(({ exitCode }) => exitCode), [1, 1, 1]);
 assert.equal(persistentLinkScan.final.exitCode, 1);
 assert.equal(combineDiagnostics('command stderr\n', new Error('spawn failed')), 'command stderr\nspawn failed\n');
+
+const exceptionUrl = 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/use-data-monitoring-committees-clinical-trials';
+const exceptionManifest = {
+  schemaVersion: 1,
+  exceptions: [{
+    url: exceptionUrl,
+    reason: 'GitHub-hosted runners receive a false 404 for this official URL.',
+    verifiedAt: '2026-07-22',
+    recheckAfter: '2026-08-15',
+  }],
+};
+const exceptions = parseExceptions(exceptionManifest, new Date('2026-07-22T12:00:00Z'));
+assert.equal(exceptions.length, 1);
+assert.equal(exceptions[0].skipPattern, `^${escapeRegExp(exceptionUrl)}$`);
+assert.match(exceptionUrl, new RegExp(exceptions[0].skipPattern));
+assert.doesNotMatch(`${exceptionUrl}?wide=true`, new RegExp(exceptions[0].skipPattern));
+assert.doesNotThrow(() => requirePublishedReferences(exceptions, [exceptionUrl], [exceptionUrl]));
+assert.throws(() => requirePublishedReferences(exceptions, ['missing'], [exceptionUrl]), /canonical source/);
+assert.throws(() => requirePublishedReferences(exceptions, [exceptionUrl], ['missing']), /published docs/);
+assert.throws(
+  () => parseExceptions(exceptionManifest, new Date('2026-08-15T00:00:00Z')),
+  /expired on 2026-08-15/,
+);
+assert.throws(
+  () => parseExceptions({ ...exceptionManifest, exceptions: [...exceptionManifest.exceptions, exceptionManifest.exceptions[0]] }, new Date('2026-07-22T00:00:00Z')),
+  /duplicated/,
+);
+assert.throws(
+  () => parseExceptions({
+    ...exceptionManifest,
+    exceptions: [{ ...exceptionManifest.exceptions[0], url: 'http://www.fda.gov/resource' }],
+  }, new Date('2026-07-22T00:00:00Z')),
+  /HTTPS URL/,
+);
+assert.throws(
+  () => parseExceptions({
+    ...exceptionManifest,
+    exceptions: [{ ...exceptionManifest.exceptions[0], url: 'https://www.fda.gov/' }],
+  }, new Date('2026-07-22T00:00:00Z')),
+  /not a host-wide pattern/,
+);
+assert.throws(
+  () => parseExceptions({
+    ...exceptionManifest,
+    exceptions: [{ ...exceptionManifest.exceptions[0], recheckAfter: '2026-07-22' }],
+  }, new Date('2026-07-22T00:00:00Z')),
+  /later than verifiedAt/,
+);
+assert.throws(
+  () => parseExceptions({
+    ...exceptionManifest,
+    exceptions: [{ ...exceptionManifest.exceptions[0], verifiedAt: '2026-02-31' }],
+  }, new Date('2026-07-22T00:00:00Z')),
+  /not a valid date/,
+);
+assert.throws(
+  () => parseExceptions({
+    ...exceptionManifest,
+    exceptions: [{ ...exceptionManifest.exceptions[0], verifiedAt: '2026-07-23' }],
+  }, new Date('2026-07-22T00:00:00Z')),
+  /cannot be in the future/,
+);
+assert.equal(loadExceptions().length, 1);
 
 console.log('scheduled maintenance contract tests passed (clean/finding/infrastructure/duplicate/recovery)');
