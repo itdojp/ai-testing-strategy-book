@@ -55,6 +55,7 @@ jobs:
       - name: Check outdated dependencies
         id: outdated
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set +e
@@ -66,6 +67,7 @@ jobs:
       - name: Security audit
         id: audit
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set +e
@@ -77,15 +79,11 @@ jobs:
       - name: Check public external links
         id: links
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set +e
-          npx --yes "linkinator@${LINKINATOR_VERSION}" \
-            'https://itdojp.github.io/ai-testing-strategy-book/' \
-            --recurse --skip 'localhost|127.0.0.1' --timeout 30000 --concurrency 10 \
-            --retry-errors --retry-errors-count 2 --retry-errors-jitter 250 \
-            --status-code '429:warn' --format json \
-            > links.json 2> links.stderr
+          node scripts/run-public-link-check.js 'https://itdojp.github.io/ai-testing-strategy-book/'
           rc=$?
           set -e
           node scripts/classify-maintenance-command.js links "$rc" links.json links.stderr "$GITHUB_OUTPUT" "$GITHUB_STEP_SUMMARY" links-result.json
@@ -98,10 +96,13 @@ jobs:
           INSTALL_OUTCOME: ${{ steps.install.outcome }}
           BUILD_OUTCOME: ${{ steps.build.outcome }}
           CONTRACT_OUTCOME: ${{ steps.contract.outcome }}
+          OUTDATED_OUTCOME: ${{ steps.outdated.outcome }}
           OUTDATED: ${{ steps.outdated.outputs.found || 'false' }}
           OUTDATED_INFRA: ${{ steps.outdated.outputs.infrastructure_failure || 'false' }}
+          AUDIT_OUTCOME: ${{ steps.audit.outcome }}
           AUDIT: ${{ steps.audit.outputs.found || 'false' }}
           AUDIT_INFRA: ${{ steps.audit.outputs.infrastructure_failure || 'false' }}
+          LINKS_OUTCOME: ${{ steps.links.outcome }}
           LINKS: ${{ steps.links.outputs.found || 'false' }}
           LINKS_INFRA: ${{ steps.links.outputs.infrastructure_failure || 'false' }}
         with:
@@ -114,9 +115,9 @@ jobs:
               validation: 'success',
               build: process.env.BUILD_OUTCOME,
               contract: process.env.CONTRACT_OUTCOME,
-              outdated: {found: bool(process.env.OUTDATED), infrastructureFailure: bool(process.env.OUTDATED_INFRA)},
-              audit: {found: bool(process.env.AUDIT), infrastructureFailure: bool(process.env.AUDIT_INFRA)},
-              links: {found: bool(process.env.LINKS), infrastructureFailure: bool(process.env.LINKS_INFRA)},
+              outdated: {outcome: process.env.OUTDATED_OUTCOME, found: bool(process.env.OUTDATED), infrastructureFailure: bool(process.env.OUTDATED_INFRA)},
+              audit: {outcome: process.env.AUDIT_OUTCOME, found: bool(process.env.AUDIT), infrastructureFailure: bool(process.env.AUDIT_INFRA)},
+              links: {outcome: process.env.LINKS_OUTCOME, found: bool(process.env.LINKS), infrastructureFailure: bool(process.env.LINKS_INFRA)},
             });
             core.setOutput('infrastructure_failure', String(state.infrastructureFailure));
             const runUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
@@ -165,6 +166,9 @@ jobs:
             links.json
             links.stderr
             links-result.json
+            links-attempt-*.json
+            links-attempt-*.stderr
+            links-attempts.json
           if-no-files-found: ignore
           retention-days: 14
 
