@@ -55,6 +55,7 @@ jobs:
       - name: Check outdated dependencies
         id: outdated
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set +e
@@ -66,6 +67,7 @@ jobs:
       - name: Security audit
         id: audit
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set +e
@@ -77,6 +79,7 @@ jobs:
       - name: Check public external links
         id: links
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set +e
