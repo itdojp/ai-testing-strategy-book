@@ -196,7 +196,7 @@ if (require.main === module) {
   try {
     main();
   } catch (error) {
-    fs.writeFileSync('links.json', '');
+    fs.writeFileSync('links.json', `${JSON.stringify({ error: error.message }, null, 2)}\n`);
     fs.writeFileSync('links.stderr', `${error.stack || error.message}\n`);
     process.stderr.write(`${error.stack || error.message}\n`);
     process.exitCode = 2;

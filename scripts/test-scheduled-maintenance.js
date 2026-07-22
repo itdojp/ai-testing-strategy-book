@@ -106,6 +106,12 @@ assert.equal(classifyCommandOutput('links', 0, '{"passed":true,"links":[{"state"
 const wrongDirectory = classifyCommandOutput('links', 1, '');
 assert.equal(wrongDirectory.found, false);
 assert.equal(wrongDirectory.infrastructureFailure, true);
+const exceptionValidationFailure = classifyCommandOutput('links', 2, '{"error":"exception expired"}');
+assert.deepEqual(exceptionValidationFailure, {
+  found: false,
+  infrastructureFailure: true,
+  reason: 'unexpected exit code 2',
+});
 
 const missingCliArgument = spawnSync(
   process.execPath,
