@@ -5,7 +5,7 @@
   "author": "ITDO Inc.",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.22.2"
   },
   "scripts": {
     "setup": "node easy-setup.js",
@@ -35,13 +35,13 @@
     "qa:reader-ux": "npm run check:reader-ux"
   },
   "dependencies": {
-    "fs-extra": "^11.3.0",
+    "fs-extra": "^11.3.6",
     "glob": "^13.0.6",
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "http-server": "^14.1.1",
-    "markdownlint-cli": "^0.49.0"
+    "markdownlint-cli": "^0.49.1"
   },
   "keywords": [
     "book",
