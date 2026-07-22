@@ -111,6 +111,13 @@ function loadExceptions(manifestPath = EXCEPTIONS_PATH, today = new Date()) {
   return exceptions;
 }
 
+function exceptionEvidence(exceptions) {
+  return {
+    schemaVersion: 1,
+    exceptions: exceptions.map(({ skipPattern: _skipPattern, ...entry }) => entry),
+  };
+}
+
 function runWithRetries(runAttempt, { maxAttempts = 3, wait = sleep } = {}) {
   if (!Number.isInteger(maxAttempts) || maxAttempts < 1) {
     throw new Error('maxAttempts must be a positive integer');
@@ -160,7 +167,7 @@ function main() {
   const exceptions = loadExceptions();
   fs.writeFileSync(
     'links-exceptions.json',
-    `${JSON.stringify({ schemaVersion: 1, exceptions }, null, 2)}\n`,
+    `${JSON.stringify(exceptionEvidence(exceptions), null, 2)}\n`,
   );
   const result = runWithRetries((attempt) => runLinkinator(rootUrl, version, attempt, exceptions));
   fs.writeFileSync('links.json', result.final.stdout);
@@ -199,6 +206,7 @@ if (require.main === module) {
 module.exports = {
   combineDiagnostics,
   escapeRegExp,
+  exceptionEvidence,
   loadExceptions,
   parseExceptions,
   requirePublishedReferences,

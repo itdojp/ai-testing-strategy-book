@@ -6,6 +6,7 @@ const path = require('node:path');
 const {
   combineDiagnostics,
   escapeRegExp,
+  exceptionEvidence,
   loadExceptions,
   parseExceptions,
   requirePublishedReferences,
@@ -145,6 +146,9 @@ assert.equal(exceptions[0].skipPattern, `^${escapeRegExp(exceptionUrl)}$`);
 assert.match(exceptionUrl, new RegExp(exceptions[0].skipPattern));
 assert.doesNotMatch(`${exceptionUrl}?wide=true`, new RegExp(exceptions[0].skipPattern));
 assert.doesNotThrow(() => requirePublishedReferences(exceptions, [exceptionUrl], [exceptionUrl]));
+const evidence = exceptionEvidence(exceptions);
+assert.deepEqual(Object.keys(evidence.exceptions[0]).sort(), ['reason', 'recheckAfter', 'url', 'verifiedAt']);
+assert.doesNotThrow(() => parseExceptions(evidence, new Date('2026-07-22T12:00:00Z')));
 assert.throws(() => requirePublishedReferences(exceptions, ['missing'], [exceptionUrl]), /canonical source/);
 assert.throws(() => requirePublishedReferences(exceptions, [exceptionUrl], ['missing']), /published docs/);
 assert.throws(
