@@ -61,7 +61,9 @@
   "homepage": "https://itdojp.github.io/ai-testing-strategy-book/",
   "overrides": {
     "brace-expansion": "5.0.9",
-    "js-yaml": "3.15.1",
+    "gray-matter": {
+      "js-yaml": "3.15.1"
+    },
     "markdownlint-cli": {
       "js-yaml": "5.2.2"
     }
