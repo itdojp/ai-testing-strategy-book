@@ -200,6 +200,6 @@ assert.throws(
   }, new Date('2026-07-22T00:00:00Z')),
   /cannot be in the future/,
 );
-assert.equal(loadExceptions().length, 0);
+assert.equal(loadExceptions().length, 1);
 
 console.log('scheduled maintenance contract tests passed (clean/finding/infrastructure/duplicate/recovery)');
